@@ -122,7 +122,7 @@ LIBEXE_VC5 := $(VC5)/BIN/lib.exe
 $(foreach p,LithRez RezMgr Lith,$(eval ENV_$(p) := $$(ENV_VC5))$(eval CL_$(p) := $$(CL_VC5))\
     $(eval LINK_$(p) := $$(LINK_VC5))$(eval LIBEXE_$(p) := $$(LIBEXE_VC5)))
 
-# NOLF Tools 001's Processor.exe (2001-01-03; progress/Processor-nolf-map.md):
+# NOLF Tools 001's Processor.exe (2001-01-03; progress/Processor_nolf_map.md):
 # its own objects are Intel C/C++ 4.0's (icl-4.0, with VC6 SP3's headers and
 # MFC's), but PreWorld.cpp, which is VC6 SP3's (cl 12.00.8447), as are the
 # LT2 libraries (the NOLF_* projects) and the MFC and C runtime it links
@@ -141,12 +141,12 @@ ENV_ProcessorNOLF  := $(ENV_ICL40)
 CL_ProcessorNOLF   := $(ICL40)/BIN/icl.exe
 LINK_ProcessorNOLF := $(VC6SP3)/BIN/link.exe
 
-# The Talon ModelEdit (2001-12-19; progress/ModelEdit-map.md): its own
+# The Talon ModelEdit (2001-12-19; progress/ModelEdit_map.md): its own
 # objects and the LT2 libraries it links (LT2_StdLith_alloc,
 # LT2_RegMgr_Talon) are VC6 SP5 with the Processor Pack's (cl 12.00.9044,
 # Rich 0x31/9044), with that toolchain's headers, MFC (nafxcw.lib, build
 # 8569) and C runtime, linked statically. The Talon DEdit (2001-12-06;
-# progress/DEdit-map.md) likewise, with the 2001 libraries it links
+# progress/DEdit_map.md) likewise, with the 2001 libraries it links
 # (LT2_ZLib_Talon and the Talon_* projects).
 ENV_VC6PP := WINEPREFIX=$(PFX) WINEPATH='$(call ws,$(VC6PP))\BIN' \
     INCLUDE='$(call ws,$(VC6PP))\INCLUDE;$(call ws,$(VC6PP))\MFC\INCLUDE' \

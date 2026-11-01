@@ -23,7 +23,7 @@ CFG=Talon_LTAMgr - Win32 Release
 # talon: The LTA library as the Talon DEdit (2001-12-06) links it: the plug-ins'
 # talon: sources (ltamgr.dsp), compiled by VC6 SP5 with the Processor Pack
 # talon: (cl 12.00.9044: build.mk's Talon_LTAMgr), /MT /O2, against the LT2 SDK
-# talon: and STLport, into their own directory (progress/DEdit-map.md).
+# talon: and STLport, into their own directory (progress/DEdit_map.md).
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0

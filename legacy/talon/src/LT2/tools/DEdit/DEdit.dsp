@@ -34,10 +34,10 @@ CFG=DEdit - Win32 Release
 # DibMgr, GenRegMgr, the LTA library, zlib and S3's s3tc.lib, all but
 # s3tc.lib compiled with 9044 (DEdit.dsw). Its sources are Build 69's DEdit
 # and shared engine, world and model code, being brought back to 2001
-# (progress/DEdit-map.md).
+# (progress/DEdit_map.md).
 #
 # talon: the sources are listed in the shipped image's module order
-# (progress/DEdit-map.md), which the link keeps: the Project Bar group
+# (progress/DEdit_map.md), which the link keeps: the Project Bar group
 # first, then the rest of the project's sources, the shared code among
 # them, in file name order, then MRCEXT and the trackers. Build 69's
 # later code that the rest still calls comes last, in a group of its own.

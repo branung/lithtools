@@ -24,7 +24,7 @@ CFG=Processor - Win32 Release
 # (built 2001-01-03; it writes NOLF's world version 66). Written for this
 # project, from the AvP2 processor's (../PreProcessor/Processor.dsp, nine
 # months later), brought back to January 2001. What built it
-# (progress/Processor-nolf-map.md): its own objects are Intel C/C++ 4.0's
+# (progress/Processor_nolf_map.md): its own objects are Intel C/C++ 4.0's
 # (no @comp.id: the Rich header's 82 objects without one; .data1 holds their
 # literals; the prologue and lea-nop padding are icl's), /O1, but PreWorld.cpp,
 # which is VC6 SP3's (cl 12.00.8447) /O1 (0x442f08..0x44ce10: __EH_prolog,
@@ -38,7 +38,7 @@ CFG=Processor - Win32 Release
 # doesn't give.
 #
 # talon: the sources are listed in the shipped image's module order
-# (progress/Processor-nolf-map.md), which the link keeps. The libraries'
+# (progress/Processor_nolf_map.md), which the link keeps. The libraries'
 # #pragma comment(lib) names (\proj\libs\...) are not linked: the project
 # links the LT2 ones.
 

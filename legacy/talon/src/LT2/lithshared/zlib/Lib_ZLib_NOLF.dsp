@@ -26,7 +26,7 @@ CFG=Lib_ZLib - Win32 Debug
 # it: the same sources and settings, compiled by VC6 SP3 (cl 12.00.8447:
 # build.mk's NOLF_* projects) into their own directory. The image's StdLith,
 # zlib and RegMgr code is 8447's (its Rich header: C++ and C objects of
-# build 8447 besides MFC's; progress/Processor-nolf-map.md).
+# build 8447 besides MFC's; progress/Processor_nolf_map.md).
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0

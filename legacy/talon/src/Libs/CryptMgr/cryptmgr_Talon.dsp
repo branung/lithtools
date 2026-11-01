@@ -24,7 +24,7 @@ CFG=Talon_CryptMgr - Win32 Release
 # talon: encrypted attribute files (the Blowfish tables are in its .data): the
 # talon: Release configuration's sources and settings, compiled by VC6 SP5 with
 # talon: the Processor Pack (cl 12.00.9044: build.mk's Talon_CryptMgr) into their
-# talon: own directory (progress/DEdit-map.md).
+# talon: own directory (progress/DEdit_map.md).
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0

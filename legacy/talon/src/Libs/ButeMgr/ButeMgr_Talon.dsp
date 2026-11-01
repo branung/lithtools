@@ -24,7 +24,7 @@ CFG=Talon_ButeMgr - Win32 Release
 # talon: with the Processor Pack (cl 12.00.9044: build.mk's Talon_ButeMgr), /O2,
 # talon: with MFC (its strings are CStrings) linked statically, the LT2
 # talon: STLport and the LT2 StdLith and Lith headers, which the 2001 DEdit
-# talon: links (progress/DEdit-map.md). Build 51's sources, the 2001 ones'
+# talon: links (progress/DEdit_map.md). Build 51's sources, the 2001 ones'
 # talon: near relatives.
 
 # Begin Project

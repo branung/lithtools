@@ -30,7 +30,7 @@ CFG=Processor - Win32 Release
 # code taken from Build 69 and brought back to 2001.
 #
 # talon: the sources are listed in the shipped image's module order
-# (progress/Processor-avp2-map.md), which the link keeps: nearly the file
+# (progress/Processor_avp2_map.md), which the link keeps: nearly the file
 # names' order (Threads comes after the T-junctions; bdefs.cpp's
 # g_ReturnErrString is the first thing in .data, 0x47e100). The libraries' #pragma comment(lib) names
 # (\proj\libs\...) are not linked: the project links the LT2 ones.

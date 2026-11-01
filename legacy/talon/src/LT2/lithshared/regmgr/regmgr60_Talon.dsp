@@ -26,7 +26,7 @@ CFG=RegMgr - Win32 Release
 # same sources and settings, compiled by VC6 SP5 with the Processor Pack
 # (cl 12.00.9044: build.mk's LT2_RegMgr_Talon) into their own directory.
 # The image's Rich header has no 8966 row: its 73 objects of 9044 are
-# Monolith's, the LT2 libraries' among them (progress/ModelEdit-map.md).
+# Monolith's, the LT2 libraries' among them (progress/ModelEdit_map.md).
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0

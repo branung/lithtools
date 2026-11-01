@@ -24,7 +24,7 @@ CFG=Talon_DibMgr - Win32 Release
 # talon: with the LT2 header (incs/dibmgr.h) and without build 51's DWORD as
 # talon: unsigned int, the Release configuration's settings, compiled by VC6 SP5 with the
 # talon: Processor Pack (cl 12.00.9044: build.mk's Talon_DibMgr) into their own
-# talon: directory (progress/DEdit-map.md).
+# talon: directory (progress/DEdit_map.md).
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0

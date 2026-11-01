@@ -40,11 +40,11 @@ TARGETS = [
     # first static MFC member libscan.py finds (wincore.obj's
     # _InitMultipleMonitorStubs) start; the shared libraries below them
     # (ButeMgr, StdLith, RegMgr, DibMgr, ...) are Monolith code of ours
-    # to build (progress/DEdit-map.md, progress/ModelEdit-map.md).
+    # to build (progress/DEdit_map.md, progress/ModelEdit_map.md).
     dict(label="DEdit.exe", what="world editor (Talon, Update 1/2)", kind="image",
          shipped=U2 + "/DEdit.exe", stem="DEdit",
          # src/LT2/tools/DEdit/DEdit.dsw (cl 9044, /O1, static MFC, STLport;
-         # progress/DEdit-map.md). Its own code, in module order, to
+         # progress/DEdit_map.md). Its own code, in module order, to
          # 0x0047d040; S3's prebuilt s3tc.lib (0x0047d040..0x0048301a) is
          # middleware; then the libraries, Monolith's and ours to build:
          # GenRegMgr 0x00483020, ButeMgr 0x004835a0, RegMgr 0x00488ed0,
@@ -73,7 +73,7 @@ TARGETS = [
     dict(label="ModelEdit.exe", what="model editor (Talon, Update 1/2)", kind="image",
          shipped=U2 + "/ModelEdit.exe", stem="ModelEdit",
          # src/LT2/tools/ModelEdit/ModelEdit.dsw (cl 9044, /O1, static MFC;
-         # progress/ModelEdit-map.md). Its own code, in module order, then
+         # progress/ModelEdit_map.md). Its own code, in module order, then
          # the LT2 libraries (RegMgr 0x00436870..0x00436be2, StdLith built
          # with the allocator override 0x00436c00..0x00437164: Monolith's,
          # ours to build, so inside the range); from 0x00437170 MFC's inline
@@ -100,7 +100,7 @@ TARGETS = [
          # CNotSupportedException's constructors and destructors,
          # AfxGetMainWnd, ??_9 vcall thunks, as nafxcw places them in our
          # link), its library code from 0x0045680f
-         # (progress/Processor-avp2-map.md)
+         # (progress/Processor_avp2_map.md)
          built="src/LT2/built/Release/tools/Processor/Processor.exe", optional=True,
          # without the image (a build stopped before the link), its
          # compiled objects are scored on their own, with the LT2 libraries
@@ -115,7 +115,7 @@ TARGETS = [
          # src/LT2/tools/PreProcessorNOLF/Processor.dsw: its own objects
          # Intel C/C++ 4.0 /O1, but PreWorld.cpp VC6 SP3 /O1
          # (0x442f08..0x44ce10); the LT2 libraries, MFC and the C runtime
-         # VC6 SP3's (progress/Processor-nolf-map.md). Its own code
+         # VC6 SP3's (progress/Processor_nolf_map.md). Its own code
          # 0x00401000..0x00460f00, then StdLith (l_allocator.obj's
          # initializers first), zlib 1.0.4 from 0x00463390 and RegMgr
          # 0x00468d90..0x00469000 (Monolith's, ours to build, so inside the

@@ -11,12 +11,12 @@
 # attached; a tag with a hyphen in it is marked a pre-release. A release of
 # that tag made by hand beforehand is kept, with its text; the files are
 # added to it, replacing ones of the same name. A new release's text is
-# .github/release-notes.md, followed by GitHub's generated list of changes.
+# .github/release_notes.md, followed by GitHub's generated list of changes.
 #
 # A push to master whose builds pass updates the pre-release "nightly" the
 # same way: the tag nightly is moved to the commit, its files are replaced
-# by the commit's (named for it), and the text is .github/nightly-notes.md
-# followed by release-notes.md. The new files go up before the old ones are
+# by the commit's (named for it), and the text is .github/nightly_notes.md
+# followed by release_notes.md. The new files go up before the old ones are
 # deleted. It is edited in place, not made anew, so its page stays the same
 # and watchers are not notified of every merge, and it is never marked the
 # latest release. A run whose commit is no longer master's head leaves it
@@ -245,11 +245,11 @@ jobs:
           find dist -type f -ls
           notes() {   # the release text for $TAG, into notes.md
             sed -e "s|{{TAG}}|$TAG|g" -e "s|{{NAME}}|$NAME|g" -e "s|{{REPO}}|$GH_REPO|g" \
-                .github/release-notes.md | sed '/^<!--/,/^-->/d' > body.md
+                .github/release_notes.md | sed '/^<!--/,/^-->/d' > body.md
             if [ "$TAG" = nightly ]; then
               sed -e "s|{{SHA}}|$SHA|g" -e "s|{{SHORT}}|${SHA:0:7}|g" \
                   -e "s|{{REPO}}|$GH_REPO|g" -e "s|{{DATE}}|$(date -u '+%Y-%m-%d %H:%M UTC')|g" \
-                  .github/nightly-notes.md | cat - body.md > notes.md
+                  .github/nightly_notes.md | cat - body.md > notes.md
             else
               mv body.md notes.md
             fi

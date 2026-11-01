@@ -30,7 +30,7 @@ CFG=Lib_StdLith - Win32 Debug
 # straight on to LAllocCount::Alloc, 0x436d10). The same sources and
 # settings otherwise, compiled by VC6 SP5 with the Processor Pack (cl
 # 12.00.9044: build.mk's LT2_StdLith_alloc; the image's Rich header has no
-# 8966 row), into their own directory (progress/ModelEdit-map.md).
+# 8966 row), into their own directory (progress/ModelEdit_map.md).
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0

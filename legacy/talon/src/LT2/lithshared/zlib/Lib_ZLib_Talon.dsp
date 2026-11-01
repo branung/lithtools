@@ -24,7 +24,7 @@ CFG=LT2_ZLib_Talon - Win32 Release
 # talon: configuration's sources and settings (Lib_ZLib.dsp), compiled by VC6 SP5
 # talon: with the Processor Pack (cl 12.00.9044: build.mk's LT2_ZLib_Talon, the
 # talon: image's ten C objects of 9044) into their own directory
-# talon: (progress/DEdit-map.md).
+# talon: (progress/DEdit_map.md).
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0

@@ -24,7 +24,7 @@ CFG=Talon_GenRegMgr - Win32 Release
 # talon: source brought back to the LT2 header (incs/genregmgr.h: DWORDs), the
 # talon: Release configuration's settings, compiled by VC6 SP5 with the
 # talon: Processor Pack (cl 12.00.9044: build.mk's Talon_GenRegMgr) into its own
-# talon: directory (progress/DEdit-map.md).
+# talon: directory (progress/DEdit_map.md).
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0

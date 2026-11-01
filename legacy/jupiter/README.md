@@ -91,6 +91,6 @@ Each is its own commit; changes to code are marked `lithtools:` in it:
 Entertainment); `src/Engine/sdk/Legal.txt` is its notice. archive.org's
 description says Touchdown released it under the GPL, but nothing in the
 package says so, and no licence file is in it. Treat it as nolf2src's
-`docs/LICENSE-NOTES.md` treats the same tree: work out the terms before
+`docs/LICENSE_NOTES.md` treats the same tree: work out the terms before
 distributing anything built from it. Third-party code inside it keeps its
 own terms (zlib, FreeType, ImageMagick, STLport, S3TC's `s3tc.lib`, ...).

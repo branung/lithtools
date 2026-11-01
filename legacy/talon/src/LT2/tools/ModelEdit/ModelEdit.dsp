@@ -29,10 +29,10 @@ CFG=ModelEdit - Win32 Release
 # CL_ModelEdit), /O1 (unaligned functions), no /GF (literals in .data, one
 # copy per object), no /GR; the LT2 libraries StdLith and RegMgr. Its
 # sources are Build 69's ModelEdit and shared model code, being brought back
-# to 2001 (progress/ModelEdit-map.md).
+# to 2001 (progress/ModelEdit_map.md).
 #
 # talon: the sources are listed in the shipped image's module order
-# (progress/ModelEdit-map.md), which the link keeps: the project's own
+# (progress/ModelEdit_map.md), which the link keeps: the project's own
 # folder, in name order (with animtracker, the LTA importer, ltquatbase and
 # smmempnproc among them), then the shared engine and model code, in name
 # order. The 2001 LTA parse-node reader (cstream, ltaBuildTree, ltaFindPN,

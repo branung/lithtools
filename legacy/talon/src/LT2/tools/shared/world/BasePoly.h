@@ -58,7 +58,7 @@
 
 #ifdef DIRECTEDITOR_BUILD
 			// talon: Build 69's LTA loading and saving, for DEdit (the 2001
-			// one has an LTA world: progress/DEdit-map.md).
+			// one has an LTA world: progress/DEdit_map.md).
 			// talon: BOOL in 2001: 0x40f8f8 returns `xor eax; inc eax`, its
 			// callers test %eax (0x424e93)
 			BOOL				LoadBasePolyLTA( CLTANode* pNode );

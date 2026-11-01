@@ -46,7 +46,7 @@ with VC6 SP5, and bring it back.
 
 No source of any version; their descendant is Build 69's PreProcessor
 (the SDK build 51's Processor.exe is already the Jupiter one, writing world
-version 85). `progress/Processor-avp2-map.md` is the map.
+version 85). `progress/Processor_avp2_map.md` is the map.
 
 - [ ] **Processor.exe (AvP2)**, cl 12.00.8966, static MFC, 340 KB of code.
   - [x] Its libraries: StdLith, zlib 1.0.4 and RegMgr from
@@ -348,7 +348,7 @@ version 85). `progress/Processor-avp2-map.md` is the map.
     physics and terrain (0x425d20..), the MFC application and its dialogs,
     the main processing driver and DAT output (0x42f900.., 0x43e7e0..).
 - [ ] **Processor.exe (NOLF)**, 415 KB: 85% the same strings as AvP2's;
-  after AvP2's, as its diff. `progress/Processor-nolf-map.md` is the map.
+  after AvP2's, as its diff. `progress/Processor_nolf_map.md` is the map.
   - [x] What built it (2026-10-29): its own code is **Intel C/C++ 4.0**
     `/O1` (the Rich header's 82 objects without `@comp.id`; icl's frames,
     padding and `.data1`), but PreWorld.cpp, VC6 SP3 (8447) `/O1`; the LT2
@@ -393,7 +393,7 @@ version 85). `progress/Processor-avp2-map.md` is the map.
 ## 3. The editors (cl 12.00.9044, static MFC)
 
 - [ ] **ModelEdit.exe** (221 KB of its own code, 1,927 functions;
-  `progress/ModelEdit-map.md`).
+  `progress/ModelEdit_map.md`).
   - [x] The project (`src/LT2/tools/ModelEdit/ModelEdit.dsw`, 2026-10-30):
     Build 69's ModelEdit and shared model code with the LT2 SDK, StdLith
     (its allocator-override build) and RegMgr, cl 9044 `/O1`, static MFC,
@@ -426,7 +426,7 @@ version 85). `progress/Processor-avp2-map.md` is the map.
     three module starts (0x40243f, 0x4160b8, 0x436849) our objects emit
     last; string pooling (probably /Gf).
 - [ ] **DEdit.exe** (573 KB of code, 4,471 functions scored;
-  `progress/DEdit-map.md`).
+  `progress/DEdit_map.md`).
   - [x] The project (`src/LT2/tools/DEdit/DEdit.dsw`, 2026-10-30): Build
     69's DEdit with the processors' 2001 world headers (DEdit's own copies
     of the world sources in DEdit/World, Build 69's editor functions added;
@@ -489,7 +489,7 @@ version 85). `progress/Processor-avp2-map.md` is the map.
     written: the 16-bit software renderer (0x429b55..0x42b077,
     dm_CreateNormalDrawMgr a stand-in) and the self-closing dialog after
     ColumnCtrl (0x414546, its handlers a stand-in in ColumnCtrl.cpp, its
-    module unknown); the stand-ins (progress/DEdit-map.md's last section:
+    module unknown); the stand-ins (progress/DEdit_map.md's last section:
     Build 69's vertex flags and textured planes over the 2001 poly, the
     trackers' FlushTracker, ViewDef's camera settings, viewrender's clip
     mask and lighting, three light-texel functions of ViewFunctions, the
