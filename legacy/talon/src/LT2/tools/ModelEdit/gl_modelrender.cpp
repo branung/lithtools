@@ -631,7 +631,7 @@ void DrawModel(GLM_CONTEXT hContext, DrawStruct *pStruct)
 	if(pModel->m_bNormalRef && pStruct->m_bShowNormalRef)
 	{
 		LTMatrix mNormalRef = pModel->m_Transforms[pModel->m_iNormalRefNode] * pModel->m_mNormalRef;
-		DrawCoordSys(&mNormalRef, 30.0f);
+		DrawCoordSys(&mNormalRef, 15.0f);	// RETAIL: 15 (0x00474574), not the later 30
 	}
 
 	if (pStruct->m_bAnimBox)
@@ -1358,9 +1358,9 @@ void SetGLMBackgroundColor( GLM_CONTEXT hContext, COLORREF win_color )
 	}
 
 	// unitize
-	pContext->m_bgColor[0] = pColDecomp[0]/255.0f;
-	pContext->m_bgColor[1] = pColDecomp[1]/255.0f;
-	pContext->m_bgColor[2] = pColDecomp[2]/255.0f;
+	pContext->m_bgColor[0] = pColDecomp[0]/256.0f;	// RETAIL: by 256 (0x004745dc's 1/256), not 255
+	pContext->m_bgColor[1] = pColDecomp[1]/256.0f;
+	pContext->m_bgColor[2] = pColDecomp[2]/256.0f;
 
 }
 

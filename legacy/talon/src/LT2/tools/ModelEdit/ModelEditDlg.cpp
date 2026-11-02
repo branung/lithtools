@@ -4726,7 +4726,7 @@ void CModelEditDlg::OnCalcInternalRadius()
 		return;
 	}
 
-	if( MessageBox( "This operation can take a while.  Do you wish to proceed?", "Do you really want to do this?", MB_OKCANCEL ) != IDOK )
+	if( MessageBox( "Are you sure?  This could take a while..", "Do you really want to do this?", MB_OKCANCEL ) != IDOK )
 		return;
 
 	HCURSOR oldCursor = SetCursor( LoadCursor( NULL, IDC_WAIT ) );
@@ -4805,7 +4805,7 @@ void CModelEditDlg::OnCalcInternalRadius()
 	sprintf( results, "Results:\n"
 					  "\tOld Dimensions: %f\n"
 					  "\tNew Dimensions: %f\n"
-					  "\tBiggest Animation: %s\n"
+					  "\tLongest animation: %s\n"
 					  "\nUse these results?", m_pModel->m_GlobalRadius, fNewRadius, pAnimName );
 	if( MessageBox( results, "Is that better?", MB_YESNO ) != IDYES )
 		return;

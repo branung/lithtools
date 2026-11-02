@@ -892,3 +892,14 @@ member is initialised, so whether a poly drawing can be cancelled, and the
 navigation's starting value, depend on what was in the heap.
 
 Not fixed yet.
+
+### ModelEdit's background colour never reaches full brightness
+
+ModelEdit.exe 0x004062a4 (SetGLMBackgroundColor(GLM_CONTEXT, COLORREF),
+src/LT2/tools/ModelEdit/gl_modelrender.cpp; identical). Each byte of the
+COLORREF is turned into OpenGL's 0..1 by multiplying by 1/256 (the
+0.00390625 at 0x004745dc), not dividing by 255, so 255 becomes 0.996: a
+white background is drawn very slightly grey, and every colour a shade
+darker than the one picked.
+
+Not fixed yet.

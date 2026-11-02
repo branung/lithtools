@@ -2667,7 +2667,7 @@ ChildInfo* Model::AddChildModel(
 	{
 		// ooooo you dirty rat %#$@#!
 		ASSERT(false);
-		sprintf(pErrStr, "Child Model already exists.");
+		sprintf(pErrStr, "Model already exists.");
 		return LTNULL;
 	}
 
@@ -2695,7 +2695,7 @@ ChildInfo* Model::AddChildModel(
 
 	if(!SetupChildModelRelation(pChildModel, pChild, bScaleSkeleton))
 	{
-		sprintf(pErrStr, "SetupChildModelRelation returned false.");
+		sprintf(pErrStr, "SetupChildModelRelation returned LTFALSE.");
 		delete pChildModel;
 		return LTNULL;
 	}
@@ -2754,7 +2754,7 @@ ChildInfo* Model::AddChildModelRef( char *pFilename,
 	if(FindChildModelByFilename(pFilename, &index) != LTNULL)
 	{
 		ASSERT(false);
-		sprintf(pErrStr, "Child Model already exists.");
+		sprintf(pErrStr, "Model already exists.");
 		return LTNULL;
 	}
 
@@ -2788,7 +2788,7 @@ ChildInfo* Model::AddChildModelRef( char *pFilename,
 	// ?? 
 	if(!SetupChildModelRelation(pChildModel, pChild, bScaleSkeleton))
 	{
-		sprintf(pErrStr, "SetupChildModelRelation returned false.");
+		sprintf(pErrStr, "SetupChildModelRelation returned LTFALSE.");
 		delete pChildModel;
 		return LTNULL;
 	}

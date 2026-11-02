@@ -343,7 +343,7 @@ ParseShapeNode( Shape *shape, CParseNode *pnroot )
 				char buf[1024];
 				LTA::ParseVector( mat_attrib->getElement(1), mat->m_diffuse );
 				// talon: formatted and never used (0x412fee)
-				sprintf( buf, "diffuse %f %f %f %f\n", 
+				sprintf( buf, "diffuse %f %f %f %f\r\n", 
 						 mat->m_diffuse[0], mat->m_diffuse[1], 
 						 mat->m_diffuse[2], mat->m_diffuse[3] );
 			}
