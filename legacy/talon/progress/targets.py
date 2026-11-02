@@ -254,3 +254,25 @@ TARGETS = [
          built="src/Engine/built/Release/tools/Plugins/MayaWorldExport/MayaWorldExport40.mll",
          app=[(0x10001000, 0x1001eb70)]),   # to msvcprt's delop_s.obj (operator delete), the runtime's first
 ]
+
+# Each image's resources -- the dialogs, menus, accelerators, icons,
+# version and string tables the editors and plug-ins are driven by --
+# scored resource by resource as the games score theirs (kind
+# "resources": identical / near / todo per resource, left out of the code
+# total). An image with no resources has no such target.
+def _has_resources(path):
+    import os
+    import struct
+    try:
+        d = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), path), "rb").read()
+        pe = struct.unpack_from("<I", d, 0x3C)[0]
+        return struct.unpack_from("<II", d, pe + 24 + 96 + 8 * 2)[1] > 0
+    except (OSError, struct.error):
+        return True     # not extracted yet: listed, scored when it is
+
+
+TARGETS += [dict(label=t["label"] + ":rsrc", what=t["what"] + ": resources",
+                 kind="resources", shipped=t["shipped"], stem=t["stem"] + "-rsrc",
+                 built=t.get("built"), optional=True)
+            for t in list(TARGETS)
+            if t["kind"] == "image" and _has_resources(t["shipped"])]

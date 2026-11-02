@@ -1,0 +1,96 @@
+## The text differences from the retail images that are known: tools/datacheck.py.
+## <image><TAB><retail|ours><TAB><string>; `# ...` is the reason for the entries after it.
+
+# Build paths, which __FILE__ puts in the data: the 3ds Max SDK's tab.h (its asserts) from ..\sdkfiles\max30sdk or max40sdk\include in retail, from toolchains' t:\maxsdk-3.0 or -4.0 in ours; and MaxModelExport's Exporter.cpp from Monolith's C:\Jupiter_TO2_SDK\TO2_Build tree in retail
+MaxDTXLoader40.bmi	ours	t:\\maxsdk-4.0\\include\\tab.h
+MaxDTXLoader40.bmi	retail	..\\sdkfiles\\max40sdk\\include\\tab.h
+
+# Build paths, which __FILE__ puts in the data: the 3ds Max SDK's tab.h (its asserts) from ..\sdkfiles\max30sdk or max40sdk\include in retail, from toolchains' t:\maxsdk-3.0 or -4.0 in ours; and MaxModelExport's Exporter.cpp from Monolith's C:\Jupiter_TO2_SDK\TO2_Build tree in retail
+MaxModelExport30.dle	ours	.\\Exporter.cpp
+MaxModelExport30.dle	retail	C:\\Jupiter_TO2_SDK\\TO2_Build\\Engine\\tools\\Plugins\\MaxModelExport\\Exporter.cpp
+
+# Build paths, which __FILE__ puts in the data: the 3ds Max SDK's tab.h (its asserts) from ..\sdkfiles\max30sdk or max40sdk\include in retail, from toolchains' t:\maxsdk-3.0 or -4.0 in ours; and MaxModelExport's Exporter.cpp from Monolith's C:\Jupiter_TO2_SDK\TO2_Build tree in retail
+MaxModelExport40.dle	ours	.\\Exporter.cpp
+MaxModelExport40.dle	ours	t:\\maxsdk-4.0\\include\\tab.h
+MaxModelExport40.dle	retail	..\\sdkfiles\\max40sdk\\include\\tab.h
+MaxModelExport40.dle	retail	C:\\Jupiter_TO2_SDK\\TO2_Build\\Engine\\tools\\Plugins\\MaxModelExport\\Exporter.cpp
+
+# Build paths, which __FILE__ puts in the data: the 3ds Max SDK's tab.h (its asserts) from ..\sdkfiles\max30sdk or max40sdk\include in retail, from toolchains' t:\maxsdk-3.0 or -4.0 in ours; and MaxModelExport's Exporter.cpp from Monolith's C:\Jupiter_TO2_SDK\TO2_Build tree in retail
+MaxWorldExport30.dle	ours	t:\\maxsdk-3.0\\include\\tab.h
+MaxWorldExport30.dle	retail	..\\sdkfiles\\max30sdk\\include\\tab.h
+
+# Build paths, which __FILE__ puts in the data: the 3ds Max SDK's tab.h (its asserts) from ..\sdkfiles\max30sdk or max40sdk\include in retail, from toolchains' t:\maxsdk-3.0 or -4.0 in ours; and MaxModelExport's Exporter.cpp from Monolith's C:\Jupiter_TO2_SDK\TO2_Build tree in retail
+MaxWorldExport40.dle	ours	t:\\maxsdk-4.0\\include\\tab.h
+MaxWorldExport40.dle	retail	..\\sdkfiles\\max40sdk\\include\\tab.h
+
+# Build paths, which __FILE__ puts in the data: the 3ds Max SDK's tab.h (its asserts) from ..\sdkfiles\max30sdk or max40sdk\include in retail, from toolchains' t:\maxsdk-3.0 or -4.0 in ours; and MaxModelExport's Exporter.cpp from Monolith's C:\Jupiter_TO2_SDK\TO2_Build tree in retail
+MaxWorldImport30.dli	ours	t:\\maxsdk-3.0\\include\\tab.h
+MaxWorldImport30.dli	retail	..\\sdkfiles\\max30sdk\\include\\tab.h
+
+# Build paths, which __FILE__ puts in the data: the 3ds Max SDK's tab.h (its asserts) from ..\sdkfiles\max30sdk or max40sdk\include in retail, from toolchains' t:\maxsdk-3.0 or -4.0 in ours; and MaxModelExport's Exporter.cpp from Monolith's C:\Jupiter_TO2_SDK\TO2_Build tree in retail
+MaxWorldImport40.dli	ours	t:\\maxsdk-4.0\\include\\tab.h
+MaxWorldImport40.dli	retail	..\\sdkfiles\\max40sdk\\include\\tab.h
+
+# UNREVIEWED: strings retail's code has and ours does not yet (the vertex-merge and LOD results, 'Select a piece first', 'Warning!': functions still to be written or matched), and the import name SHELL32.dll read off a run our layout cuts differently
+ModelEdit.exe	ours	ELL32.dll
+ModelEdit.exe	retail	Finished.\nRemoved %d vertices\nMerged %d vertices
+ModelEdit.exe	retail	MbP?2cB
+ModelEdit.exe	retail	Results
+ModelEdit.exe	retail	SHELL32.dll
+ModelEdit.exe	retail	Select a piece first
+ModelEdit.exe	retail	The LOD's didn't regenerate correctly, by the way..
+ModelEdit.exe	retail	Warning!
+
+# UNREVIEWED: retail-only strings of code still to be written (the Quake .map export: classname, worldspawn, wad; the processor command line), and ours-only strings of the later source (DETAILTEX, Gouraud, frozen, ...)
+DEdit.exe	ours	 Failed to load:\n %s\n System Error Code: %d\n Description: %s\n
+DEdit.exe	ours	DETAILTEX
+DEdit.exe	ours	DefaultBrushSize
+DEdit.exe	ours	Gouraud
+DEdit.exe	ours	Lighting
+DEdit.exe	ours	frozen
+DEdit.exe	ours	group
+DEdit.exe	ours	patch
+DEdit.exe	ours	showmodel
+DEdit.exe	retail	 for reading.
+DEdit.exe	retail	"classname" "info_player_start"\n
+DEdit.exe	retail	"classname" "light"\n
+DEdit.exe	retail	"classname" "worldspawn"\n
+DEdit.exe	retail	"light" "%d"\n
+DEdit.exe	retail	"origin" "%d %d %d"\n
+DEdit.exe	retail	"style" "0"\n
+DEdit.exe	retail	"wad" "medieval.wad"\n
+DEdit.exe	retail	%f %f %f %f %f %f
+DEdit.exe	retail	-fast 
+DEdit.exe	retail	-light 
+DEdit.exe	retail	-optimize 
+DEdit.exe	retail	-unseen 
+DEdit.exe	retail	Error: Cannot open 
+DEdit.exe	retail	Leak Files (*.lek)|*.lek|All Files (*.*)|*.*||
+DEdit.exe	retail	LightMap
+DEdit.exe	retail	LithTech Inc.
+DEdit.exe	retail	Processor 
+DEdit.exe	retail	StartPoint
+DEdit.exe	retail	Text (*.txt)|*.txt||
+DEdit.exe	retail	default_app_dlls
+DEdit.exe	retail	group1
+DEdit.exe	retail	group2
+DEdit.exe	retail	group3
+DEdit.exe	retail	group4
+DEdit.exe	retail	group5
+DEdit.exe	retail	group6
+DEdit.exe	retail	m_Radius
+
+# UNREVIEWED: 'PreProcessor' only in retail
+Processor.exe (AvP2)	retail	PreProcessor
+
+# UNREVIEWED: ours links STLport where retail's RTTI names Microsoft's std::bad_alloc (an STL choice still to settle), and builds a _Vis.lek leak file name that retail's 'Making VisBSP leak file.' does not (code still to match)
+Processor.exe (NOLF)	ours	.?AV__Named_exception@_STL@@
+Processor.exe (NOLF)	ours	.?AVlength_error@_STL@@
+Processor.exe (NOLF)	ours	.?AVlogic_error@_STL@@
+Processor.exe (NOLF)	ours	Making VisBSP leak file: %s
+Processor.exe (NOLF)	ours	_Vis.lek
+Processor.exe (NOLF)	ours	basic_string
+Processor.exe (NOLF)	retail	.?AVbad_alloc@std@@
+Processor.exe (NOLF)	retail	Making VisBSP leak file.
+Processor.exe (NOLF)	retail	PreProcessor
+Processor.exe (NOLF)	retail	bad allocation

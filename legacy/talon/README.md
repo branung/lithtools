@@ -28,9 +28,9 @@ they are re-implemented.
 
 | Binary | | Byte-identical functions | Byte-identical code | | Unwritten | Unplaced |
 |---|---|--:|--:|---|--:|--:|
-| `DEdit.exe` | world editor (Talon, Update 1/2) | 3,855 / 4,402 | 462,911 / 577,837 bytes | `████████████████░░░░` 80.1% | 58 | 64 |
-| `ModelEdit.exe` | model editor (Talon, Update 1/2) | 1,664 / 1,891 | 189,480 / 222,641 bytes | `█████████████████░░░` 85.1% | 8 | 94 |
-| `Processor.exe (AvP2)` | world processor, AvP2 (v1.0) | 1,396 / 1,504 | 267,337 / 339,492 bytes | `███████████████░░░░░` 78.7% | 3 | 2 |
+| `DEdit.exe` | world editor (Talon, Update 1/2) | 3,758 / 4,305 | 455,145 / 570,071 bytes | `███████████████░░░░░` 79.8% | 58 | 64 |
+| `ModelEdit.exe` | model editor (Talon, Update 1/2) | 1,609 / 1,836 | 187,491 / 220,652 bytes | `████████████████░░░░` 84.9% | 8 | 94 |
+| `Processor.exe (AvP2)` | world processor, AvP2 (v1.0) | 1,395 / 1,503 | 267,329 / 339,484 bytes | `███████████████░░░░░` 78.7% | 3 | 2 |
 | `Processor.exe (NOLF)` | world processor, NOLF (Tools 001) | 1,297 / 2,587 | 176,270 / 414,841 bytes | `████████░░░░░░░░░░░░` 42.4% | 459 | 61 |
 | `lithrez.exe` | resource (.rez) packer, LithRez 1.00 | 121 / 122 | 21,652 / 22,326 bytes | `███████████████████░` 96.9% | 0 | 0 |
 | `TProcessor.exe` | DirectEngine world processor (1998, NOLF Tools 001) | 0 / 1,314 | 0 / 236,418 bytes | `░░░░░░░░░░░░░░░░░░░░` 0.0% | 1,314 | 0 |
@@ -40,8 +40,8 @@ they are re-implemented.
 | `LandExport.dll (NOLF)` | Softimage\|3D terrain exporter (NOLF Tools 001) | 0 / 511 | 0 / 72,146 bytes | `░░░░░░░░░░░░░░░░░░░░` 0.0% | 511 | 0 |
 | `LithMayaExport.mll` | Maya model exporter (1999, AvP2 v1.0) | 0 / 206 | 0 / 37,710 bytes | `░░░░░░░░░░░░░░░░░░░░` 0.0% | 206 | 0 |
 | `IMFLithDTX.dll` | Maya .dtx image plug-in (Update 2) | 131 / 186 | 19,238 / 19,893 bytes | `███████████████████░` 96.7% | 0 | 0 |
-| `MaxDTXLoader30.bmi` | 3ds Max .dtx bitmap loader for 3ds Max 3 (Update 2) | 160 / 221 | 19,534 / 20,249 bytes | `███████████████████░` 96.4% | 0 | 0 |
-| `MaxDTXLoader40.bmi` | 3ds Max .dtx bitmap loader for 3ds Max 4 (Update 2) | 167 / 228 | 19,835 / 20,550 bytes | `███████████████████░` 96.5% | 0 | 0 |
+| `MaxDTXLoader30.bmi` | 3ds Max .dtx bitmap loader for 3ds Max 3 (Update 2) | 158 / 219 | 19,518 / 20,233 bytes | `███████████████████░` 96.4% | 0 | 0 |
+| `MaxDTXLoader40.bmi` | 3ds Max .dtx bitmap loader for 3ds Max 4 (Update 2) | 165 / 226 | 19,819 / 20,534 bytes | `███████████████████░` 96.5% | 0 | 0 |
 | `MaxModelExport30.dle` | 3ds Max model exporter for 3ds Max 3 (Update 2) | 278 / 420 | 38,287 / 39,886 bytes | `███████████████████░` 95.9% | 0 | 2 |
 | `MaxModelExport40.dle` | 3ds Max model exporter for 3ds Max 4 (Update 2) | 286 / 428 | 41,866 / 43,465 bytes | `███████████████████░` 96.3% | 0 | 2 |
 | `MaxWorldExport30.dle` | 3ds Max world exporter for 3ds Max 3 (Update 2) | 300 / 475 | 58,611 / 67,673 bytes | `█████████████████░░░` 86.6% | 0 | 0 |
@@ -52,12 +52,35 @@ they are re-implemented.
 | `MayaModelExport40.mll` | Maya model exporter for Maya 4 (Update 2) | 264 / 401 | 48,151 / 49,702 bytes | `███████████████████░` 96.8% | 0 | 2 |
 | `MayaWorldExport30.mll` | Maya world exporter for Maya 3 (Update 2) | 501 / 707 | 113,215 / 115,652 bytes | `███████████████████░` 97.8% | 0 | 2 |
 | `MayaWorldExport40.mll` | Maya world exporter for Maya 4 (Update 2) | 501 / 707 | 113,215 / 115,652 bytes | `███████████████████░` 97.8% | 0 | 2 |
-| **All** | | **12,260 / 23,957** | **1,781,601 / 3,118,983 bytes** | `███████████░░░░░░░░░` **57.1%** | **8,179** | **237** |
+| `DEdit.exe:rsrc` | world editor (Talon, Update 1/2): resources, not in the total | 224 / 224 resources | 289,504 / 289,504 bytes | `████████████████████` 100.0% | 0 | -- |
+| `ModelEdit.exe:rsrc` | model editor (Talon, Update 1/2): resources, not in the total | 86 / 86 resources | 197,632 / 197,632 bytes | `████████████████████` 100.0% | 0 | -- |
+| `Processor.exe (AvP2):rsrc` | world processor, AvP2 (v1.0): resources, not in the total | 7 / 7 resources | 4,754 / 4,754 bytes | `████████████████████` 100.0% | 0 | -- |
+| `Processor.exe (NOLF):rsrc` | world processor, NOLF (Tools 001): resources, not in the total | 7 / 7 resources | 4,528 / 4,528 bytes | `████████████████████` 100.0% | 0 | -- |
+| `LithExport.dll (AvP2):rsrc` | Softimage\|3D model exporter (AvP2 v1.0): resources, not in the total | 0 / 1 resources | 0 / 448 bytes | `░░░░░░░░░░░░░░░░░░░░` 0.0% | 1 | -- |
+| `LithExport.dll (NOLF):rsrc` | Softimage\|3D model exporter, debug build (NOLF Tools 001): resources, not in the total | 0 / 1 resources | 0 / 448 bytes | `░░░░░░░░░░░░░░░░░░░░` 0.0% | 1 | -- |
+| `MaxDTXLoader30.bmi:rsrc` | 3ds Max .dtx bitmap loader for 3ds Max 3 (Update 2): resources, not in the total | 1 / 1 resources | 344 / 344 bytes | `████████████████████` 100.0% | 0 | -- |
+| `MaxDTXLoader40.bmi:rsrc` | 3ds Max .dtx bitmap loader for 3ds Max 4 (Update 2): resources, not in the total | 1 / 1 resources | 344 / 344 bytes | `████████████████████` 100.0% | 0 | -- |
+| `MaxModelExport30.dle:rsrc` | 3ds Max model exporter for 3ds Max 3 (Update 2): resources, not in the total | 5 / 5 resources | 3,688 / 3,688 bytes | `████████████████████` 100.0% | 0 | -- |
+| `MaxModelExport40.dle:rsrc` | 3ds Max model exporter for 3ds Max 4 (Update 2): resources, not in the total | 5 / 5 resources | 3,688 / 3,688 bytes | `████████████████████` 100.0% | 0 | -- |
+| `MaxWorldExport30.dle:rsrc` | 3ds Max world exporter for 3ds Max 3 (Update 2): resources, not in the total | 4 / 4 resources | 3,062 / 3,062 bytes | `████████████████████` 100.0% | 0 | -- |
+| `MaxWorldExport40.dle:rsrc` | 3ds Max world exporter for 3ds Max 4 (Update 2): resources, not in the total | 4 / 4 resources | 3,062 / 3,062 bytes | `████████████████████` 100.0% | 0 | -- |
+| `MaxWorldImport30.dli:rsrc` | 3ds Max world importer for 3ds Max 3 (Update 2): resources, not in the total | 4 / 4 resources | 2,266 / 2,266 bytes | `████████████████████` 100.0% | 0 | -- |
+| `MaxWorldImport40.dli:rsrc` | 3ds Max world importer for 3ds Max 4 (Update 2): resources, not in the total | 4 / 4 resources | 2,266 / 2,266 bytes | `████████████████████` 100.0% | 0 | -- |
+| **All** | | **12,103 / 23,800** | **1,771,806 / 3,109,188 bytes** | `███████████░░░░░░░░░` **56.9%** | **8,179** | **237** |
 <!-- progress:end -->
 
 A function is *identical* when our object's code is the shipped code byte
 for byte up to addresses; *small* functions are reconstructed but too short
-to verify on their own (tools/progress.py).
+to verify on their own (tools/progress.py). Each image's resources are
+scored too (the `:rsrc` rows), outside the code total. Byte-identical up
+to addresses is not the whole check: `make progress` also compares the
+float constants our functions load (tools/fpconst.py), the text in our
+images' data (tools/datacheck.py, `progress/data-known.txt`), and our
+vtables and the callees and globals our functions reach
+(tools/vtabcheck.py, `progress/vtab-known.txt`) with the shipped ones, and
+checks `out/reference/` against `progress/reference.sha256` first.
+`progress/corrections.txt` lists what the corrected scoring took out of
+the baseline (2026-11-02), and why.
 
 ## Building
 
@@ -65,7 +88,7 @@ to verify on their own (tools/progress.py).
 git submodule update --init      # tools/, toolchains/, rez/
 make reference                   # the shipped binaries -> out/reference/ (build/reference.sh)
 make                             # build everything reconstructed so far
-make progress                    # score it; fails if an identical function stops matching
+make progress                    # score it and check it (COMPLETE=1, COVERED=1); fails on a regression
 make progress-update             # record the score here and in progress/
 make test                        # behaviour: shipped tools vs ours on the same inputs (tests/)
 ```

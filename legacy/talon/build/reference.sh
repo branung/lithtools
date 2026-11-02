@@ -105,8 +105,16 @@ for n in avp2tools avp2tools_update avp2tools_update2 nolftools001; do
     mv "$TMP/$n" "$OUT/$n"
 done
 rm -rf "$TMP"
-(cd "$OUT" && find . -type f -print0 | LC_ALL=C sort -z | xargs -0 sha256sum) >"$OUT/SHA256SUMS"
-echo "out/reference: $(wc -l <"$OUT/SHA256SUMS") files"
+# (written beside the tree and moved in, so it does not list itself; it
+# must equal progress/reference.sha256, the release files as pinned)
+(cd "$OUT" && find . -type f -print0 | LC_ALL=C sort -z | xargs -0 sha256sum) >"$OUT.SHA256SUMS"
+mv "$OUT.SHA256SUMS" "$OUT/SHA256SUMS"
+(cd "$OUT" && sha256sum --quiet -c SHA256SUMS)
+if ! cmp -s "$OUT/SHA256SUMS" progress/reference.sha256; then
+    echo "error: out/reference/ is not the release files progress/reference.sha256 names" >&2
+    exit 1
+fi
+echo "out/reference: $(wc -l <"$OUT/SHA256SUMS") files, as progress/reference.sha256 pins them"
 
 # Each target's function table (tools/enumfuncs.py), as progress/targets.py
 # names them: out/reference/<stem>-functions.csv

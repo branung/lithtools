@@ -35,8 +35,8 @@ all: check-toolchain
 help:
 	@echo "make            build every reconstructed tool"
 	@echo "make reference  extract the shipped binaries into out/reference/"
-	@echo "make progress   score the build against them"
-	@echo "make progress-update  record the score in progress/"
+	@echo "make progress   score the build against them (COMPLETE=1, COVERED=1)"
+	@echo "make progress-update  record the score in progress/ (ACCEPT_LOSSES=1)"
 	@echo "make test       behaviour tests against the shipped tools (TESTS=suite...)"
 	@echo "make shell      a shell in the build container"
 	@echo "make clean      remove out/ and every build output in src/"
@@ -50,10 +50,10 @@ reference:
 	$(DOCKER_RUN) bash build/reference.sh
 
 progress:
-	$(DOCKER_RUN) bash -c "python3 tools/progress.py && python3 tools/ratchet.py check"
+	$(DOCKER_RUN) env COMPLETE=$(COMPLETE) COVERED=$(COVERED) bash build/progress.sh check
 
 progress-update:
-	$(DOCKER_RUN) bash -c "python3 tools/progress.py && python3 tools/ratchet.py update $(if $(ACCEPT_LOSSES),--accept-losses)"
+	$(DOCKER_RUN) env ACCEPT_LOSSES=$(ACCEPT_LOSSES) bash build/progress.sh update
 
 test:
 	$(DOCKER_RUN) bash tests/run.sh $(TESTS)
