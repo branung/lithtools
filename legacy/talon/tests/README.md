@@ -23,8 +23,19 @@ the same. Work files go to `out/tests/<suite>/`, the shipped side's under
 prefix is `out/tests-wine/`).
 
 Where a retail bug makes the shipped tool's own output vary, the
-comparison masks exactly those bytes and says how many it masked: the
-processor's physics BSP vertex colours (`datcmp.py`).
+comparison is normalised over exactly the bytes the bug makes vary, and
+says so: the processor's physics BSP vertex colours (`datcmp.py`), every
+other byte compared raw. A pass that needed it says "equal but for N ...
+bytes" rather than "identical". The exception is tested against the
+shipped tool itself: a control run of the shipped processor from another
+path, whose garbage differs, must pass the same comparison with the
+shipped run (Sample_DM always, every world with `CONTROL=1`). That control
+is also why the exception is no narrower: garbage can be 255, so a poly
+can be all 255 in one retail run and not in another.
+
+`pending.txt`'s suites are failing ones, not covered ones: the default
+`make test` covers the AvP2 processor only, not NOLF's processor, the
+editors, the packer or the Max and Maya plug-ins.
 
 | Suite | What it runs | Inputs |
 |---|---|---|

@@ -7,18 +7,25 @@ uninitialised.
 
 The physics BSP's T-junction splits keep uninitialised vertex colours
 (RETAIL_BUGS.md, "The physics BSP's T-junction splits keep uninitialised
-vertex colours"): MakeBsp sets every physics BSP vertex colour to 255 and
-the splits that come after it get whatever the heap held. That garbage
-follows the heap, and the heap follows the processor's lighting threads'
-timing, so two runs of the same exe can differ there. Everywhere else the
-files must be identical; in the physics BSP's vertex colours, a byte may
-differ only where at least one file has something other than 255 (the
-garbage); a colour both files have and that is not 255 must still agree.
+vertex colours"): MakeBsp sets every physics BSP vertex colour to 255, and
+the polies the T-junction fix creates after it get whatever the heap held.
+That garbage follows the heap, and the heap follows the processor's
+lighting threads' timing, so two runs of the same exe can differ there.
 
-Prints "identical", "identical but N uninitialised vertex colour bytes",
-or where the first real difference is (offset, and the world model it is
-in). Exits 0 if the files agree as above, 1 if not, 2 on a file it can't
-read.
+So the exception is exactly that: a byte of a physics BSP vertex colour may
+differ, whatever either file holds there; every other byte must be equal.
+It cannot be narrower. Heap garbage can be 255 as well as anything else,
+and a control run of the shipped exe from another path (tests/processor-
+avp2.sh) gives polies that are all 255 in one run and garbage in the
+other; nothing in the file says which polies the T-junction fix made. Each
+file's world models and colour layout are read on their own, and must
+agree.
+
+Prints "identical" (raw, byte for byte) or "equal but for M physics BSP
+vertex colour bytes in N polies (RETAIL_BUGS.md)" -- a normalised
+comparison, not a raw one -- or where the first real difference is
+(offset, and the world model it is in). Exits 0 if the files agree as
+above, 1 if not, 2 on a file it can't read.
 """
 import struct
 import sys
@@ -69,8 +76,8 @@ def world_models(d):
 
 
 def colour_offsets(d, start):
-    """The file offsets of a physics BSP world model's vertex colour bytes
-    (empty for any other world model)."""
+    """Per poly, the file offsets of a physics BSP world model's vertex
+    colour bytes (empty for any other world model)."""
     r = R(d, start)
     r.skip(32)
     flags, _depth = r.u('II')
@@ -106,10 +113,12 @@ def colour_offsets(d, start):
         r.skip(12 + 4)
         r.skip(4 * r.u('H'))
         r.skip(8 + 36)
+        poly = []
         for _ in range(hdr[i][0] + hdr[i][1]):
             r.skip(2)
-            out.extend((r.o, r.o + 1, r.o + 2))
+            poly.extend((r.o, r.o + 1, r.o + 2))
             r.skip(3)
+        out.append(poly)
     return out
 
 
@@ -129,26 +138,36 @@ def main():
         return 1
     try:
         models_a, models_b = world_models(a), world_models(b)
-        loose = set()
-        if models_a == models_b:
-            for s, _e in models_a:
-                loose.update(colour_offsets(a, s))
+        if models_a != models_b:
+            print('differs: the world models are laid out differently')
+            return 1
+        polies_a = [p for s, _e in models_a for p in colour_offsets(a, s)]
+        polies_b = [p for s, _e in models_b for p in colour_offsets(b, s)]
+        if polies_a != polies_b:
+            print('differs: the physics BSP colours are laid out differently')
+            return 1
     except (ValueError, struct.error) as e:
-        loose, models_a = set(), []
+        polies_a, models_a = [], []
         print('(could not parse the world models: %s)' % e)
-    tolerated = 0
+    loose = {}
+    for k, poly in enumerate(polies_a):
+        for o in poly:
+            loose[o] = k
+    polies, nbytes = set(), 0
     for i in range(len(a)):
         if a[i] == b[i]:
             continue
-        if i in loose and (a[i] != 255 or b[i] != 255):
-            tolerated += 1
+        k = loose.get(i)
+        if k is not None:
+            polies.add(k)
+            nbytes += 1
             continue
-        where = next(('world model %d' % k for k, (s, e) in enumerate(models_a) if s <= i < e), 'outside the world models')
+        where = next(('world model %d' % j for j, (s, e) in enumerate(models_a) if s <= i < e), 'outside the world models')
         print('differs at byte %d (%s): %02x, %02x' % (i, where, a[i], b[i]))
         return 1
-    print('identical but %d uninitialised vertex colour bytes (RETAIL_BUGS.md)' % tolerated)
+    print('equal but for %d physics BSP vertex colour bytes in %d polies '
+          '(RETAIL_BUGS.md)' % (nbytes, len(polies)))
     return 0
-
 
 if __name__ == '__main__':
     sys.exit(main())
