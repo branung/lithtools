@@ -49,11 +49,17 @@ check-toolchain:
 reference:
 	$(DOCKER_RUN) bash build/reference.sh
 
+# what tools/evidence.py cannot ask git for in the container (talon is a
+# directory of lithtools, whose .git is not mounted)
+EVIDENCE_ENV = EVIDENCE_REVISION=$(shell git rev-parse HEAD 2>/dev/null) \
+	EVIDENCE_MODIFIED=$(shell git status --porcelain --untracked-files=no . 2>/dev/null | wc -l) \
+	EVIDENCE_SUBMODULES="$(shell git submodule status 2>/dev/null | sed 's/^ *//' | tr '\n' ';')"
+
 progress:
-	$(DOCKER_RUN) env COMPLETE=$(COMPLETE) COVERED=$(COVERED) bash build/progress.sh check
+	$(DOCKER_RUN) env COMPLETE=$(COMPLETE) COVERED=$(COVERED) $(EVIDENCE_ENV) bash build/progress.sh check
 
 progress-update:
-	$(DOCKER_RUN) env ACCEPT_LOSSES=$(ACCEPT_LOSSES) bash build/progress.sh update
+	$(DOCKER_RUN) env ACCEPT_LOSSES=$(ACCEPT_LOSSES) $(EVIDENCE_ENV) bash build/progress.sh update
 
 test:
 	$(DOCKER_RUN) bash tests/run.sh $(TESTS)
