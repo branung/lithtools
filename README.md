@@ -7,6 +7,11 @@ cross-platform tools for the files these games ship, and the original
 development tools archived and reconstructed from their binaries for
 research.
 
+<p align="center">
+  <img src="screenshots/lithrez_studio.png" alt="LithRez Studio: No One Lives Forever 2's GAME.REZ open, previewing Cate Archer's HERO_CASUAL.LTB model with its pieces, sockets and skins" width="49%">
+  <img src="screenshots/blender.png" alt="Blender: No One Lives Forever 2's mime model imported with its LODs, and the LithTech Animations panel" width="49%">
+</p>
+
 ## What's here
 
 | Directory | What it is |
