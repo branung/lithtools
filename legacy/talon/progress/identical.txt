@@ -1,7 +1,6 @@
 # Every function the scoreboard has verified byte-identical to the retail binaries
 # (target<TAB>function). Written by tools/ratchet.py update; `make progress`
 # fails if one of them stops matching.
-DEdit.exe	sub_401006
 DEdit.exe	sub_401009
 DEdit.exe	sub_401015
 DEdit.exe	sub_401021
@@ -674,7 +673,6 @@ DEdit.exe	sub_4179ce
 DEdit.exe	sub_4179da
 DEdit.exe	sub_417a19
 DEdit.exe	sub_417a36
-DEdit.exe	sub_417cc9
 DEdit.exe	sub_417cca
 DEdit.exe	sub_417d29
 DEdit.exe	sub_417d60
@@ -1193,7 +1191,6 @@ DEdit.exe	sub_42fb4e
 DEdit.exe	sub_42fbe3
 DEdit.exe	sub_42fe0a
 DEdit.exe	sub_42fe4e
-DEdit.exe	sub_42fe6f
 DEdit.exe	sub_42fe70
 DEdit.exe	sub_42ffa9
 DEdit.exe	sub_42ffe3
@@ -1260,7 +1257,6 @@ DEdit.exe	sub_431bf2
 DEdit.exe	sub_431d96
 DEdit.exe	sub_431ee3
 DEdit.exe	sub_431efe
-DEdit.exe	sub_431f18
 DEdit.exe	sub_431f1c
 DEdit.exe	sub_431f6a
 DEdit.exe	sub_431f79
@@ -2288,7 +2284,6 @@ DEdit.exe	sub_44ee6f
 DEdit.exe	sub_44ee8c
 DEdit.exe	sub_44eeca
 DEdit.exe	sub_44eee7
-DEdit.exe	sub_44ef03
 DEdit.exe	sub_44efd8
 DEdit.exe	sub_44efe8
 DEdit.exe	sub_44eff8
@@ -2485,7 +2480,6 @@ DEdit.exe	sub_455686
 DEdit.exe	sub_455719
 DEdit.exe	sub_455757
 DEdit.exe	sub_4557cb
-DEdit.exe	sub_45582b
 DEdit.exe	sub_455831
 DEdit.exe	sub_45584a
 DEdit.exe	sub_4558ca
@@ -2935,7 +2929,6 @@ DEdit.exe	sub_46d3f5
 DEdit.exe	sub_46d4f1
 DEdit.exe	sub_46d54e
 DEdit.exe	sub_46d837
-DEdit.exe	sub_46d88b
 DEdit.exe	sub_46d892
 DEdit.exe	sub_46d8d0
 DEdit.exe	sub_46d916
@@ -3172,7 +3165,6 @@ DEdit.exe	sub_473a5c
 DEdit.exe	sub_473ab3
 DEdit.exe	sub_473b63
 DEdit.exe	sub_473b7c
-DEdit.exe	sub_473c2f
 DEdit.exe	sub_473c32
 DEdit.exe	sub_473c3f
 DEdit.exe	sub_473cb9
@@ -4019,7 +4011,6 @@ IMFLithDTX.dll	sub_10001c40
 IMFLithDTX.dll	sub_10001c50
 IMFLithDTX.dll	sub_10001c60
 IMFLithDTX.dll	sub_10001c70
-IMFLithDTX.dll	sub_10001c80
 IMFLithDTX.dll	sub_10001c90
 IMFLithDTX.dll	sub_10001cb0
 IMFLithDTX.dll	sub_10001df0
@@ -4118,7 +4109,6 @@ MaxDTXLoader30.bmi	sub_10001000
 MaxDTXLoader30.bmi	sub_10001040
 MaxDTXLoader30.bmi	sub_10001050
 MaxDTXLoader30.bmi	sub_10001060
-MaxDTXLoader30.bmi	sub_10001070
 MaxDTXLoader30.bmi	sub_10001080
 MaxDTXLoader30.bmi	sub_100010d0
 MaxDTXLoader30.bmi	sub_100010e0
@@ -4161,7 +4151,6 @@ MaxDTXLoader30.bmi	sub_10001da0
 MaxDTXLoader30.bmi	sub_10001dc0
 MaxDTXLoader30.bmi	sub_10001dd0
 MaxDTXLoader30.bmi	sub_10001e30
-MaxDTXLoader30.bmi	sub_10001e40
 MaxDTXLoader30.bmi	sub_10001e50
 MaxDTXLoader30.bmi	sub_10001e70
 MaxDTXLoader30.bmi	sub_10001e80
@@ -4179,19 +4168,11 @@ MaxDTXLoader30.bmi	sub_10002500
 MaxDTXLoader30.bmi	sub_10002510
 MaxDTXLoader30.bmi	sub_10002530
 MaxDTXLoader30.bmi	sub_10002540
-MaxDTXLoader30.bmi	sub_100025c0
-MaxDTXLoader30.bmi	sub_100025d0
-MaxDTXLoader30.bmi	sub_100025e0
-MaxDTXLoader30.bmi	sub_100025f0
-MaxDTXLoader30.bmi	sub_10002600
-MaxDTXLoader30.bmi	sub_10002610
 MaxDTXLoader30.bmi	sub_10002620
 MaxDTXLoader30.bmi	sub_10002630
 MaxDTXLoader30.bmi	sub_10002640
 MaxDTXLoader30.bmi	sub_10002650
 MaxDTXLoader30.bmi	sub_10002660
-MaxDTXLoader30.bmi	sub_10002670
-MaxDTXLoader30.bmi	sub_10002680
 MaxDTXLoader30.bmi	sub_10002690
 MaxDTXLoader30.bmi	sub_100026a0
 MaxDTXLoader30.bmi	sub_100026b0
@@ -4275,9 +4256,7 @@ MaxDTXLoader30.bmi	sub_100066a0
 MaxDTXLoader30.bmi:rsrc	rsrc:6/1/1033
 MaxDTXLoader40.bmi	sub_10001000
 MaxDTXLoader40.bmi	sub_10001040
-MaxDTXLoader40.bmi	sub_10001050
 MaxDTXLoader40.bmi	sub_10001060
-MaxDTXLoader40.bmi	sub_10001070
 MaxDTXLoader40.bmi	sub_10001080
 MaxDTXLoader40.bmi	sub_100010d0
 MaxDTXLoader40.bmi	sub_100010e0
@@ -4317,10 +4296,8 @@ MaxDTXLoader40.bmi	sub_10001d30
 MaxDTXLoader40.bmi	sub_10001d40
 MaxDTXLoader40.bmi	sub_10001d90
 MaxDTXLoader40.bmi	sub_10001da0
-MaxDTXLoader40.bmi	sub_10001dc0
 MaxDTXLoader40.bmi	sub_10001dd0
 MaxDTXLoader40.bmi	sub_10001e30
-MaxDTXLoader40.bmi	sub_10001e40
 MaxDTXLoader40.bmi	sub_10001e50
 MaxDTXLoader40.bmi	sub_10001e70
 MaxDTXLoader40.bmi	sub_10001e80
@@ -4339,25 +4316,16 @@ MaxDTXLoader40.bmi	sub_10002510
 MaxDTXLoader40.bmi	sub_10002530
 MaxDTXLoader40.bmi	sub_10002540
 MaxDTXLoader40.bmi	sub_100025c0
-MaxDTXLoader40.bmi	sub_10002670
-MaxDTXLoader40.bmi	sub_10002680
-MaxDTXLoader40.bmi	sub_10002690
-MaxDTXLoader40.bmi	sub_100026a0
-MaxDTXLoader40.bmi	sub_100026b0
 MaxDTXLoader40.bmi	sub_100026c0
 MaxDTXLoader40.bmi	sub_100026d0
 MaxDTXLoader40.bmi	sub_10002710
 MaxDTXLoader40.bmi	sub_10002720
-MaxDTXLoader40.bmi	sub_10002740
 MaxDTXLoader40.bmi	sub_10002750
 MaxDTXLoader40.bmi	sub_10002760
 MaxDTXLoader40.bmi	sub_10002780
 MaxDTXLoader40.bmi	sub_10002790
 MaxDTXLoader40.bmi	sub_100027a0
 MaxDTXLoader40.bmi	sub_100027b0
-MaxDTXLoader40.bmi	sub_100027c0
-MaxDTXLoader40.bmi	sub_100027d0
-MaxDTXLoader40.bmi	sub_100027e0
 MaxDTXLoader40.bmi	sub_100027f0
 MaxDTXLoader40.bmi	sub_10002800
 MaxDTXLoader40.bmi	sub_10002810
@@ -4442,8 +4410,6 @@ MaxDTXLoader40.bmi:rsrc	rsrc:6/1/1033
 MaxModelExport30.dle	sub_105b1000
 MaxModelExport30.dle	sub_105b1040
 MaxModelExport30.dle	sub_105b1050
-MaxModelExport30.dle	sub_105b1060
-MaxModelExport30.dle	sub_105b1070
 MaxModelExport30.dle	sub_105b1080
 MaxModelExport30.dle	sub_105b10d0
 MaxModelExport30.dle	sub_105b11b0
@@ -4487,7 +4453,6 @@ MaxModelExport30.dle	sub_105b5860
 MaxModelExport30.dle	sub_105b5940
 MaxModelExport30.dle	sub_105b5a40
 MaxModelExport30.dle	sub_105b5ad0
-MaxModelExport30.dle	sub_105b5b60
 MaxModelExport30.dle	sub_105b5b70
 MaxModelExport30.dle	sub_105b5b80
 MaxModelExport30.dle	sub_105b5c20
@@ -4725,8 +4690,6 @@ MaxModelExport30.dle:rsrc	rsrc:6/2/1033
 MaxModelExport40.dle	sub_105b1000
 MaxModelExport40.dle	sub_105b1040
 MaxModelExport40.dle	sub_105b1050
-MaxModelExport40.dle	sub_105b1060
-MaxModelExport40.dle	sub_105b1070
 MaxModelExport40.dle	sub_105b1080
 MaxModelExport40.dle	sub_105b10d0
 MaxModelExport40.dle	sub_105b11b0
@@ -4772,7 +4735,6 @@ MaxModelExport40.dle	sub_105b65f0
 MaxModelExport40.dle	sub_105b66d0
 MaxModelExport40.dle	sub_105b67c0
 MaxModelExport40.dle	sub_105b6850
-MaxModelExport40.dle	sub_105b68e0
 MaxModelExport40.dle	sub_105b68f0
 MaxModelExport40.dle	sub_105b6900
 MaxModelExport40.dle	sub_105b69a0
@@ -5016,8 +4978,6 @@ MaxModelExport40.dle:rsrc	rsrc:6/2/1033
 MaxWorldExport30.dle	sub_10001000
 MaxWorldExport30.dle	sub_10001040
 MaxWorldExport30.dle	sub_10001050
-MaxWorldExport30.dle	sub_10001060
-MaxWorldExport30.dle	sub_10001070
 MaxWorldExport30.dle	sub_10001080
 MaxWorldExport30.dle	sub_100010d0
 MaxWorldExport30.dle	sub_100010e0
@@ -5068,7 +5028,6 @@ MaxWorldExport30.dle	sub_100055b0
 MaxWorldExport30.dle	sub_100055e0
 MaxWorldExport30.dle	sub_10005790
 MaxWorldExport30.dle	sub_100057f0
-MaxWorldExport30.dle	sub_10005880
 MaxWorldExport30.dle	sub_10005890
 MaxWorldExport30.dle	sub_10005950
 MaxWorldExport30.dle	sub_10005a10
@@ -5320,8 +5279,6 @@ MaxWorldExport30.dle:rsrc	rsrc:6/1/1033
 MaxWorldExport40.dle	sub_10001000
 MaxWorldExport40.dle	sub_10001040
 MaxWorldExport40.dle	sub_10001050
-MaxWorldExport40.dle	sub_10001060
-MaxWorldExport40.dle	sub_10001070
 MaxWorldExport40.dle	sub_10001080
 MaxWorldExport40.dle	sub_100010d0
 MaxWorldExport40.dle	sub_100010e0
@@ -5375,7 +5332,6 @@ MaxWorldExport40.dle	sub_100056f0
 MaxWorldExport40.dle	sub_10005720
 MaxWorldExport40.dle	sub_10005750
 MaxWorldExport40.dle	sub_10005900
-MaxWorldExport40.dle	sub_10005960
 MaxWorldExport40.dle	sub_10005970
 MaxWorldExport40.dle	sub_10005a00
 MaxWorldExport40.dle	sub_10005ac0
@@ -5631,8 +5587,6 @@ MaxWorldExport40.dle:rsrc	rsrc:6/1/1033
 MaxWorldImport30.dli	sub_10001000
 MaxWorldImport30.dli	sub_10001040
 MaxWorldImport30.dli	sub_10001050
-MaxWorldImport30.dli	sub_10001060
-MaxWorldImport30.dli	sub_10001070
 MaxWorldImport30.dli	sub_10001080
 MaxWorldImport30.dli	sub_100010b0
 MaxWorldImport30.dli	sub_100010c0
@@ -5749,7 +5703,6 @@ MaxWorldImport30.dli	sub_100066a0
 MaxWorldImport30.dli	sub_100067d0
 MaxWorldImport30.dli	sub_10006840
 MaxWorldImport30.dli	sub_100068d0
-MaxWorldImport30.dli	sub_10006960
 MaxWorldImport30.dli	sub_10006970
 MaxWorldImport30.dli	sub_10006a10
 MaxWorldImport30.dli	sub_10006ab0
@@ -5810,7 +5763,6 @@ MaxWorldImport30.dli	sub_100093f0
 MaxWorldImport30.dli	sub_10009560
 MaxWorldImport30.dli	sub_10009590
 MaxWorldImport30.dli	sub_100095a0
-MaxWorldImport30.dli	sub_100095d0
 MaxWorldImport30.dli	sub_100095e0
 MaxWorldImport30.dli	sub_10009620
 MaxWorldImport30.dli	sub_10009630
@@ -6016,8 +5968,6 @@ MaxWorldImport30.dli:rsrc	rsrc:6/1/1033
 MaxWorldImport40.dli	sub_10001000
 MaxWorldImport40.dli	sub_10001040
 MaxWorldImport40.dli	sub_10001050
-MaxWorldImport40.dli	sub_10001060
-MaxWorldImport40.dli	sub_10001070
 MaxWorldImport40.dli	sub_10001080
 MaxWorldImport40.dli	sub_100010b0
 MaxWorldImport40.dli	sub_100010c0
@@ -6138,7 +6088,6 @@ MaxWorldImport40.dli	sub_10006710
 MaxWorldImport40.dli	sub_10006840
 MaxWorldImport40.dli	sub_100068b0
 MaxWorldImport40.dli	sub_10006940
-MaxWorldImport40.dli	sub_100069d0
 MaxWorldImport40.dli	sub_100069e0
 MaxWorldImport40.dli	sub_10006a80
 MaxWorldImport40.dli	sub_10006b20
@@ -6201,7 +6150,6 @@ MaxWorldImport40.dli	sub_100094c0
 MaxWorldImport40.dli	sub_10009630
 MaxWorldImport40.dli	sub_10009660
 MaxWorldImport40.dli	sub_10009670
-MaxWorldImport40.dli	sub_100096a0
 MaxWorldImport40.dli	sub_100096b0
 MaxWorldImport40.dli	sub_100096f0
 MaxWorldImport40.dli	sub_10009710
@@ -6470,7 +6418,6 @@ MayaModelExport30.mll	sub_10008940
 MayaModelExport30.mll	sub_100089d0
 MayaModelExport30.mll	sub_100089e0
 MayaModelExport30.mll	sub_100089f0
-MayaModelExport30.mll	sub_10008a90
 MayaModelExport30.mll	sub_10008aa0
 MayaModelExport30.mll	sub_10008b40
 MayaModelExport30.mll	sub_10008be0
@@ -6734,7 +6681,6 @@ MayaModelExport40.mll	sub_10008940
 MayaModelExport40.mll	sub_100089d0
 MayaModelExport40.mll	sub_100089e0
 MayaModelExport40.mll	sub_100089f0
-MayaModelExport40.mll	sub_10008a90
 MayaModelExport40.mll	sub_10008aa0
 MayaModelExport40.mll	sub_10008b40
 MayaModelExport40.mll	sub_10008be0
@@ -7025,7 +6971,6 @@ MayaWorldExport30.mll	sub_1000e7e0
 MayaWorldExport30.mll	sub_1000e7f0
 MayaWorldExport30.mll	sub_1000e810
 MayaWorldExport30.mll	sub_1000e820
-MayaWorldExport30.mll	sub_1000e870
 MayaWorldExport30.mll	sub_1000e8b0
 MayaWorldExport30.mll	sub_1000e970
 MayaWorldExport30.mll	sub_1000eb50
@@ -7155,7 +7100,6 @@ MayaWorldExport30.mll	sub_100158a0
 MayaWorldExport30.mll	sub_10015a10
 MayaWorldExport30.mll	sub_10015a40
 MayaWorldExport30.mll	sub_10015a50
-MayaWorldExport30.mll	sub_10015a80
 MayaWorldExport30.mll	sub_10015a90
 MayaWorldExport30.mll	sub_10015ad0
 MayaWorldExport30.mll	sub_10015ae0
@@ -7526,7 +7470,6 @@ MayaWorldExport40.mll	sub_1000e7e0
 MayaWorldExport40.mll	sub_1000e7f0
 MayaWorldExport40.mll	sub_1000e810
 MayaWorldExport40.mll	sub_1000e820
-MayaWorldExport40.mll	sub_1000e870
 MayaWorldExport40.mll	sub_1000e8b0
 MayaWorldExport40.mll	sub_1000e970
 MayaWorldExport40.mll	sub_1000eb50
@@ -7656,7 +7599,6 @@ MayaWorldExport40.mll	sub_100158a0
 MayaWorldExport40.mll	sub_10015a10
 MayaWorldExport40.mll	sub_10015a40
 MayaWorldExport40.mll	sub_10015a50
-MayaWorldExport40.mll	sub_10015a80
 MayaWorldExport40.mll	sub_10015a90
 MayaWorldExport40.mll	sub_10015ad0
 MayaWorldExport40.mll	sub_10015ae0
@@ -8367,8 +8309,6 @@ ModelEdit.exe	sub_40fcb1
 ModelEdit.exe	sub_40fcc0
 ModelEdit.exe	sub_40fd06
 ModelEdit.exe	sub_40fd33
-ModelEdit.exe	sub_40fda6
-ModelEdit.exe	sub_40fdac
 ModelEdit.exe	sub_40fdb0
 ModelEdit.exe	sub_40fdcd
 ModelEdit.exe	sub_40fe41
@@ -8615,7 +8555,6 @@ ModelEdit.exe	sub_417ec0
 ModelEdit.exe	sub_417f28
 ModelEdit.exe	sub_417f81
 ModelEdit.exe	sub_4187ca
-ModelEdit.exe	sub_418899
 ModelEdit.exe	sub_4188a0
 ModelEdit.exe	sub_4198da
 ModelEdit.exe	sub_41990f
@@ -9065,7 +9004,6 @@ ModelEdit.exe	sub_42950a
 ModelEdit.exe	sub_429602
 ModelEdit.exe	sub_429636
 ModelEdit.exe	sub_42969f
-ModelEdit.exe	sub_42971b
 ModelEdit.exe	sub_42971f
 ModelEdit.exe	sub_42976d
 ModelEdit.exe	sub_42977c
@@ -9775,7 +9713,6 @@ Processor.exe (AvP2)	sub_409f40
 Processor.exe (AvP2)	sub_409f60
 Processor.exe (AvP2)	sub_409f80
 Processor.exe (AvP2)	sub_40a030
-Processor.exe (AvP2)	sub_40a0a0
 Processor.exe (AvP2)	sub_40a0b0
 Processor.exe (AvP2)	sub_40a0d0
 Processor.exe (AvP2)	sub_40a140
@@ -10347,7 +10284,6 @@ Processor.exe (AvP2)	sub_42dc00
 Processor.exe (AvP2)	sub_42dc80
 Processor.exe (AvP2)	sub_42dca0
 Processor.exe (AvP2)	sub_42dd30
-Processor.exe (AvP2)	sub_42dd40
 Processor.exe (AvP2)	sub_42dd50
 Processor.exe (AvP2)	sub_42df70
 Processor.exe (AvP2)	sub_42e530
@@ -10383,7 +10319,6 @@ Processor.exe (AvP2)	sub_42f900
 Processor.exe (AvP2)	sub_42fe90
 Processor.exe (AvP2)	sub_42fff0
 Processor.exe (AvP2)	sub_430070
-Processor.exe (AvP2)	sub_430130
 Processor.exe (AvP2)	sub_430140
 Processor.exe (AvP2)	sub_430210
 Processor.exe (AvP2)	sub_430220
@@ -11065,7 +11000,6 @@ Processor.exe (NOLF)	sub_403090
 Processor.exe (NOLF)	sub_4030c0
 Processor.exe (NOLF)	sub_403110
 Processor.exe (NOLF)	sub_403140
-Processor.exe (NOLF)	sub_403190
 Processor.exe (NOLF)	sub_4031a0
 Processor.exe (NOLF)	sub_4031d0
 Processor.exe (NOLF)	sub_403260
@@ -11084,7 +11018,6 @@ Processor.exe (NOLF)	sub_404a50
 Processor.exe (NOLF)	sub_404f60
 Processor.exe (NOLF)	sub_404fb0
 Processor.exe (NOLF)	sub_405000
-Processor.exe (NOLF)	sub_40523e
 Processor.exe (NOLF)	sub_405250
 Processor.exe (NOLF)	sub_405280
 Processor.exe (NOLF)	sub_4052f0
@@ -11137,7 +11070,6 @@ Processor.exe (NOLF)	sub_40a960
 Processor.exe (NOLF)	sub_40a9d0
 Processor.exe (NOLF)	sub_40aa00
 Processor.exe (NOLF)	sub_40abb0
-Processor.exe (NOLF)	sub_40abc0
 Processor.exe (NOLF)	sub_40ac00
 Processor.exe (NOLF)	sub_40acd0
 Processor.exe (NOLF)	sub_40ace0
@@ -11438,7 +11370,6 @@ Processor.exe (NOLF)	sub_42e660
 Processor.exe (NOLF)	sub_42e830
 Processor.exe (NOLF)	sub_42e950
 Processor.exe (NOLF)	sub_42ea00
-Processor.exe (NOLF)	sub_42ece0
 Processor.exe (NOLF)	sub_42ecf0
 Processor.exe (NOLF)	sub_42ed10
 Processor.exe (NOLF)	sub_42edf0
@@ -11604,7 +11535,6 @@ Processor.exe (NOLF)	sub_441550
 Processor.exe (NOLF)	sub_441980
 Processor.exe (NOLF)	sub_441c70
 Processor.exe (NOLF)	sub_441cf0
-Processor.exe (NOLF)	sub_441d00
 Processor.exe (NOLF)	sub_441d10
 Processor.exe (NOLF)	sub_441d20
 Processor.exe (NOLF)	sub_441d60
@@ -11626,7 +11556,6 @@ Processor.exe (NOLF)	sub_442380
 Processor.exe (NOLF)	sub_4423b0
 Processor.exe (NOLF)	sub_4423c0
 Processor.exe (NOLF)	sub_4423d0
-Processor.exe (NOLF)	sub_4423e0
 Processor.exe (NOLF)	sub_442410
 Processor.exe (NOLF)	sub_442420
 Processor.exe (NOLF)	sub_442450
@@ -11746,7 +11675,6 @@ Processor.exe (NOLF)	sub_448a35
 Processor.exe (NOLF)	sub_448a84
 Processor.exe (NOLF)	sub_448b86
 Processor.exe (NOLF)	sub_448bb9
-Processor.exe (NOLF)	sub_448bf5
 Processor.exe (NOLF)	sub_448bfc
 Processor.exe (NOLF)	sub_448c2f
 Processor.exe (NOLF)	sub_448c61
@@ -11917,7 +11845,6 @@ Processor.exe (NOLF)	sub_44c97e
 Processor.exe (NOLF)	sub_44c9c8
 Processor.exe (NOLF)	sub_44c9f9
 Processor.exe (NOLF)	sub_44ca2d
-Processor.exe (NOLF)	sub_44ca8a
 Processor.exe (NOLF)	sub_44ca8b
 Processor.exe (NOLF)	sub_44cae9
 Processor.exe (NOLF)	sub_44cb27
