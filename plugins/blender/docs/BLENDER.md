@@ -1,9 +1,9 @@
 # The Blender extension
 
 `io_scene_lithtech` imports and exports LithTech models (`.abc` versions 9
-to 12: NOLF, AvP2; `.ltb` model file versions 18 to 25: NOLF2, Contract
-J.A.C.K., Tron 2.0) and textures (`.dtx`, version -5) in Blender 5.2 LTS
-and later.
+to 12: NOLF, AvP2; `.abc` version 6: Shogo, Blood 2, KISS Psycho Circus;
+`.ltb` model file versions 18 to 25: NOLF2, Contract J.A.C.K., Tron 2.0)
+and textures (`.dtx`, version -5) in Blender 5.2 LTS and later.
 
 Die Hard: Nakatomi Plaza's wrapped `.ltb` files can also be imported through
 the LTB importer (wrapper version 3, model versions 9–13, ABC or D3D body).
@@ -224,9 +224,40 @@ the same triangles and weights). Nothing exported here has been run on a
 PS2. Skins are found as for `.abc` (SKINS beside MODELS, SKINS_PV beside
 MODELS_PV, in any letter case); PS2 skins are 8-bit palette DTX files.
 
+## LithTech 1 models (Shogo, Blood 2, KISS Psycho Circus)
+
+**File > Import / Export > LithTech Model (.abc)** reads and writes `.abc`
+version 6 too; *Version* "As Imported" writes a v6 model back as v6, and
+"12" converts it. `lithtech/abc6.py` has the format. The layout in Blender
+is the `.abc` one. What v6 adds:
+
+| v6 | Blender |
+|---|---|
+| one mesh, each vertex on one node | one mesh object, each vertex in one vertex group |
+| no bind pose: the first key of the first animation | the rest pose |
+| vertex animation: a deformation node's vertices keyed per keyframe as three bytes each | shape keys `<animation>\|<key>` (as for `.ltb`), at the bind pose, keyed in the action's KEY slot so they play with the bones |
+| quaternions as stored, some not unit length | the action's `lt_v6_keys` |
+| bounds, the reduced-detail vertices, the vertex bytes, the raw vertex and face values | `lt_v6_*` properties and attributes |
+
+**Export.** Each value the import kept is written back while what Blender
+holds still matches it, so an unchanged model exports byte for byte:
+`tests/blender_abc6.py` checks every v6 model of Shogo's and Blood 2's
+demos and the LithTech 2.42 SDK's samples, 414. An edit changes what it
+touches: `tests/blender_abc6_edit.py` moves an animated vertex in one frame
+(three bytes change), a bone at one key (that key changes, written unit
+length), a vertex, a face, and makes vertex animation on a model that had
+none, and checks each file against what Blender shows. v6 holds one node per
+vertex (the heaviest of several is taken), triangles only, and no skins; a
+node with a vertex that moves in a frame lists every vertex on it, as every
+such node in the shipped files does. The first key of the first animation
+is LithTech 1's bind, so keep it the rest pose (export warns when it is
+not). The shape keys are found by their action's name, so rename an action
+and its keys together. Blender interpolates normalized quaternions where LithTech 1
+interpolates the stored ones, so a few Blood 2 animations with very long
+keys play differently between keys in Blender; the file is unaffected.
+
 ## Not yet
 
-- Shogo/Blood 2-era `.abc` (its own module beside `lithtech/abc.py`).
 - Matrix-palette skeletal meshes are read and written but no shipped model
   uses them, so they're untested.
 - World files (`.dat`; the PS2's world `.ltb` files).

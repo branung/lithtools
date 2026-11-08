@@ -13,7 +13,7 @@ from bpy_extras.io_utils import ExportHelper, ImportHelper, poll_file_object_dro
 # --------------------------------------------------------------------- #
 
 class IMPORT_SCENE_OT_lithtech_abc(bpy.types.Operator, ImportHelper):
-    """Import LithTech models (.abc): NOLF, AvP2 and AvP2 Primal Hunt"""
+    """Import LithTech models (.abc): NOLF, AvP2 and AvP2 Primal Hunt, and LithTech 1's v6 (Shogo, Blood 2, KISS)"""
     bl_idname = "import_scene.lithtech_abc"
     bl_label = "Import LithTech Model"
     bl_options = {'REGISTER', 'UNDO', 'PRESET'}
@@ -94,7 +94,7 @@ class IMPORT_SCENE_OT_lithtech_abc(bpy.types.Operator, ImportHelper):
 
 
 class EXPORT_SCENE_OT_lithtech_abc(bpy.types.Operator, ExportHelper):
-    """Export an armature and its meshes as a LithTech model (.abc, version 12)"""
+    """Export an armature and its meshes as a LithTech model (.abc: version 12, or LithTech 1's version 6)"""
     bl_idname = "export_scene.lithtech_abc"
     bl_label = "Export LithTech Model"
     bl_options = {'PRESET'}
@@ -102,6 +102,14 @@ class EXPORT_SCENE_OT_lithtech_abc(bpy.types.Operator, ExportHelper):
     filename_ext = ".abc"
     filter_glob: StringProperty(default="*.abc", options={'HIDDEN'})
 
+    abc_version: EnumProperty(
+        name="Version",
+        items=[('AUTO', "As Imported", "Version 6 for a model imported from LithTech 1's .abc v6, "
+                "else version 12"),
+               ('12', "12", "NOLF, AvP2 and AvP2 Primal Hunt"),
+               ('6', "6 (LithTech 1)", "Shogo, Blood 2, KISS Psycho Circus: one mesh, one node per "
+                "vertex, and vertex animation from the shape keys \"<action>|<key>\"")],
+        default='AUTO')
     scale: FloatProperty(
         name="Scale", default=1.0, min=1e-6, soft_min=0.001, soft_max=1000.0,
         description="LithTech units per Blender unit (set from the scale the model was "
@@ -138,8 +146,26 @@ class EXPORT_SCENE_OT_lithtech_abc(bpy.types.Operator, ExportHelper):
             self.filepath = bpy.path.ensure_ext(arm.name, self.filename_ext)
         return super().invoke(context, event)
 
+    def _version(self, context):
+        if self.abc_version != 'AUTO':
+            return int(self.abc_version)
+        from . import export_abc
+        arm = export_abc.find_armature(context)
+        return 6 if arm is not None and arm.get("lt_source_version") == 6 else 12
+
     def execute(self, context):
         from . import export_abc, textures
+        if self._version(context) == 6:
+            from . import export_abc6
+            try:
+                _, written, _notes = export_abc6.save(
+                    context, self.filepath, scale=self.scale, use_selection=self.use_selection,
+                    export_animations=self.export_animations, report=self.report)
+            except export_abc.ExportError as e:
+                self.report({'ERROR'}, str(e))
+                return {'CANCELLED'}
+            self.report({'INFO'}, "Wrote " + ", ".join(os.path.basename(p) for p in written) + " (v6)")
+            return {'FINISHED'}
         try:
             _, written = export_abc.save(
                 context, self.filepath, scale=self.scale, use_selection=self.use_selection,
@@ -157,13 +183,19 @@ class EXPORT_SCENE_OT_lithtech_abc(bpy.types.Operator, ExportHelper):
     def draw(self, context):
         layout = self.layout
         layout.use_property_split = True
+        layout.prop(self, "abc_version")
+        v12 = self._version(context) != 6
         layout.prop(self, "scale")
         layout.prop(self, "use_selection")
         layout.prop(self, "export_animations")
-        layout.prop(self, "normalize_weights")
-        layout.prop(self, "export_textures")
+        # v6 holds one node per vertex, and LithTech 1's skins are a DTX
+        # version the texture writer doesn't write.
         sub = layout.column()
-        sub.active = self.export_textures
+        sub.active = v12
+        sub.prop(self, "normalize_weights")
+        sub.prop(self, "export_textures")
+        sub = layout.column()
+        sub.active = v12 and self.export_textures
         sub.prop(self, "texture_format")
 
 

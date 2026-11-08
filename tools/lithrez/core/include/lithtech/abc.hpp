@@ -1,6 +1,7 @@
 // LithTech .abc models, versions 9-12 (NOLF, AvP2, AvP2 Primal Hunt):
 // reading, for previews. The C++ twin of plugins/blender's lithtech/abc.py;
-// plugins/blender/docs/ABC.md has the format and the evidence.
+// plugins/blender/docs/ABC.md has the format and the evidence. Version 6
+// (Shogo, Blood 2, KISS) is lithtech::abc6, converted to this Model.
 
 #pragma once
 
@@ -39,6 +40,10 @@ struct Node {
     uint8_t flags = 0;
     Mat4 bind{};           // node -> model space at the bind pose
     int parent = -1;       // index into Model::nodes
+    // Vertex animation, which only .abc v6 has (lithtech::abc6): the vertices
+    // of pieces[0].lods[0] whose positions this node keys per keyframe, in
+    // Animation::vertex_frames order. Empty in versions 9-12.
+    std::vector<uint32_t> animated_vertices;
 };
 
 struct Keyframe { uint32_t time; std::string command; };
@@ -51,6 +56,9 @@ struct Animation {
     std::vector<Keyframe> keyframes;
     // transforms[node][key], relative to the parent node
     std::vector<std::vector<std::pair<Vec3, Quat>>> transforms;
+    // vertex_frames[node][key][i]: the node-space position of the node's
+    // animated_vertices[i] at that key (.abc v6 only; empty otherwise).
+    std::vector<std::vector<std::vector<Vec3>>> vertex_frames;
     uint32_t length_ms() const { return keyframes.empty() ? 0 : keyframes.back().time; }
 };
 
@@ -78,5 +86,12 @@ std::vector<Mat4> pose(const Model& m, const Animation& a, float t_ms);
 std::vector<Mat4> bind_pose(const Model& m);
 // A vertex placed by its weights: sum of matrix @ (x, y, z, bias).
 Vec3 skin(const Vertex& v, const std::vector<Mat4>& matrices);
+// For a model whose nodes animate vertices (.abc v6): moves each animated
+// vertex of `lod` (a copy of pieces[0].lods[0]) to its keyed node-space
+// position at time t, interpolated linearly between keys as pose() is, by
+// setting its one weight's location; skin() then places it as usual. A
+// later entry for the same vertex wins. Does nothing for other models.
+void animate(const Model& m, const Animation& a, float t_ms, LOD& lod);
+bool has_vertex_animation(const Model& m);
 
 }  // namespace lithtech::abc

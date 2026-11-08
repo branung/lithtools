@@ -187,11 +187,17 @@ Model read(const std::vector<uint8_t>& d) {
     return m;
 }
 
+// Scaled by 2/|q|^2, as every LithTech engine's quat_ConvertToMatrix is
+// (LithTech 1's quaternion.h, NOLF's sharedcommon.cpp, Jupiter's
+// ltquatbase.cpp), so a quaternion needn't be unit: .abc v6 stores
+// thousands that aren't (abc6.hpp). For a unit one it is the plain formula.
 Mat4 quat_to_matrix(const Vec3& p, const Quat& q) {
     float x = q[0], y = q[1], z = q[2], w = q[3];
-    return {1 - 2 * (y * y + z * z), 2 * (x * y - z * w), 2 * (x * z + y * w), p[0],
-            2 * (x * y + z * w), 1 - 2 * (x * x + z * z), 2 * (y * z - x * w), p[1],
-            2 * (x * z - y * w), 2 * (y * z + x * w), 1 - 2 * (x * x + y * y), p[2],
+    float n = x * x + y * y + z * z + w * w;
+    float s = n > 0 ? 2 / n : 0;
+    return {1 - s * (y * y + z * z), s * (x * y - z * w), s * (x * z + y * w), p[0],
+            s * (x * y + z * w), 1 - s * (x * x + z * z), s * (y * z - x * w), p[1],
+            s * (x * z - y * w), s * (y * z + x * w), 1 - s * (x * x + y * y), p[2],
             0, 0, 0, 1};
 }
 
@@ -232,10 +238,12 @@ Quat slerp(Quat a, Quat b, float t) {
 }
 }  // namespace
 
-std::vector<Mat4> pose(const Model& m, const Animation& a, float t) {
+namespace {
+// The two keys around time t and how far between them.
+void key_span(const Animation& a, float t, std::size_t& k0, std::size_t& k1, float& f) {
     std::size_t nk = a.keyframes.size();
-    std::size_t k0 = 0, k1 = 0;
-    float f = 0;
+    k0 = k1 = 0;
+    f = 0;
     if (nk > 1) {
         if (t <= a.keyframes.front().time) {
             k0 = k1 = 0;
@@ -248,6 +256,14 @@ std::vector<Mat4> pose(const Model& m, const Animation& a, float t) {
             f = span > 0 ? (t - a.keyframes[k0].time) / span : 0;
         }
     }
+}
+}  // namespace
+
+std::vector<Mat4> pose(const Model& m, const Animation& a, float t) {
+    std::size_t nk = a.keyframes.size();
+    std::size_t k0, k1;
+    float f;
+    key_span(a, t, k0, k1, f);
     std::vector<Mat4> out(m.nodes.size());
     for (std::size_t i = 0; i < m.nodes.size(); ++i) {
         Mat4 local;
@@ -265,6 +281,32 @@ std::vector<Mat4> pose(const Model& m, const Animation& a, float t) {
         out[i] = par < 0 ? local : multiply(out[std::size_t(par)], local);
     }
     return out;
+}
+
+bool has_vertex_animation(const Model& m) {
+    for (auto& n : m.nodes)
+        if (!n.animated_vertices.empty()) return true;
+    return false;
+}
+
+void animate(const Model& m, const Animation& a, float t, LOD& lod) {
+    if (a.vertex_frames.empty() || a.keyframes.empty()) return;
+    std::size_t k0, k1;
+    float f;
+    key_span(a, t, k0, k1, f);
+    for (std::size_t n = 0; n < m.nodes.size() && n < a.vertex_frames.size(); ++n) {
+        const auto& frames = a.vertex_frames[n];
+        const auto& list = m.nodes[n].animated_vertices;
+        if (frames.size() <= k1 || list.empty()) continue;
+        for (std::size_t i = 0; i < list.size() && i < frames[k0].size() && i < frames[k1].size(); ++i) {
+            if (list[i] >= lod.vertices.size()) continue;
+            Vertex& v = lod.vertices[list[i]];
+            if (v.weights.size() != 1) continue;
+            const Vec3& p0 = frames[k0][i];
+            const Vec3& p1 = frames[k1][i];
+            for (int c = 0; c < 3; ++c) v.weights[0].location[std::size_t(c)] = p0[std::size_t(c)] + (p1[std::size_t(c)] - p0[std::size_t(c)]) * f;
+        }
+    }
 }
 
 std::vector<Mat4> bind_pose(const Model& m) {

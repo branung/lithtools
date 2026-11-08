@@ -117,12 +117,19 @@ def _mesh_objects(arm_obj, objects):
 
 
 def _evaluated_mesh(obj, depsgraph):
-    """The object's mesh with its modifiers except Armature ones."""
+    """The object's mesh with its modifiers except Armature ones, and
+    without its vertex-animation frames (shape keys "<animation>|<key>"):
+    playing an animation sets their values, and the mesh is written at
+    rest."""
     toggled = []
     for m in obj.modifiers:
         if m.type == 'ARMATURE' and m.show_viewport:
             m.show_viewport = False
             toggled.append(m)
+    keys = obj.data.shape_keys if obj.type == 'MESH' else None
+    muted = [kb for kb in keys.key_blocks if "|" in kb.name and not kb.mute] if keys else []
+    for kb in muted:
+        kb.mute = True
     try:
         depsgraph.update()
         ev = obj.evaluated_get(depsgraph)
@@ -132,6 +139,8 @@ def _evaluated_mesh(obj, depsgraph):
     finally:
         for m in toggled:
             m.show_viewport = True
+        for kb in muted:
+            kb.mute = False
     return me
 
 

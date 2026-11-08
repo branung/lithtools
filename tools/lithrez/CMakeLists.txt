@@ -32,6 +32,7 @@ add_library(lithtech STATIC
   core/src/tga.cpp
   core/src/bmp.cpp
   core/src/abc.cpp
+  core/src/abc6.cpp
   core/src/ltb.cpp
   core/src/ps2ltb.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/ps2ltb_names.cpp

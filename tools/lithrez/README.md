@@ -12,7 +12,8 @@ they build with clang, gcc or MSVC on Linux, macOS and Windows.
   (PCX, TGA and BMP images preview and thumbnail too), animated sprites,
   lip-sync curves played with their voice lines, texture effects run as
   the engine runs them, render styles, fonts, a
-  model preview for `.abc` (NOLF, AvP2) and `.ltb` (NOLF2, Contract
+  model preview for `.abc` (NOLF, AvP2, and LithTech 1's v6: Shogo, Blood 2,
+  KISS) and `.ltb` (NOLF2, Contract
   J.A.C.K., Tron 2.0, and NOLF on the PS2) models, a sound player, and a string table editor for
   `CRes.dll`.
 - **`core/`**: the shared library (`lithtech::rez`, `lithtech::dtx`,
@@ -76,6 +77,14 @@ These read the game archives (never committed), so they aren't part of
   (docs/RENDERSTYLE.md; all read but the version 2 files the games refuse
   too). `renderstyle_test` and `shader_test` (in ctest) check files made
   in the test.
+- `abc6_verify <dir> [--dump <file>]`: every `.abc` v6 under a folder (the
+  Shogo and Blood 2 demos' `SHOGODEM.REZ` and `B2Demo.rez`: 401 models, all
+  read) through `lithtech::abc6`, checking that each vertex skins back to
+  its stored position and the first key is the bind pose; `--dump` writes
+  every vertex posed at every keyframe and halfway between, which matched an
+  independent LithTech 1 reference on all 20,677 poses (worst 0.00012).
+  `abc6_test` (in ctest) checks a hand-made v6 file value by value,
+  including a vertex-animated node and a non-unit quaternion key.
 - `dtx_decode_all`, `abc_verify`, `ltb_verify`, `ps2ltb_verify`: textures
   and models (`ps2ltb_verify --dump` against plugins/blender's
   `tests/ps2ltb_dump.py` compares the C++ and Python PS2 readers).

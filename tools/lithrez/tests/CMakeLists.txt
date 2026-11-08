@@ -7,6 +7,13 @@ target_link_libraries(rez_progress_test PRIVATE lithtech)
 add_test(NAME rez_progress_test COMMAND rez_progress_test ${CMAKE_CURRENT_BINARY_DIR}/progress-work)
 add_executable(abc_verify abc_verify.cpp)
 target_link_libraries(abc_verify PRIVATE lithtech)
+# .abc v6 (Shogo, Blood 2, KISS): a file made here, checked value by value;
+# and every v6 model under a directory, read and converted (abc6_verify).
+add_executable(abc6_test abc6_test.cpp)
+target_link_libraries(abc6_test PRIVATE lithtech)
+add_test(NAME abc6_test COMMAND abc6_test)
+add_executable(abc6_verify abc6_verify.cpp)
+target_link_libraries(abc6_verify PRIVATE lithtech)
 
 # DTX decoding over whole archives, and texture viewer screenshots.
 add_executable(dtx_decode_all dtx_decode_all.cpp)

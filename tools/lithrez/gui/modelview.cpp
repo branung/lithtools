@@ -12,6 +12,7 @@
 #include "modelview.h"
 
 #include <lithtech/abc.hpp>
+#include <lithtech/abc6.hpp>
 #include <lithtech/dtx.hpp>
 #include <lithtech/ltb.hpp>
 #include <lithtech/ps2ltb.hpp>
@@ -50,6 +51,7 @@
 #include <set>
 
 namespace abc = lithtech::abc;
+namespace abc6 = lithtech::abc6;
 namespace dtx = lithtech::dtx;
 namespace ltb = lithtech::ltb;
 namespace ps2ltb = lithtech::ps2ltb;
@@ -127,6 +129,9 @@ public:
     int lod = 0;
     bool wireframe = false, skeleton = false, textured = true, transparency = true;
     std::vector<abc::Mat4> matrices;     // current pose, model space
+    // The pose's animation and time, for vertex animation (.abc v6).
+    const abc::Animation* animation = nullptr;
+    float animTime = 0;
 
     QVector3D center;
     float radius = 1;
@@ -139,6 +144,8 @@ public:
         texturesDirty = true;
         geometryDirty = true;
         lod = 0;
+        animation = nullptr;
+        animTime = 0;
         if (m) {
             matrices = abc::bind_pose(*m);
             frame();
@@ -439,7 +446,15 @@ private:
             g.corners = 0;
             g.triangleCenters.clear();
             if (piece.lods.empty()) continue;
-            const abc::LOD& L = piece.lods[std::size_t(std::clamp(lod, 0, int(piece.lods.size()) - 1))];
+            const abc::LOD* shown = &piece.lods[std::size_t(std::clamp(lod, 0, int(piece.lods.size()) - 1))];
+            // A v6 model's vertex animation keys vertices of pieces[0]'s LOD 0.
+            abc::LOD animated;
+            if (animation && pi == 0 && shown == &piece.lods[0] && abc::has_vertex_animation(*model)) {
+                animated = *shown;
+                abc::animate(*model, *animation, animTime, animated);
+                shown = &animated;
+            }
+            const abc::LOD& L = *shown;
             std::vector<QVector3D> pos(L.vertices.size()), nor(L.vertices.size());
             for (std::size_t vi = 0; vi < L.vertices.size(); ++vi) {
                 auto& v = L.vertices[vi];
@@ -554,6 +569,8 @@ struct ModelView::Impl {
         if (!model) return;
         const abc::Animation* a = anim();
         gl->matrices = a ? abc::pose(*model, *a, t) : abc::bind_pose(*model);
+        gl->animation = a;
+        gl->animTime = t;
         gl->poseChanged();
         time->setText(QStringLiteral("%1 / %2 ms").arg(int(t)).arg(a ? int(a->length_ms()) : 0));
         QSignalBlocker b(slider);
@@ -726,6 +743,10 @@ bool ModelView::loadAbc(const QByteArray& data, const QString& name, SkinLookup 
             ltb::Model lm = ltb::read(bytes);
             format = QStringLiteral("LTB, model file version %1").arg(lm.version);
             m = std::make_unique<abc::Model>(ltb::to_abc(lm));
+        } else if (abc6::is_model(bytes)) {
+            // LithTech 1's .abc (Shogo, Blood 2, KISS), drawn the same way.
+            m = std::make_unique<abc::Model>(abc6::to_abc(abc6::read(bytes)));
+            format = QStringLiteral("ABC version 6 (LithTech 1)");
         } else {
             m = std::make_unique<abc::Model>(abc::read(bytes));
             format = QStringLiteral("ABC version %1").arg(m->version);

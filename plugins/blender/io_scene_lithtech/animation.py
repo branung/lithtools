@@ -31,6 +31,41 @@ def assign(arm, action):
         slot = action.slots.new(id_type='OBJECT', name=arm.name)
     ad.action = action
     ad.action_slot = slot
+    assign_shape_keys(arm, action)
+
+
+def vertex_animated_keys(arm):
+    """The shape keys (Key datablocks) of the meshes this armature deforms
+    whose vertex animation the importer keyed (LithTech 1's .abc v6; see
+    import_abc._add_v6_vertex_animation)."""
+    out = []
+    for o in bpy.data.objects:
+        if o.type != 'MESH' or o.get("lt_vertex_animation") != "abc6" or o.data.shape_keys is None:
+            continue
+        if o.parent == arm or any(m.type == 'ARMATURE' and m.object == arm for m in o.modifiers):
+            out.append(o.data.shape_keys)
+    return out
+
+
+def assign_shape_keys(arm, action):
+    """Give each vertex-animated mesh's shape keys the action's KEY slot, so
+    the frames play with the bones; with none (or no action), take the
+    action off them and set every frame's key to 0, the first pose."""
+    for key in vertex_animated_keys(arm):
+        slots = [] if action is None else [s for s in action.slots if s.target_id_type == 'KEY']
+        slot = next((s for s in slots if s.name_display == key.name), None)
+        if slot is None and len(slots) == 1:
+            slot = slots[0]
+        if slot is None:
+            if key.animation_data:
+                key.animation_data.action = None
+            for kb in key.key_blocks:
+                if "|" in kb.name:
+                    kb.value = 0.0
+            continue
+        ad = key.animation_data or key.animation_data_create()
+        ad.action = action
+        ad.action_slot = slot
 
 
 def rest_pose(arm):
@@ -40,6 +75,7 @@ def rest_pose(arm):
             track.mute = True
     for bone in arm.pose.bones:
         bone.matrix_basis = Matrix.Identity(4)
+    assign_shape_keys(arm, None)
 
 
 def select_action(context, arm, action):

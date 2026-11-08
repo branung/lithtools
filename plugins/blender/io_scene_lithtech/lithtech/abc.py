@@ -106,6 +106,11 @@ class Node:
     flags: int                         # uint8; 1 = null/removable, 2 = tris
     bind_matrix: Mat4                  # model space -> the node, at bind pose
     children: List["Node"] = field(default_factory=list)
+    # Vertex animation, which only LithTech 1's .abc v6 has (lithtech.abc6):
+    # the vertices of pieces[0].lods[0] whose positions this node keys per
+    # keyframe, in Animation.vertex_frames order. Empty in versions 9-12,
+    # and write() ignores it.
+    animated_vertices: List[int] = field(default_factory=list)
 
 
 @dataclass
@@ -147,6 +152,9 @@ class Animation:
     # node_transforms[i][k] is node i's (position, rotation) at keyframe k,
     # relative to its parent; nodes in depth-first order as Model.nodes.
     node_transforms: List[List[Tuple[Vec3, Quat]]] = field(default_factory=list)
+    # vertex_frames[i][k][j] is the node-space position, at keyframe k, of
+    # node i's animated_vertices[j] (.abc v6 only; empty otherwise).
+    vertex_frames: List[List[List[Vec3]]] = field(default_factory=list)
 
 
 @dataclass
@@ -215,11 +223,18 @@ class Model:
 # --------------------------------------------------------------------- #
 
 def quat_to_matrix(position: Vec3, rotation: Quat) -> Mat4:
-    """A (position, (x, y, z, w)) pair as a 16-float row-major matrix."""
+    """A (position, (x, y, z, w)) pair as a 16-float row-major matrix.
+
+    Scaled by 2/|q|^2, as every LithTech engine's quat_ConvertToMatrix is
+    (LithTech 1, NOLF, Jupiter), so the quaternion needn't be unit: .abc v6
+    stores thousands that aren't (abc6.py). For a unit one it is the plain
+    formula."""
     x, y, z, w = rotation
-    return (1 - 2 * (y * y + z * z), 2 * (x * y - z * w), 2 * (x * z + y * w), position[0],
-            2 * (x * y + z * w), 1 - 2 * (x * x + z * z), 2 * (y * z - x * w), position[1],
-            2 * (x * z - y * w), 2 * (y * z + x * w), 1 - 2 * (x * x + y * y), position[2],
+    n = x * x + y * y + z * z + w * w
+    s = 2.0 / n if n > 0 else 0.0
+    return (1 - s * (y * y + z * z), s * (x * y - z * w), s * (x * z + y * w), position[0],
+            s * (x * y + z * w), 1 - s * (x * x + z * z), s * (y * z - x * w), position[1],
+            s * (x * z - y * w), s * (y * z + x * w), 1 - s * (x * x + y * y), position[2],
             0.0, 0.0, 0.0, 1.0)
 
 
@@ -253,6 +268,25 @@ def skinned_position(m: Model, v: Vertex, matrices: Optional[List[Mat4]] = None)
         for i in range(3):
             s[i] += M[4 * i] * x + M[4 * i + 1] * y + M[4 * i + 2] * z + M[4 * i + 3] * wt.bias
     return (s[0], s[1], s[2])
+
+
+def animated_vertices(m: Model, anim: Animation, keyframe: int, lod: LOD) -> List[Vertex]:
+    """pieces[0].lods[0]'s vertices at a keyframe, for a model whose nodes
+    animate vertices (.abc v6): each animated vertex's one weight moved to
+    its keyed node-space position, the rest as stored. skinned_position
+    then places them as usual. Without vertex animation, lod.vertices."""
+    if not anim.vertex_frames:
+        return lod.vertices
+    out = list(lod.vertices)
+    for i, node in enumerate(m.nodes):
+        if not node.animated_vertices or i >= len(anim.vertex_frames) or not anim.vertex_frames[i]:
+            continue
+        frame = anim.vertex_frames[i][keyframe]
+        for j, vi in enumerate(node.animated_vertices):
+            v = out[vi]
+            out[vi] = Vertex([Weight(w.node, frame[j], w.bias) for w in v.weights],
+                             v.replacement, v.location, v.normal)
+    return out
 
 
 # --------------------------------------------------------------------- #
