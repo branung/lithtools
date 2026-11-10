@@ -28,10 +28,10 @@ they are re-implemented.
 
 | Binary | | Byte-identical functions | Byte-identical code | | Unwritten | Unplaced |
 |---|---|--:|--:|---|--:|--:|
-| `DEdit.exe` | world editor (Talon, Update 1/2) | 3,750 / 4,305 | 455,117 / 570,071 bytes | `███████████████░░░░░` 79.8% | 58 | 64 |
-| `ModelEdit.exe` | model editor (Talon, Update 1/2) | 1,605 / 1,836 | 187,470 / 220,652 bytes | `████████████████░░░░` 84.9% | 8 | 94 |
-| `Processor.exe (AvP2)` | world processor, AvP2 (v1.0) | 1,392 / 1,503 | 267,320 / 339,484 bytes | `███████████████░░░░░` 78.7% | 3 | 2 |
-| `Processor.exe (NOLF)` | world processor, NOLF (Tools 001) | 1,289 / 2,587 | 176,226 / 414,841 bytes | `████████░░░░░░░░░░░░` 42.4% | 459 | 61 |
+| `DEdit.exe` | world editor (Talon, Update 1/2) | 3,848 / 4,305 | 455,786 / 570,071 bytes | `███████████████░░░░░` 79.9% | 59 | 65 |
+| `ModelEdit.exe` | model editor (Talon, Update 1/2) | 1,648 / 1,836 | 187,769 / 220,652 bytes | `█████████████████░░░` 85.0% | 8 | 94 |
+| `Processor.exe (AvP2)` | world processor, AvP2 (v1.0) | 1,399 / 1,503 | 267,366 / 339,484 bytes | `███████████████░░░░░` 78.7% | 3 | 2 |
+| `Processor.exe (NOLF)` | world processor, NOLF (Tools 001) | 1,344 / 2,587 | 176,780 / 414,841 bytes | `████████░░░░░░░░░░░░` 42.6% | 468 | 59 |
 | `lithrez.exe` | resource (.rez) packer, LithRez 1.00 | 121 / 122 | 21,652 / 22,326 bytes | `███████████████████░` 96.9% | 0 | 0 |
 | `TProcessor.exe` | DirectEngine world processor (1998, NOLF Tools 001) | 0 / 1,314 | 0 / 236,418 bytes | `░░░░░░░░░░░░░░░░░░░░` 0.0% | 1,314 | 0 |
 | `LithExport.dll (AvP2)` | Softimage\|3D model exporter (AvP2 v1.0) | 0 / 1,408 | 0 / 156,440 bytes | `░░░░░░░░░░░░░░░░░░░░` 0.0% | 1,408 | 0 |
@@ -39,19 +39,19 @@ they are re-implemented.
 | `LandExport.dll (AvP2)` | Softimage\|3D terrain exporter (AvP2 v1.0) | 0 / 511 | 0 / 72,518 bytes | `░░░░░░░░░░░░░░░░░░░░` 0.0% | 511 | 0 |
 | `LandExport.dll (NOLF)` | Softimage\|3D terrain exporter (NOLF Tools 001) | 0 / 511 | 0 / 72,146 bytes | `░░░░░░░░░░░░░░░░░░░░` 0.0% | 511 | 0 |
 | `LithMayaExport.mll` | Maya model exporter (1999, AvP2 v1.0) | 0 / 206 | 0 / 37,710 bytes | `░░░░░░░░░░░░░░░░░░░░` 0.0% | 206 | 0 |
-| `IMFLithDTX.dll` | Maya .dtx image plug-in (Update 2) | 130 / 186 | 19,232 / 19,893 bytes | `███████████████████░` 96.6% | 0 | 0 |
-| `MaxDTXLoader30.bmi` | 3ds Max .dtx bitmap loader for 3ds Max 3 (Update 2) | 148 / 219 | 19,467 / 20,233 bytes | `███████████████████░` 96.2% | 0 | 0 |
-| `MaxDTXLoader40.bmi` | 3ds Max .dtx bitmap loader for 3ds Max 4 (Update 2) | 152 / 226 | 19,751 / 20,534 bytes | `███████████████████░` 96.1% | 0 | 0 |
-| `MaxModelExport30.dle` | 3ds Max model exporter for 3ds Max 3 (Update 2) | 275 / 420 | 38,274 / 39,886 bytes | `███████████████████░` 95.9% | 0 | 2 |
-| `MaxModelExport40.dle` | 3ds Max model exporter for 3ds Max 4 (Update 2) | 283 / 428 | 41,853 / 43,465 bytes | `███████████████████░` 96.2% | 0 | 2 |
-| `MaxWorldExport30.dle` | 3ds Max world exporter for 3ds Max 3 (Update 2) | 297 / 475 | 58,598 / 67,673 bytes | `█████████████████░░░` 86.5% | 0 | 0 |
-| `MaxWorldExport40.dle` | 3ds Max world exporter for 3ds Max 4 (Update 2) | 304 / 482 | 58,998 / 68,024 bytes | `█████████████████░░░` 86.7% | 0 | 0 |
-| `MaxWorldImport30.dli` | 3ds Max world importer for 3ds Max 3 (Update 2) | 377 / 569 | 42,325 / 44,521 bytes | `███████████████████░` 95.0% | 0 | 2 |
-| `MaxWorldImport40.dli` | 3ds Max world importer for 3ds Max 4 (Update 2) | 383 / 575 | 42,478 / 44,674 bytes | `███████████████████░` 95.0% | 0 | 2 |
+| `IMFLithDTX.dll` | Maya .dtx image plug-in (Update 2) | 131 / 186 | 19,243 / 19,893 bytes | `███████████████████░` 96.7% | 0 | 0 |
+| `MaxDTXLoader30.bmi` | 3ds Max .dtx bitmap loader for 3ds Max 3 (Update 2) | 149 / 219 | 19,478 / 20,233 bytes | `███████████████████░` 96.2% | 0 | 0 |
+| `MaxDTXLoader40.bmi` | 3ds Max .dtx bitmap loader for 3ds Max 4 (Update 2) | 153 / 226 | 19,762 / 20,534 bytes | `███████████████████░` 96.2% | 0 | 0 |
+| `MaxModelExport30.dle` | 3ds Max model exporter for 3ds Max 3 (Update 2) | 276 / 420 | 38,280 / 39,886 bytes | `███████████████████░` 95.9% | 0 | 2 |
+| `MaxModelExport40.dle` | 3ds Max model exporter for 3ds Max 4 (Update 2) | 284 / 428 | 41,859 / 43,465 bytes | `███████████████████░` 96.3% | 0 | 2 |
+| `MaxWorldExport30.dle` | 3ds Max world exporter for 3ds Max 3 (Update 2) | 298 / 475 | 58,604 / 67,673 bytes | `█████████████████░░░` 86.5% | 0 | 0 |
+| `MaxWorldExport40.dle` | 3ds Max world exporter for 3ds Max 4 (Update 2) | 305 / 482 | 59,004 / 68,024 bytes | `█████████████████░░░` 86.7% | 0 | 0 |
+| `MaxWorldImport30.dli` | 3ds Max world importer for 3ds Max 3 (Update 2) | 378 / 569 | 42,331 / 44,521 bytes | `███████████████████░` 95.0% | 0 | 2 |
+| `MaxWorldImport40.dli` | 3ds Max world importer for 3ds Max 4 (Update 2) | 384 / 575 | 42,484 / 44,674 bytes | `███████████████████░` 95.0% | 0 | 2 |
 | `MayaModelExport30.mll` | Maya model exporter for Maya 3 (Update 2) | 263 / 401 | 48,150 / 49,702 bytes | `███████████████████░` 96.8% | 0 | 2 |
 | `MayaModelExport40.mll` | Maya model exporter for Maya 4 (Update 2) | 263 / 401 | 48,150 / 49,702 bytes | `███████████████████░` 96.8% | 0 | 2 |
-| `MayaWorldExport30.mll` | Maya world exporter for Maya 3 (Update 2) | 499 / 707 | 113,210 / 115,652 bytes | `███████████████████░` 97.8% | 0 | 2 |
-| `MayaWorldExport40.mll` | Maya world exporter for Maya 4 (Update 2) | 499 / 707 | 113,210 / 115,652 bytes | `███████████████████░` 97.8% | 0 | 2 |
+| `MayaWorldExport30.mll` | Maya world exporter for Maya 3 (Update 2) | 501 / 707 | 113,227 / 115,652 bytes | `███████████████████░` 97.9% | 0 | 2 |
+| `MayaWorldExport40.mll` | Maya world exporter for Maya 4 (Update 2) | 501 / 707 | 113,227 / 115,652 bytes | `███████████████████░` 97.9% | 0 | 2 |
 | `DEdit.exe:rsrc` | world editor (Talon, Update 1/2): resources, not in the total | 224 / 224 resources | 289,504 / 289,504 bytes | `████████████████████` 100.0% | 0 | -- |
 | `ModelEdit.exe:rsrc` | model editor (Talon, Update 1/2): resources, not in the total | 86 / 86 resources | 197,632 / 197,632 bytes | `████████████████████` 100.0% | 0 | -- |
 | `Processor.exe (AvP2):rsrc` | world processor, AvP2 (v1.0): resources, not in the total | 7 / 7 resources | 4,754 / 4,754 bytes | `████████████████████` 100.0% | 0 | -- |
@@ -66,7 +66,7 @@ they are re-implemented.
 | `MaxWorldExport40.dle:rsrc` | 3ds Max world exporter for 3ds Max 4 (Update 2): resources, not in the total | 4 / 4 resources | 3,062 / 3,062 bytes | `████████████████████` 100.0% | 0 | -- |
 | `MaxWorldImport30.dli:rsrc` | 3ds Max world importer for 3ds Max 3 (Update 2): resources, not in the total | 4 / 4 resources | 2,266 / 2,266 bytes | `████████████████████` 100.0% | 0 | -- |
 | `MaxWorldImport40.dli:rsrc` | 3ds Max world importer for 3ds Max 4 (Update 2): resources, not in the total | 4 / 4 resources | 2,266 / 2,266 bytes | `████████████████████` 100.0% | 0 | -- |
-| **All** | | **12,030 / 23,800** | **1,771,481 / 3,109,188 bytes** | `███████████░░░░░░░░░` **56.9%** | **8,179** | **237** |
+| **All** | | **12,246 / 23,800** | **1,773,152 / 3,109,188 bytes** | `███████████░░░░░░░░░` **57.0%** | **8,189** | **236** |
 <!-- progress:end -->
 
 A function is *identical* when our object's code is the shipped code byte

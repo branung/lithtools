@@ -1,24 +1,29 @@
 # Every function the scoreboard has verified byte-identical to the retail binaries
 # (target<TAB>function). Written by tools/ratchet.py update; `make progress`
 # fails if one of them stops matching.
+DEdit.exe	sub_401000
 DEdit.exe	sub_401009
 DEdit.exe	sub_401015
 DEdit.exe	sub_401021
 DEdit.exe	sub_40103d
 DEdit.exe	sub_401042
 DEdit.exe	sub_401129
+DEdit.exe	sub_4011a6
 DEdit.exe	sub_4011ac
 DEdit.exe	sub_4011e1
+DEdit.exe	sub_4011ee
 DEdit.exe	sub_4011f4
 DEdit.exe	sub_40124e
 DEdit.exe	sub_40126a
 DEdit.exe	sub_401275
+DEdit.exe	sub_4012a1
 DEdit.exe	sub_4012a7
 DEdit.exe	sub_401332
 DEdit.exe	sub_40134e
 DEdit.exe	sub_40136a
 DEdit.exe	sub_401386
 DEdit.exe	sub_4013d0
+DEdit.exe	sub_401446
 DEdit.exe	sub_40144c
 DEdit.exe	sub_4016a8
 DEdit.exe	sub_401757
@@ -33,6 +38,7 @@ DEdit.exe	sub_401be9
 DEdit.exe	sub_401c31
 DEdit.exe	sub_401c4d
 DEdit.exe	sub_401c97
+DEdit.exe	sub_401cce
 DEdit.exe	sub_401cd4
 DEdit.exe	sub_401d48
 DEdit.exe	sub_401d79
@@ -76,6 +82,7 @@ DEdit.exe	sub_402a7d
 DEdit.exe	sub_402b36
 DEdit.exe	sub_402bd7
 DEdit.exe	sub_402c25
+DEdit.exe	sub_402c2a
 DEdit.exe	sub_402c30
 DEdit.exe	sub_402d01
 DEdit.exe	sub_402d22
@@ -150,6 +157,7 @@ DEdit.exe	sub_404a48
 DEdit.exe	sub_404ab2
 DEdit.exe	sub_404ace
 DEdit.exe	sub_404b2c
+DEdit.exe	sub_404bb3
 DEdit.exe	sub_404bb9
 DEdit.exe	sub_404c69
 DEdit.exe	sub_404cae
@@ -190,6 +198,7 @@ DEdit.exe	sub_406d56
 DEdit.exe	sub_406dfa
 DEdit.exe	sub_406eaa
 DEdit.exe	sub_406ec6
+DEdit.exe	sub_406f4c
 DEdit.exe	sub_406f52
 DEdit.exe	sub_406f60
 DEdit.exe	sub_40717a
@@ -211,6 +220,7 @@ DEdit.exe	sub_407812
 DEdit.exe	sub_4078cb
 DEdit.exe	sub_407956
 DEdit.exe	sub_407972
+DEdit.exe	sub_4079e8
 DEdit.exe	sub_4079ee
 DEdit.exe	sub_407c4a
 DEdit.exe	sub_407cf9
@@ -218,6 +228,7 @@ DEdit.exe	sub_407de3
 DEdit.exe	sub_4080e6
 DEdit.exe	sub_408171
 DEdit.exe	sub_40818d
+DEdit.exe	sub_408203
 DEdit.exe	sub_408209
 DEdit.exe	sub_408465
 DEdit.exe	sub_40852b
@@ -239,6 +250,7 @@ DEdit.exe	sub_408c7b
 DEdit.exe	sub_408c7f
 DEdit.exe	sub_408c9b
 DEdit.exe	sub_408d20
+DEdit.exe	sub_408d57
 DEdit.exe	sub_408d5d
 DEdit.exe	sub_408f96
 DEdit.exe	sub_409051
@@ -283,6 +295,7 @@ DEdit.exe	sub_40c553
 DEdit.exe	sub_40c5ef
 DEdit.exe	sub_40c693
 DEdit.exe	sub_40c6ba
+DEdit.exe	sub_40c6dc
 DEdit.exe	sub_40c702
 DEdit.exe	sub_40c728
 DEdit.exe	sub_40c74b
@@ -306,6 +319,7 @@ DEdit.exe	sub_40cf08
 DEdit.exe	sub_40cf3c
 DEdit.exe	sub_40cfcd
 DEdit.exe	sub_40cfe9
+DEdit.exe	sub_40d05f
 DEdit.exe	sub_40d065
 DEdit.exe	sub_40d2e9
 DEdit.exe	sub_40d332
@@ -352,6 +366,7 @@ DEdit.exe	sub_40e279
 DEdit.exe	sub_40e294
 DEdit.exe	sub_40e34b
 DEdit.exe	sub_40e404
+DEdit.exe	sub_40e49d
 DEdit.exe	sub_40e4a3
 DEdit.exe	sub_40e52f
 DEdit.exe	sub_40e590
@@ -361,6 +376,7 @@ DEdit.exe	sub_40e656
 DEdit.exe	sub_40e65a
 DEdit.exe	sub_40e676
 DEdit.exe	sub_40e6d0
+DEdit.exe	sub_40e6ec
 DEdit.exe	sub_40e6f2
 DEdit.exe	sub_40e7fb
 DEdit.exe	sub_40e884
@@ -390,11 +406,13 @@ DEdit.exe	sub_40f48d
 DEdit.exe	sub_40f522
 DEdit.exe	sub_40f53e
 DEdit.exe	sub_40f55a
+DEdit.exe	sub_40f5ac
 DEdit.exe	sub_40f5b2
 DEdit.exe	sub_40f625
 DEdit.exe	sub_40f650
 DEdit.exe	sub_40f6b0
 DEdit.exe	sub_40f702
+DEdit.exe	sub_40f74b
 DEdit.exe	sub_40f751
 DEdit.exe	sub_40f76a
 DEdit.exe	sub_40f7b7
@@ -471,6 +489,7 @@ DEdit.exe	sub_411840
 DEdit.exe	sub_4118fb
 DEdit.exe	sub_411917
 DEdit.exe	sub_411933
+DEdit.exe	sub_411997
 DEdit.exe	sub_41199d
 DEdit.exe	sub_411a9a
 DEdit.exe	sub_411a9f
@@ -493,10 +512,12 @@ DEdit.exe	sub_411f95
 DEdit.exe	sub_411fbc
 DEdit.exe	sub_412040
 DEdit.exe	sub_4120a6
+DEdit.exe	sub_412121
 DEdit.exe	sub_412127
 DEdit.exe	sub_412172
 DEdit.exe	sub_41218e
 DEdit.exe	sub_4121e2
+DEdit.exe	sub_412207
 DEdit.exe	sub_41220d
 DEdit.exe	sub_412298
 DEdit.exe	sub_4122ae
@@ -505,6 +526,7 @@ DEdit.exe	sub_4123c2
 DEdit.exe	sub_4123c7
 DEdit.exe	sub_412475
 DEdit.exe	sub_412487
+DEdit.exe	sub_4124ae
 DEdit.exe	sub_4124b4
 DEdit.exe	sub_4125cb
 DEdit.exe	sub_412631
@@ -534,6 +556,7 @@ DEdit.exe	sub_413107
 DEdit.exe	sub_413150
 DEdit.exe	sub_41316c
 DEdit.exe	sub_4131da
+DEdit.exe	sub_41321c
 DEdit.exe	sub_413222
 DEdit.exe	sub_4134ac
 DEdit.exe	sub_4134d6
@@ -554,11 +577,13 @@ DEdit.exe	sub_413dd9
 DEdit.exe	sub_413e00
 DEdit.exe	sub_413e33
 DEdit.exe	sub_413e45
+DEdit.exe	sub_413e6c
 DEdit.exe	sub_413e72
 DEdit.exe	sub_413f55
 DEdit.exe	sub_413f73
 DEdit.exe	sub_413fec
 DEdit.exe	sub_414008
+DEdit.exe	sub_414058
 DEdit.exe	sub_41405e
 DEdit.exe	sub_414131
 DEdit.exe	sub_4142af
@@ -591,6 +616,7 @@ DEdit.exe	sub_414f16
 DEdit.exe	sub_414f7c
 DEdit.exe	sub_414f98
 DEdit.exe	sub_414fcd
+DEdit.exe	sub_415033
 DEdit.exe	sub_415039
 DEdit.exe	sub_415050
 DEdit.exe	sub_415055
@@ -635,11 +661,13 @@ DEdit.exe	sub_41630e
 DEdit.exe	sub_41638c
 DEdit.exe	sub_4163ec
 DEdit.exe	sub_41640c
+DEdit.exe	sub_416429
 DEdit.exe	sub_41642f
 DEdit.exe	sub_416442
 DEdit.exe	sub_4164be
 DEdit.exe	sub_4164c6
 DEdit.exe	sub_416517
+DEdit.exe	sub_416538
 DEdit.exe	sub_41653e
 DEdit.exe	sub_4165b2
 DEdit.exe	sub_4165c0
@@ -650,6 +678,7 @@ DEdit.exe	sub_416955
 DEdit.exe	sub_416989
 DEdit.exe	sub_4169a3
 DEdit.exe	sub_416a2d
+DEdit.exe	sub_416a43
 DEdit.exe	sub_416a49
 DEdit.exe	sub_416a82
 DEdit.exe	sub_416abd
@@ -695,6 +724,7 @@ DEdit.exe	sub_41868a
 DEdit.exe	sub_4186cb
 DEdit.exe	sub_4186e7
 DEdit.exe	sub_41871f
+DEdit.exe	sub_418725
 DEdit.exe	sub_41872b
 DEdit.exe	sub_41874a
 DEdit.exe	sub_41876f
@@ -939,6 +969,7 @@ DEdit.exe	sub_424546
 DEdit.exe	sub_42455b
 DEdit.exe	sub_4245bd
 DEdit.exe	sub_4245f9
+DEdit.exe	sub_42462e
 DEdit.exe	sub_42463f
 DEdit.exe	sub_42476a
 DEdit.exe	sub_424937
@@ -1074,6 +1105,7 @@ DEdit.exe	sub_42b3a5
 DEdit.exe	sub_42b459
 DEdit.exe	sub_42b479
 DEdit.exe	sub_42b4ab
+DEdit.exe	sub_42b503
 DEdit.exe	sub_42b509
 DEdit.exe	sub_42b515
 DEdit.exe	sub_42b55e
@@ -1088,6 +1120,7 @@ DEdit.exe	sub_42b93f
 DEdit.exe	sub_42b965
 DEdit.exe	sub_42b969
 DEdit.exe	sub_42b973
+DEdit.exe	sub_42b99a
 DEdit.exe	sub_42b9a0
 DEdit.exe	sub_42b9bb
 DEdit.exe	sub_42bccf
@@ -1101,6 +1134,7 @@ DEdit.exe	sub_42bde5
 DEdit.exe	sub_42be3c
 DEdit.exe	sub_42be77
 DEdit.exe	sub_42be9e
+DEdit.exe	sub_42bed8
 DEdit.exe	sub_42bede
 DEdit.exe	sub_42bf09
 DEdit.exe	sub_42bf35
@@ -1129,8 +1163,10 @@ DEdit.exe	sub_42ca9a
 DEdit.exe	sub_42cb5a
 DEdit.exe	sub_42cccf
 DEdit.exe	sub_42cced
+DEdit.exe	sub_42cd02
 DEdit.exe	sub_42cd08
 DEdit.exe	sub_42cd34
+DEdit.exe	sub_42cd7d
 DEdit.exe	sub_42cd83
 DEdit.exe	sub_42cd88
 DEdit.exe	sub_42cdd1
@@ -1138,6 +1174,7 @@ DEdit.exe	sub_42ce1a
 DEdit.exe	sub_42ce61
 DEdit.exe	sub_42ceb2
 DEdit.exe	sub_42cece
+DEdit.exe	sub_42cee3
 DEdit.exe	sub_42cee9
 DEdit.exe	sub_42cfc5
 DEdit.exe	sub_42d081
@@ -1157,6 +1194,8 @@ DEdit.exe	sub_42dc69
 DEdit.exe	sub_42de07
 DEdit.exe	sub_42df60
 DEdit.exe	sub_42e0a9
+DEdit.exe	sub_42e0bf
+DEdit.exe	sub_42e0c5
 DEdit.exe	sub_42e0cb
 DEdit.exe	sub_42e35f
 DEdit.exe	sub_42e37b
@@ -1244,6 +1283,7 @@ DEdit.exe	sub_4312f2
 DEdit.exe	sub_431371
 DEdit.exe	sub_431464
 DEdit.exe	sub_4314b7
+DEdit.exe	sub_4315f8
 DEdit.exe	sub_4315fe
 DEdit.exe	sub_431707
 DEdit.exe	sub_431a2a
@@ -1591,6 +1631,7 @@ DEdit.exe	sub_43a241
 DEdit.exe	sub_43a2f8
 DEdit.exe	sub_43a333
 DEdit.exe	sub_43a34f
+DEdit.exe	sub_43a398
 DEdit.exe	sub_43a39e
 DEdit.exe	sub_43a401
 DEdit.exe	sub_43a443
@@ -1621,6 +1662,7 @@ DEdit.exe	sub_43afba
 DEdit.exe	sub_43afea
 DEdit.exe	sub_43b056
 DEdit.exe	sub_43b072
+DEdit.exe	sub_43b087
 DEdit.exe	sub_43b08d
 DEdit.exe	sub_43b123
 DEdit.exe	sub_43b191
@@ -1628,6 +1670,7 @@ DEdit.exe	sub_43b1ad
 DEdit.exe	sub_43b1f4
 DEdit.exe	sub_43b222
 DEdit.exe	sub_43b239
+DEdit.exe	sub_43b25a
 DEdit.exe	sub_43b260
 DEdit.exe	sub_43b2a4
 DEdit.exe	sub_43b391
@@ -1653,6 +1696,7 @@ DEdit.exe	sub_43bf37
 DEdit.exe	sub_43bf8d
 DEdit.exe	sub_43bfa9
 DEdit.exe	sub_43bfde
+DEdit.exe	sub_43bff3
 DEdit.exe	sub_43bff9
 DEdit.exe	sub_43c03c
 DEdit.exe	sub_43c08b
@@ -1667,9 +1711,11 @@ DEdit.exe	sub_43c39d
 DEdit.exe	sub_43c43c
 DEdit.exe	sub_43c48a
 DEdit.exe	sub_43c4a6
+DEdit.exe	sub_43c4bb
 DEdit.exe	sub_43c4c1
 DEdit.exe	sub_43c50f
 DEdit.exe	sub_43c52b
+DEdit.exe	sub_43c540
 DEdit.exe	sub_43c546
 DEdit.exe	sub_43c554
 DEdit.exe	sub_43c559
@@ -1684,6 +1730,7 @@ DEdit.exe	sub_43c769
 DEdit.exe	sub_43c8b0
 DEdit.exe	sub_43c8de
 DEdit.exe	sub_43c8fe
+DEdit.exe	sub_43c925
 DEdit.exe	sub_43c92b
 DEdit.exe	sub_43c9ec
 DEdit.exe	sub_43ca02
@@ -1714,6 +1761,7 @@ DEdit.exe	sub_43d3a3
 DEdit.exe	sub_43d3c8
 DEdit.exe	sub_43d44e
 DEdit.exe	sub_43d46a
+DEdit.exe	sub_43d4aa
 DEdit.exe	sub_43d4b0
 DEdit.exe	sub_43d5a5
 DEdit.exe	sub_43d5e8
@@ -1822,6 +1870,8 @@ DEdit.exe	sub_44060a
 DEdit.exe	sub_44062b
 DEdit.exe	sub_44069e
 DEdit.exe	sub_4406ba
+DEdit.exe	sub_4406f4
+DEdit.exe	sub_4406fa
 DEdit.exe	sub_440703
 DEdit.exe	sub_440708
 DEdit.exe	sub_4407a6
@@ -1860,6 +1910,7 @@ DEdit.exe	sub_440f3b
 DEdit.exe	sub_440f77
 DEdit.exe	sub_440faa
 DEdit.exe	sub_440fe3
+DEdit.exe	sub_440ffe
 DEdit.exe	sub_441009
 DEdit.exe	sub_44100d
 DEdit.exe	sub_441043
@@ -1897,6 +1948,7 @@ DEdit.exe	sub_443118
 DEdit.exe	sub_44317c
 DEdit.exe	sub_443198
 DEdit.exe	sub_4431e2
+DEdit.exe	sub_443258
 DEdit.exe	sub_44325e
 DEdit.exe	sub_443271
 DEdit.exe	sub_443284
@@ -1905,6 +1957,7 @@ DEdit.exe	sub_44344b
 DEdit.exe	sub_4434a5
 DEdit.exe	sub_443536
 DEdit.exe	sub_443552
+DEdit.exe	sub_4435c8
 DEdit.exe	sub_4435ce
 DEdit.exe	sub_443852
 DEdit.exe	sub_443933
@@ -1912,6 +1965,7 @@ DEdit.exe	sub_4439f9
 DEdit.exe	sub_443ab5
 DEdit.exe	sub_443b00
 DEdit.exe	sub_443b1c
+DEdit.exe	sub_443b31
 DEdit.exe	sub_443b37
 DEdit.exe	sub_443bee
 DEdit.exe	sub_443c0d
@@ -1931,10 +1985,12 @@ DEdit.exe	sub_443fee
 DEdit.exe	sub_444023
 DEdit.exe	sub_4440c1
 DEdit.exe	sub_4440fc
+DEdit.exe	sub_444118
 DEdit.exe	sub_444126
 DEdit.exe	sub_44414e
 DEdit.exe	sub_44418a
 DEdit.exe	sub_4441ce
+DEdit.exe	sub_4441ff
 DEdit.exe	sub_444212
 DEdit.exe	sub_444228
 DEdit.exe	sub_44423e
@@ -2154,18 +2210,21 @@ DEdit.exe	sub_44c98f
 DEdit.exe	sub_44c9b6
 DEdit.exe	sub_44cb82
 DEdit.exe	sub_44cb98
+DEdit.exe	sub_44cbbf
 DEdit.exe	sub_44cbc5
 DEdit.exe	sub_44cc3b
 DEdit.exe	sub_44cc69
 DEdit.exe	sub_44cc85
 DEdit.exe	sub_44ccf4
 DEdit.exe	sub_44cdb1
+DEdit.exe	sub_44ce3a
 DEdit.exe	sub_44ce55
 DEdit.exe	sub_44ce71
 DEdit.exe	sub_44ce9f
 DEdit.exe	sub_44cebb
 DEdit.exe	sub_44cf2a
 DEdit.exe	sub_44cfe7
+DEdit.exe	sub_44d0e1
 DEdit.exe	sub_44d0e7
 DEdit.exe	sub_44d0f1
 DEdit.exe	sub_44d0fb
@@ -2223,6 +2282,7 @@ DEdit.exe	sub_44da41
 DEdit.exe	sub_44da5a
 DEdit.exe	sub_44da80
 DEdit.exe	sub_44da8c
+DEdit.exe	sub_44dacb
 DEdit.exe	sub_44dad9
 DEdit.exe	sub_44db1c
 DEdit.exe	sub_44db41
@@ -2238,10 +2298,12 @@ DEdit.exe	sub_44de66
 DEdit.exe	sub_44de9d
 DEdit.exe	sub_44ded2
 DEdit.exe	sub_44def4
+DEdit.exe	sub_44df29
 DEdit.exe	sub_44df2f
 DEdit.exe	sub_44dfd9
 DEdit.exe	sub_44dff5
 DEdit.exe	sub_44e054
+DEdit.exe	sub_44e10b
 DEdit.exe	sub_44e111
 DEdit.exe	sub_44e1eb
 DEdit.exe	sub_44e206
@@ -2253,19 +2315,23 @@ DEdit.exe	sub_44e480
 DEdit.exe	sub_44e48a
 DEdit.exe	sub_44e49b
 DEdit.exe	sub_44e51a
+DEdit.exe	sub_44e54f
 DEdit.exe	sub_44e555
 DEdit.exe	sub_44e583
 DEdit.exe	sub_44e59f
 DEdit.exe	sub_44e5e2
+DEdit.exe	sub_44e638
 DEdit.exe	sub_44e63e
 DEdit.exe	sub_44e685
 DEdit.exe	sub_44e6ab
 DEdit.exe	sub_44e6d1
 DEdit.exe	sub_44e6f7
+DEdit.exe	sub_44e72c
 DEdit.exe	sub_44e732
 DEdit.exe	sub_44e7a7
 DEdit.exe	sub_44e7c3
 DEdit.exe	sub_44e813
+DEdit.exe	sub_44e87a
 DEdit.exe	sub_44e880
 DEdit.exe	sub_44e9ae
 DEdit.exe	sub_44ea22
@@ -2273,12 +2339,14 @@ DEdit.exe	sub_44ea89
 DEdit.exe	sub_44ea93
 DEdit.exe	sub_44eaac
 DEdit.exe	sub_44eabe
+DEdit.exe	sub_44eaf3
 DEdit.exe	sub_44eaf9
 DEdit.exe	sub_44eb82
 DEdit.exe	sub_44eb9e
 DEdit.exe	sub_44ebfd
 DEdit.exe	sub_44ec40
 DEdit.exe	sub_44ecf3
+DEdit.exe	sub_44edb8
 DEdit.exe	sub_44edbe
 DEdit.exe	sub_44ee6f
 DEdit.exe	sub_44ee8c
@@ -2314,6 +2382,7 @@ DEdit.exe	sub_44fd70
 DEdit.exe	sub_44fe05
 DEdit.exe	sub_44fe1f
 DEdit.exe	sub_45003d
+DEdit.exe	sub_450052
 DEdit.exe	sub_450058
 DEdit.exe	sub_450064
 DEdit.exe	sub_4501de
@@ -2342,6 +2411,7 @@ DEdit.exe	sub_4511f6
 DEdit.exe	sub_45123c
 DEdit.exe	sub_45127d
 DEdit.exe	sub_451292
+DEdit.exe	sub_4512a3
 DEdit.exe	sub_4512b0
 DEdit.exe	sub_451384
 DEdit.exe	sub_45146c
@@ -2398,6 +2468,7 @@ DEdit.exe	sub_4526c2
 DEdit.exe	sub_4526c8
 DEdit.exe	sub_452709
 DEdit.exe	sub_452725
+DEdit.exe	sub_452763
 DEdit.exe	sub_452769
 DEdit.exe	sub_45276e
 DEdit.exe	sub_4527a3
@@ -2407,10 +2478,13 @@ DEdit.exe	sub_452927
 DEdit.exe	sub_45292d
 DEdit.exe	sub_452ae2
 DEdit.exe	sub_452afe
+DEdit.exe	sub_452bb1
 DEdit.exe	sub_452bb7
 DEdit.exe	sub_455025
 DEdit.exe	sub_45502a
 DEdit.exe	sub_45503b
+DEdit.exe	sub_455045
+DEdit.exe	sub_45504b
 DEdit.exe	sub_455051
 DEdit.exe	sub_45508d
 DEdit.exe	sub_4550d2
@@ -2418,6 +2492,7 @@ DEdit.exe	sub_4550d7
 DEdit.exe	sub_4550f4
 DEdit.exe	sub_455158
 DEdit.exe	sub_455162
+DEdit.exe	sub_45516c
 DEdit.exe	sub_455172
 DEdit.exe	sub_455179
 DEdit.exe	sub_4551ee
@@ -2661,6 +2736,7 @@ DEdit.exe	sub_45efeb
 DEdit.exe	sub_45f02d
 DEdit.exe	sub_45f0ae
 DEdit.exe	sub_45f0ca
+DEdit.exe	sub_45f0f3
 DEdit.exe	sub_45f0f9
 DEdit.exe	sub_45f14a
 DEdit.exe	sub_45f397
@@ -2669,11 +2745,13 @@ DEdit.exe	sub_45f4a3
 DEdit.exe	sub_45f4c3
 DEdit.exe	sub_45f50e
 DEdit.exe	sub_45f538
+DEdit.exe	sub_45f554
 DEdit.exe	sub_45f55a
 DEdit.exe	sub_45f5ab
 DEdit.exe	sub_45f68b
 DEdit.exe	sub_45f697
 DEdit.exe	sub_45f6b9
+DEdit.exe	sub_45f6ce
 DEdit.exe	sub_45f6d4
 DEdit.exe	sub_45f6f2
 DEdit.exe	sub_45f710
@@ -2683,6 +2761,7 @@ DEdit.exe	sub_45f76a
 DEdit.exe	sub_45f83d
 DEdit.exe	sub_45f859
 DEdit.exe	sub_45f875
+DEdit.exe	sub_45f8fd
 DEdit.exe	sub_45f903
 DEdit.exe	sub_45fa10
 DEdit.exe	sub_45fbd8
@@ -2699,9 +2778,11 @@ DEdit.exe	sub_460424
 DEdit.exe	sub_460433
 DEdit.exe	sub_460464
 DEdit.exe	sub_460495
+DEdit.exe	sub_460501
 DEdit.exe	sub_460507
 DEdit.exe	sub_46052c
 DEdit.exe	sub_460548
+DEdit.exe	sub_46059f
 DEdit.exe	sub_4605a5
 DEdit.exe	sub_4605af
 DEdit.exe	sub_46062e
@@ -2718,6 +2799,7 @@ DEdit.exe	sub_46090c
 DEdit.exe	sub_4609a3
 DEdit.exe	sub_4609c4
 DEdit.exe	sub_4609de
+DEdit.exe	sub_4609f3
 DEdit.exe	sub_4609f9
 DEdit.exe	sub_460b3e
 DEdit.exe	sub_460cb0
@@ -2745,6 +2827,7 @@ DEdit.exe	sub_461452
 DEdit.exe	sub_461473
 DEdit.exe	sub_4614f6
 DEdit.exe	sub_461512
+DEdit.exe	sub_46153d
 DEdit.exe	sub_461543
 DEdit.exe	sub_461559
 DEdit.exe	sub_4615d0
@@ -2753,6 +2836,7 @@ DEdit.exe	sub_4617be
 DEdit.exe	sub_4617ce
 DEdit.exe	sub_4617d3
 DEdit.exe	sub_4617dd
+DEdit.exe	sub_461810
 DEdit.exe	sub_46181d
 DEdit.exe	sub_461826
 DEdit.exe	sub_461b18
@@ -2780,6 +2864,7 @@ DEdit.exe	sub_462dd6
 DEdit.exe	sub_462ef1
 DEdit.exe	sub_462f0d
 DEdit.exe	sub_46300e
+DEdit.exe	sub_463099
 DEdit.exe	sub_46309f
 DEdit.exe	sub_4630c3
 DEdit.exe	sub_4630e9
@@ -2851,6 +2936,7 @@ DEdit.exe	sub_46525c
 DEdit.exe	sub_465289
 DEdit.exe	sub_4652f8
 DEdit.exe	sub_465314
+DEdit.exe	sub_465329
 DEdit.exe	sub_46532f
 DEdit.exe	sub_465426
 DEdit.exe	sub_46549e
@@ -2967,6 +3053,7 @@ DEdit.exe	sub_46eacf
 DEdit.exe	sub_46eb58
 DEdit.exe	sub_46ebff
 DEdit.exe	sub_46ec1b
+DEdit.exe	sub_46ec73
 DEdit.exe	sub_46ec79
 DEdit.exe	sub_46ed0c
 DEdit.exe	sub_46ed16
@@ -3008,6 +3095,7 @@ DEdit.exe	sub_46f319
 DEdit.exe	sub_46f366
 DEdit.exe	sub_46f38d
 DEdit.exe	sub_46f3c0
+DEdit.exe	sub_46f3d8
 DEdit.exe	sub_46f3e3
 DEdit.exe	sub_46f72e
 DEdit.exe	sub_46f777
@@ -3033,10 +3121,12 @@ DEdit.exe	sub_470007
 DEdit.exe	sub_470042
 DEdit.exe	sub_4700b5
 DEdit.exe	sub_4702ad
+DEdit.exe	sub_4702e2
 DEdit.exe	sub_4702e8
 DEdit.exe	sub_4702fa
 DEdit.exe	sub_470316
 DEdit.exe	sub_47034e
+DEdit.exe	sub_470353
 DEdit.exe	sub_470359
 DEdit.exe	sub_470495
 DEdit.exe	sub_470526
@@ -3050,6 +3140,7 @@ DEdit.exe	sub_470691
 DEdit.exe	sub_470697
 DEdit.exe	sub_4706da
 DEdit.exe	sub_4706f6
+DEdit.exe	sub_470734
 DEdit.exe	sub_47073a
 DEdit.exe	sub_470810
 DEdit.exe	sub_47081a
@@ -3064,6 +3155,7 @@ DEdit.exe	sub_470b1b
 DEdit.exe	sub_470b59
 DEdit.exe	sub_470c13
 DEdit.exe	sub_470c2f
+DEdit.exe	sub_470cae
 DEdit.exe	sub_470cb4
 DEdit.exe	sub_470d0f
 DEdit.exe	sub_470dab
@@ -3096,6 +3188,7 @@ DEdit.exe	sub_471735
 DEdit.exe	sub_471749
 DEdit.exe	sub_471775
 DEdit.exe	sub_471791
+DEdit.exe	sub_4717d7
 DEdit.exe	sub_4717dd
 DEdit.exe	sub_471930
 DEdit.exe	sub_471938
@@ -3106,6 +3199,7 @@ DEdit.exe	sub_471a8e
 DEdit.exe	sub_471b69
 DEdit.exe	sub_471b74
 DEdit.exe	sub_471baf
+DEdit.exe	sub_471bbf
 DEdit.exe	sub_471bc5
 DEdit.exe	sub_471c06
 DEdit.exe	sub_471c22
@@ -3116,6 +3210,7 @@ DEdit.exe	sub_471cda
 DEdit.exe	sub_471d0a
 DEdit.exe	sub_471d2e
 DEdit.exe	sub_471d4a
+DEdit.exe	sub_471e3a
 DEdit.exe	sub_471e40
 DEdit.exe	sub_471e63
 DEdit.exe	sub_471ea3
@@ -3129,6 +3224,7 @@ DEdit.exe	sub_47222b
 DEdit.exe	sub_472246
 DEdit.exe	sub_4722b6
 DEdit.exe	sub_4722d2
+DEdit.exe	sub_47232b
 DEdit.exe	sub_472331
 DEdit.exe	sub_472761
 DEdit.exe	sub_4727ba
@@ -3636,6 +3732,7 @@ DEdit.exe	sub_48beb0
 DEdit.exe	sub_48bed0
 DEdit.exe	sub_48bf20
 DEdit.exe	sub_48bf80
+DEdit.exe	sub_48bf90
 DEdit.exe	sub_48bfa0
 DEdit.exe	sub_48c180
 DEdit.exe	sub_48c210
@@ -3656,6 +3753,7 @@ DEdit.exe	sub_48c780
 DEdit.exe	sub_48c7c0
 DEdit.exe	sub_48c7e0
 DEdit.exe	sub_48c800
+DEdit.exe	sub_48c820
 DEdit.exe	sub_48c830
 DEdit.exe	sub_48c8e0
 DEdit.exe	sub_48c920
@@ -4065,6 +4163,7 @@ IMFLithDTX.dll	sub_10004400
 IMFLithDTX.dll	sub_10004440
 IMFLithDTX.dll	sub_10004480
 IMFLithDTX.dll	sub_100044d0
+IMFLithDTX.dll	sub_100044f0
 IMFLithDTX.dll	sub_10004500
 IMFLithDTX.dll	sub_10004510
 IMFLithDTX.dll	sub_10004560
@@ -4213,6 +4312,7 @@ MaxDTXLoader30.bmi	sub_10004660
 MaxDTXLoader30.bmi	sub_100046a0
 MaxDTXLoader30.bmi	sub_100046e0
 MaxDTXLoader30.bmi	sub_10004730
+MaxDTXLoader30.bmi	sub_10004750
 MaxDTXLoader30.bmi	sub_10004760
 MaxDTXLoader30.bmi	sub_10004770
 MaxDTXLoader30.bmi	sub_100047c0
@@ -4366,6 +4466,7 @@ MaxDTXLoader40.bmi	sub_100047c0
 MaxDTXLoader40.bmi	sub_10004800
 MaxDTXLoader40.bmi	sub_10004840
 MaxDTXLoader40.bmi	sub_10004890
+MaxDTXLoader40.bmi	sub_100048b0
 MaxDTXLoader40.bmi	sub_100048c0
 MaxDTXLoader40.bmi	sub_100048d0
 MaxDTXLoader40.bmi	sub_10004920
@@ -4517,6 +4618,7 @@ MaxModelExport30.dle	sub_105b8190
 MaxModelExport30.dle	sub_105b81a0
 MaxModelExport30.dle	sub_105b81c0
 MaxModelExport30.dle	sub_105b81d0
+MaxModelExport30.dle	sub_105b81e0
 MaxModelExport30.dle	sub_105b81f0
 MaxModelExport30.dle	sub_105b8220
 MaxModelExport30.dle	sub_105b82c0
@@ -4800,6 +4902,7 @@ MaxModelExport40.dle	sub_105b8f30
 MaxModelExport40.dle	sub_105b8f40
 MaxModelExport40.dle	sub_105b8f60
 MaxModelExport40.dle	sub_105b8f70
+MaxModelExport40.dle	sub_105b8f80
 MaxModelExport40.dle	sub_105b8f90
 MaxModelExport40.dle	sub_105b8fc0
 MaxModelExport40.dle	sub_105b9060
@@ -5106,6 +5209,7 @@ MaxWorldExport30.dle	sub_1000f2b0
 MaxWorldExport30.dle	sub_1000f2c0
 MaxWorldExport30.dle	sub_1000f2e0
 MaxWorldExport30.dle	sub_1000f2f0
+MaxWorldExport30.dle	sub_1000f300
 MaxWorldExport30.dle	sub_1000f310
 MaxWorldExport30.dle	sub_1000f340
 MaxWorldExport30.dle	sub_1000f470
@@ -5411,6 +5515,7 @@ MaxWorldExport40.dle	sub_1000f420
 MaxWorldExport40.dle	sub_1000f430
 MaxWorldExport40.dle	sub_1000f450
 MaxWorldExport40.dle	sub_1000f460
+MaxWorldExport40.dle	sub_1000f470
 MaxWorldExport40.dle	sub_1000f480
 MaxWorldExport40.dle	sub_1000f4b0
 MaxWorldExport40.dle	sub_1000f5e0
@@ -5639,6 +5744,7 @@ MaxWorldImport30.dli	sub_10003a80
 MaxWorldImport30.dli	sub_10003a90
 MaxWorldImport30.dli	sub_10003ab0
 MaxWorldImport30.dli	sub_10003ac0
+MaxWorldImport30.dli	sub_10003ad0
 MaxWorldImport30.dli	sub_10003ae0
 MaxWorldImport30.dli	sub_10003b10
 MaxWorldImport30.dli	sub_10003bc0
@@ -6018,6 +6124,7 @@ MaxWorldImport40.dli	sub_10003a40
 MaxWorldImport40.dli	sub_10003a50
 MaxWorldImport40.dli	sub_10003a70
 MaxWorldImport40.dli	sub_10003a80
+MaxWorldImport40.dli	sub_10003a90
 MaxWorldImport40.dli	sub_10003aa0
 MaxWorldImport40.dli	sub_10003ad0
 MaxWorldImport40.dli	sub_10003b80
@@ -6892,10 +6999,12 @@ MayaWorldExport30.mll	sub_10001430
 MayaWorldExport30.mll	sub_100014b0
 MayaWorldExport30.mll	sub_10002440
 MayaWorldExport30.mll	sub_10002460
+MayaWorldExport30.mll	sub_100024c0
 MayaWorldExport30.mll	sub_100024d0
 MayaWorldExport30.mll	sub_10002f20
 MayaWorldExport30.mll	sub_10003d00
 MayaWorldExport30.mll	sub_10003d30
+MayaWorldExport30.mll	sub_10004610
 MayaWorldExport30.mll	sub_10004620
 MayaWorldExport30.mll	sub_100047a0
 MayaWorldExport30.mll	sub_100062d0
@@ -7391,10 +7500,12 @@ MayaWorldExport40.mll	sub_10001430
 MayaWorldExport40.mll	sub_100014b0
 MayaWorldExport40.mll	sub_10002440
 MayaWorldExport40.mll	sub_10002460
+MayaWorldExport40.mll	sub_100024c0
 MayaWorldExport40.mll	sub_100024d0
 MayaWorldExport40.mll	sub_10002f20
 MayaWorldExport40.mll	sub_10003d00
 MayaWorldExport40.mll	sub_10003d30
+MayaWorldExport40.mll	sub_10004610
 MayaWorldExport40.mll	sub_10004620
 MayaWorldExport40.mll	sub_100047a0
 MayaWorldExport40.mll	sub_100062d0
@@ -7881,11 +7992,13 @@ ModelEdit.exe	sub_40101d
 ModelEdit.exe	sub_401020
 ModelEdit.exe	sub_40102c
 ModelEdit.exe	sub_401038
+ModelEdit.exe	sub_40103b
 ModelEdit.exe	sub_401041
 ModelEdit.exe	sub_401062
 ModelEdit.exe	sub_401086
 ModelEdit.exe	sub_4010a7
 ModelEdit.exe	sub_4010eb
+ModelEdit.exe	sub_401110
 ModelEdit.exe	sub_401116
 ModelEdit.exe	sub_401260
 ModelEdit.exe	sub_401298
@@ -7893,6 +8006,7 @@ ModelEdit.exe	sub_4012b9
 ModelEdit.exe	sub_401321
 ModelEdit.exe	sub_40133d
 ModelEdit.exe	sub_401381
+ModelEdit.exe	sub_4013ac
 ModelEdit.exe	sub_4013b2
 ModelEdit.exe	sub_40140b
 ModelEdit.exe	sub_401414
@@ -7900,15 +8014,18 @@ ModelEdit.exe	sub_401435
 ModelEdit.exe	sub_40148a
 ModelEdit.exe	sub_4014a6
 ModelEdit.exe	sub_4014db
+ModelEdit.exe	sub_401506
 ModelEdit.exe	sub_40150c
 ModelEdit.exe	sub_40152d
 ModelEdit.exe	sub_401582
 ModelEdit.exe	sub_40159e
 ModelEdit.exe	sub_4015d3
+ModelEdit.exe	sub_4015fe
 ModelEdit.exe	sub_401604
 ModelEdit.exe	sub_401625
 ModelEdit.exe	sub_401646
 ModelEdit.exe	sub_40166e
+ModelEdit.exe	sub_401699
 ModelEdit.exe	sub_40169f
 ModelEdit.exe	sub_4016c0
 ModelEdit.exe	sub_401751
@@ -7928,6 +8045,7 @@ ModelEdit.exe	sub_401c69
 ModelEdit.exe	sub_401c85
 ModelEdit.exe	sub_401ca1
 ModelEdit.exe	sub_401cd6
+ModelEdit.exe	sub_401ceb
 ModelEdit.exe	sub_401cf1
 ModelEdit.exe	sub_401d31
 ModelEdit.exe	sub_401d68
@@ -7937,6 +8055,7 @@ ModelEdit.exe	sub_402080
 ModelEdit.exe	sub_4020a1
 ModelEdit.exe	sub_4020c2
 ModelEdit.exe	sub_4020de
+ModelEdit.exe	sub_402107
 ModelEdit.exe	sub_40210d
 ModelEdit.exe	sub_40212e
 ModelEdit.exe	sub_402144
@@ -7944,6 +8063,7 @@ ModelEdit.exe	sub_402165
 ModelEdit.exe	sub_4021d9
 ModelEdit.exe	sub_4021f5
 ModelEdit.exe	sub_40224b
+ModelEdit.exe	sub_40228b
 ModelEdit.exe	sub_402291
 ModelEdit.exe	sub_40236c
 ModelEdit.exe	sub_402460
@@ -7956,6 +8076,7 @@ ModelEdit.exe	sub_4024a1
 ModelEdit.exe	sub_4024a5
 ModelEdit.exe	sub_4024a9
 ModelEdit.exe	sub_4024c5
+ModelEdit.exe	sub_402506
 ModelEdit.exe	sub_40250c
 ModelEdit.exe	sub_4025a2
 ModelEdit.exe	sub_4025af
@@ -7972,6 +8093,7 @@ ModelEdit.exe	sub_402df7
 ModelEdit.exe	sub_402e13
 ModelEdit.exe	sub_402e2f
 ModelEdit.exe	sub_402e94
+ModelEdit.exe	sub_402f10
 ModelEdit.exe	sub_402f16
 ModelEdit.exe	sub_403003
 ModelEdit.exe	sub_40308b
@@ -8062,10 +8184,12 @@ ModelEdit.exe	sub_406b0d
 ModelEdit.exe	sub_406c8c
 ModelEdit.exe	sub_406db3
 ModelEdit.exe	sub_406dd4
+ModelEdit.exe	sub_406de9
 ModelEdit.exe	sub_406def
 ModelEdit.exe	sub_406e60
 ModelEdit.exe	sub_406e7c
 ModelEdit.exe	sub_406eb4
+ModelEdit.exe	sub_406f51
 ModelEdit.exe	sub_406f57
 ModelEdit.exe	sub_406f58
 ModelEdit.exe	sub_406f6a
@@ -8073,12 +8197,14 @@ ModelEdit.exe	sub_406f8b
 ModelEdit.exe	sub_406fdc
 ModelEdit.exe	sub_406ff8
 ModelEdit.exe	sub_40702d
+ModelEdit.exe	sub_407042
 ModelEdit.exe	sub_407048
 ModelEdit.exe	sub_407069
 ModelEdit.exe	sub_4070c2
 ModelEdit.exe	sub_4070de
 ModelEdit.exe	sub_407113
 ModelEdit.exe	sub_40713e
+ModelEdit.exe	sub_407154
 ModelEdit.exe	sub_40715a
 ModelEdit.exe	sub_40717b
 ModelEdit.exe	sub_40724f
@@ -8086,6 +8212,7 @@ ModelEdit.exe	sub_40726b
 ModelEdit.exe	sub_407294
 ModelEdit.exe	sub_40729f
 ModelEdit.exe	sub_4072bb
+ModelEdit.exe	sub_407390
 ModelEdit.exe	sub_407396
 ModelEdit.exe	sub_4073b3
 ModelEdit.exe	sub_407675
@@ -8140,6 +8267,7 @@ ModelEdit.exe	sub_409507
 ModelEdit.exe	sub_409522
 ModelEdit.exe	sub_40954e
 ModelEdit.exe	sub_40956a
+ModelEdit.exe	sub_40959f
 ModelEdit.exe	sub_4095a5
 ModelEdit.exe	sub_409792
 ModelEdit.exe	sub_4097a5
@@ -8155,6 +8283,7 @@ ModelEdit.exe	sub_409a19
 ModelEdit.exe	sub_409a3e
 ModelEdit.exe	sub_409a5f
 ModelEdit.exe	sub_409a86
+ModelEdit.exe	sub_409ae3
 ModelEdit.exe	sub_409ae9
 ModelEdit.exe	sub_409b27
 ModelEdit.exe	sub_409b6c
@@ -8243,6 +8372,7 @@ ModelEdit.exe	sub_40c073
 ModelEdit.exe	sub_40c106
 ModelEdit.exe	sub_40c13d
 ModelEdit.exe	sub_40c1af
+ModelEdit.exe	sub_40c1e6
 ModelEdit.exe	sub_40c1ee
 ModelEdit.exe	sub_40c28e
 ModelEdit.exe	sub_40c3b4
@@ -8284,9 +8414,11 @@ ModelEdit.exe	sub_40f548
 ModelEdit.exe	sub_40f55c
 ModelEdit.exe	sub_40f56b
 ModelEdit.exe	sub_40f580
+ModelEdit.exe	sub_40f591
 ModelEdit.exe	sub_40f59e
 ModelEdit.exe	sub_40f625
 ModelEdit.exe	sub_40f6b1
+ModelEdit.exe	sub_40f6e4
 ModelEdit.exe	sub_40f6ef
 ModelEdit.exe	sub_40f711
 ModelEdit.exe	sub_40f726
@@ -8490,10 +8622,12 @@ ModelEdit.exe	sub_415c8c
 ModelEdit.exe	sub_415dc5
 ModelEdit.exe	sub_415ee9
 ModelEdit.exe	sub_415efb
+ModelEdit.exe	sub_415f22
 ModelEdit.exe	sub_415f28
 ModelEdit.exe	sub_415f91
 ModelEdit.exe	sub_415fa5
 ModelEdit.exe	sub_415fc9
+ModelEdit.exe	sub_415fea
 ModelEdit.exe	sub_415ff0
 ModelEdit.exe	sub_416004
 ModelEdit.exe	sub_41604f
@@ -8521,6 +8655,7 @@ ModelEdit.exe	sub_41676f
 ModelEdit.exe	sub_41678c
 ModelEdit.exe	sub_4167c5
 ModelEdit.exe	sub_4169a4
+ModelEdit.exe	sub_416a3e
 ModelEdit.exe	sub_416a44
 ModelEdit.exe	sub_416a86
 ModelEdit.exe	sub_416a8b
@@ -8676,11 +8811,13 @@ ModelEdit.exe	sub_4206c3
 ModelEdit.exe	sub_4207b5
 ModelEdit.exe	sub_4207c9
 ModelEdit.exe	sub_420871
+ModelEdit.exe	sub_420893
 ModelEdit.exe	sub_4208a6
 ModelEdit.exe	sub_4208b0
 ModelEdit.exe	sub_4208f7
 ModelEdit.exe	sub_42091a
 ModelEdit.exe	sub_42092f
+ModelEdit.exe	sub_420940
 ModelEdit.exe	sub_42094d
 ModelEdit.exe	sub_420a01
 ModelEdit.exe	sub_420abd
@@ -8715,8 +8852,10 @@ ModelEdit.exe	sub_421697
 ModelEdit.exe	sub_4216f2
 ModelEdit.exe	sub_421722
 ModelEdit.exe	sub_42177c
+ModelEdit.exe	sub_4217ad
 ModelEdit.exe	sub_4217b5
 ModelEdit.exe	sub_4217bd
+ModelEdit.exe	sub_4217da
 ModelEdit.exe	sub_4217e0
 ModelEdit.exe	sub_42185c
 ModelEdit.exe	sub_4218ec
@@ -8725,6 +8864,7 @@ ModelEdit.exe	sub_42195c
 ModelEdit.exe	sub_421bfc
 ModelEdit.exe	sub_421c1d
 ModelEdit.exe	sub_421c2f
+ModelEdit.exe	sub_421c56
 ModelEdit.exe	sub_421c5c
 ModelEdit.exe	sub_421c95
 ModelEdit.exe	sub_421cb6
@@ -8812,6 +8952,7 @@ ModelEdit.exe	sub_424aec
 ModelEdit.exe	sub_424b47
 ModelEdit.exe	sub_424b69
 ModelEdit.exe	sub_424b9b
+ModelEdit.exe	sub_424c1a
 ModelEdit.exe	sub_424c20
 ModelEdit.exe	sub_424c4d
 ModelEdit.exe	sub_424c6f
@@ -8822,10 +8963,12 @@ ModelEdit.exe	sub_424cfe
 ModelEdit.exe	sub_424d1f
 ModelEdit.exe	sub_424d70
 ModelEdit.exe	sub_424d8c
+ModelEdit.exe	sub_424daf
 ModelEdit.exe	sub_424db5
 ModelEdit.exe	sub_424dd6
 ModelEdit.exe	sub_424e3e
 ModelEdit.exe	sub_424e5a
+ModelEdit.exe	sub_424e85
 ModelEdit.exe	sub_424e8b
 ModelEdit.exe	sub_424eac
 ModelEdit.exe	sub_424eb4
@@ -8837,6 +8980,7 @@ ModelEdit.exe	sub_425226
 ModelEdit.exe	sub_425381
 ModelEdit.exe	sub_42539d
 ModelEdit.exe	sub_4253a0
+ModelEdit.exe	sub_425408
 ModelEdit.exe	sub_42540e
 ModelEdit.exe	sub_42542b
 ModelEdit.exe	sub_42551f
@@ -8868,6 +9012,7 @@ ModelEdit.exe	sub_425fb1
 ModelEdit.exe	sub_425fd2
 ModelEdit.exe	sub_42604b
 ModelEdit.exe	sub_426067
+ModelEdit.exe	sub_4260a1
 ModelEdit.exe	sub_4260a7
 ModelEdit.exe	sub_42611c
 ModelEdit.exe	sub_426126
@@ -8906,6 +9051,7 @@ ModelEdit.exe	sub_4272f9
 ModelEdit.exe	sub_42731d
 ModelEdit.exe	sub_4273c8
 ModelEdit.exe	sub_4273e4
+ModelEdit.exe	sub_4274f0
 ModelEdit.exe	sub_4274f6
 ModelEdit.exe	sub_427752
 ModelEdit.exe	sub_4277e2
@@ -8913,6 +9059,7 @@ ModelEdit.exe	sub_427866
 ModelEdit.exe	sub_427887
 ModelEdit.exe	sub_4278a1
 ModelEdit.exe	sub_4278bd
+ModelEdit.exe	sub_4278c8
 ModelEdit.exe	sub_4278ce
 ModelEdit.exe	sub_4278ea
 ModelEdit.exe	sub_427924
@@ -8927,24 +9074,29 @@ ModelEdit.exe	sub_427af9
 ModelEdit.exe	sub_427b1a
 ModelEdit.exe	sub_427b95
 ModelEdit.exe	sub_427bb1
+ModelEdit.exe	sub_427bdc
 ModelEdit.exe	sub_427be2
 ModelEdit.exe	sub_427bf8
 ModelEdit.exe	sub_427c6f
 ModelEdit.exe	sub_427e3b
 ModelEdit.exe	sub_427e5c
 ModelEdit.exe	sub_427e7d
+ModelEdit.exe	sub_427ea6
 ModelEdit.exe	sub_427eac
 ModelEdit.exe	sub_427ecd
 ModelEdit.exe	sub_427f46
 ModelEdit.exe	sub_427f62
+ModelEdit.exe	sub_427f9c
 ModelEdit.exe	sub_427fa2
 ModelEdit.exe	sub_427fc3
 ModelEdit.exe	sub_428014
 ModelEdit.exe	sub_428030
+ModelEdit.exe	sub_428045
 ModelEdit.exe	sub_42804b
 ModelEdit.exe	sub_42806c
 ModelEdit.exe	sub_4280f5
 ModelEdit.exe	sub_428111
+ModelEdit.exe	sub_428151
 ModelEdit.exe	sub_428157
 ModelEdit.exe	sub_4281df
 ModelEdit.exe	sub_42826d
@@ -8958,6 +9110,7 @@ ModelEdit.exe	sub_428572
 ModelEdit.exe	sub_428593
 ModelEdit.exe	sub_4285f0
 ModelEdit.exe	sub_42860c
+ModelEdit.exe	sub_428621
 ModelEdit.exe	sub_428627
 ModelEdit.exe	sub_428662
 ModelEdit.exe	sub_4286b6
@@ -9386,6 +9539,7 @@ ModelEdit.exe	sub_433954
 ModelEdit.exe	sub_433990
 ModelEdit.exe	sub_4339c3
 ModelEdit.exe	sub_4339fc
+ModelEdit.exe	sub_433a17
 ModelEdit.exe	sub_433a22
 ModelEdit.exe	sub_433a26
 ModelEdit.exe	sub_433a5c
@@ -10242,6 +10396,7 @@ Processor.exe (AvP2)	sub_42a110
 Processor.exe (AvP2)	sub_42a1c0
 Processor.exe (AvP2)	sub_42a270
 Processor.exe (AvP2)	sub_42a2d0
+Processor.exe (AvP2)	sub_42a2f0
 Processor.exe (AvP2)	sub_42a300
 Processor.exe (AvP2)	sub_42a350
 Processor.exe (AvP2)	sub_42a390
@@ -10299,6 +10454,7 @@ Processor.exe (AvP2)	sub_42f0b0
 Processor.exe (AvP2)	sub_42f240
 Processor.exe (AvP2)	sub_42f390
 Processor.exe (AvP2)	sub_42f410
+Processor.exe (AvP2)	sub_42f580
 Processor.exe (AvP2)	sub_42f590
 Processor.exe (AvP2)	sub_42f5b0
 Processor.exe (AvP2)	sub_42f5c0
@@ -10309,12 +10465,14 @@ Processor.exe (AvP2)	sub_42f6e0
 Processor.exe (AvP2)	sub_42f6f0
 Processor.exe (AvP2)	sub_42f710
 Processor.exe (AvP2)	sub_42f720
+Processor.exe (AvP2)	sub_42f730
 Processor.exe (AvP2)	sub_42f740
 Processor.exe (AvP2)	sub_42f7d0
 Processor.exe (AvP2)	sub_42f7f0
 Processor.exe (AvP2)	sub_42f800
 Processor.exe (AvP2)	sub_42f820
 Processor.exe (AvP2)	sub_42f8d0
+Processor.exe (AvP2)	sub_42f8f0
 Processor.exe (AvP2)	sub_42f900
 Processor.exe (AvP2)	sub_42fe90
 Processor.exe (AvP2)	sub_42fff0
@@ -10335,6 +10493,8 @@ Processor.exe (AvP2)	sub_4305e0
 Processor.exe (AvP2)	sub_4305f0
 Processor.exe (AvP2)	sub_430610
 Processor.exe (AvP2)	sub_430640
+Processor.exe (AvP2)	sub_4306c0
+Processor.exe (AvP2)	sub_4306d0
 Processor.exe (AvP2)	sub_4306e0
 Processor.exe (AvP2)	sub_430740
 Processor.exe (AvP2)	sub_430760
@@ -10606,6 +10766,7 @@ Processor.exe (AvP2)	sub_443030
 Processor.exe (AvP2)	sub_443050
 Processor.exe (AvP2)	sub_443070
 Processor.exe (AvP2)	sub_443090
+Processor.exe (AvP2)	sub_4431d0
 Processor.exe (AvP2)	sub_4431e0
 Processor.exe (AvP2)	sub_443260
 Processor.exe (AvP2)	sub_443880
@@ -11022,6 +11183,7 @@ Processor.exe (NOLF)	sub_405250
 Processor.exe (NOLF)	sub_405280
 Processor.exe (NOLF)	sub_4052f0
 Processor.exe (NOLF)	sub_4054c0
+Processor.exe (NOLF)	sub_405600
 Processor.exe (NOLF)	sub_4057a0
 Processor.exe (NOLF)	sub_4057d0
 Processor.exe (NOLF)	sub_4058e0
@@ -11043,6 +11205,7 @@ Processor.exe (NOLF)	sub_406780
 Processor.exe (NOLF)	sub_4067a0
 Processor.exe (NOLF)	sub_4067b0
 Processor.exe (NOLF)	sub_4067c0
+Processor.exe (NOLF)	sub_406818
 Processor.exe (NOLF)	sub_406830
 Processor.exe (NOLF)	sub_406860
 Processor.exe (NOLF)	sub_4068a0
@@ -11069,6 +11232,7 @@ Processor.exe (NOLF)	sub_40a850
 Processor.exe (NOLF)	sub_40a960
 Processor.exe (NOLF)	sub_40a9d0
 Processor.exe (NOLF)	sub_40aa00
+Processor.exe (NOLF)	sub_40aa74
 Processor.exe (NOLF)	sub_40abb0
 Processor.exe (NOLF)	sub_40ac00
 Processor.exe (NOLF)	sub_40acd0
@@ -11089,7 +11253,9 @@ Processor.exe (NOLF)	sub_40b2d0
 Processor.exe (NOLF)	sub_40b300
 Processor.exe (NOLF)	sub_40b330
 Processor.exe (NOLF)	sub_40ba50
+Processor.exe (NOLF)	sub_40bac0
 Processor.exe (NOLF)	sub_40bb70
+Processor.exe (NOLF)	sub_40bbe0
 Processor.exe (NOLF)	sub_40bc90
 Processor.exe (NOLF)	sub_40bcb0
 Processor.exe (NOLF)	sub_40bcf0
@@ -11098,6 +11264,7 @@ Processor.exe (NOLF)	sub_40d080
 Processor.exe (NOLF)	sub_40d190
 Processor.exe (NOLF)	sub_40d1c0
 Processor.exe (NOLF)	sub_40d230
+Processor.exe (NOLF)	sub_40d2c4
 Processor.exe (NOLF)	sub_40d390
 Processor.exe (NOLF)	sub_40d3b0
 Processor.exe (NOLF)	sub_40d450
@@ -11114,6 +11281,7 @@ Processor.exe (NOLF)	sub_40dee0
 Processor.exe (NOLF)	sub_40df70
 Processor.exe (NOLF)	sub_40dfc0
 Processor.exe (NOLF)	sub_40eaf0
+Processor.exe (NOLF)	sub_40ec78
 Processor.exe (NOLF)	sub_40f200
 Processor.exe (NOLF)	sub_40f880
 Processor.exe (NOLF)	sub_40f8b0
@@ -11126,6 +11294,7 @@ Processor.exe (NOLF)	sub_40fbd0
 Processor.exe (NOLF)	sub_40fc60
 Processor.exe (NOLF)	sub_40fcf0
 Processor.exe (NOLF)	sub_410200
+Processor.exe (NOLF)	sub_41026c
 Processor.exe (NOLF)	sub_410310
 Processor.exe (NOLF)	sub_410320
 Processor.exe (NOLF)	sub_410390
@@ -11173,6 +11342,7 @@ Processor.exe (NOLF)	sub_416740
 Processor.exe (NOLF)	sub_416770
 Processor.exe (NOLF)	sub_416800
 Processor.exe (NOLF)	sub_416870
+Processor.exe (NOLF)	sub_416904
 Processor.exe (NOLF)	sub_416950
 Processor.exe (NOLF)	sub_416960
 Processor.exe (NOLF)	sub_416990
@@ -11182,10 +11352,13 @@ Processor.exe (NOLF)	sub_416bd0
 Processor.exe (NOLF)	sub_416c00
 Processor.exe (NOLF)	sub_416c30
 Processor.exe (NOLF)	sub_416c50
+Processor.exe (NOLF)	sub_416cac
 Processor.exe (NOLF)	sub_416cc0
+Processor.exe (NOLF)	sub_416fb4
 Processor.exe (NOLF)	sub_417881
 Processor.exe (NOLF)	sub_417e50
 Processor.exe (NOLF)	sub_417f70
+Processor.exe (NOLF)	sub_417fdc
 Processor.exe (NOLF)	sub_4180c0
 Processor.exe (NOLF)	sub_4180d0
 Processor.exe (NOLF)	sub_418140
@@ -11196,6 +11369,7 @@ Processor.exe (NOLF)	sub_418200
 Processor.exe (NOLF)	sub_418270
 Processor.exe (NOLF)	sub_4182a0
 Processor.exe (NOLF)	sub_4182d0
+Processor.exe (NOLF)	sub_418364
 Processor.exe (NOLF)	sub_418370
 Processor.exe (NOLF)	sub_4183d0
 Processor.exe (NOLF)	sub_4184b0
@@ -11224,9 +11398,11 @@ Processor.exe (NOLF)	sub_41c580
 Processor.exe (NOLF)	sub_41c670
 Processor.exe (NOLF)	sub_41c710
 Processor.exe (NOLF)	sub_41c780
+Processor.exe (NOLF)	sub_41c7d8
 Processor.exe (NOLF)	sub_41c860
 Processor.exe (NOLF)	sub_41c8d0
 Processor.exe (NOLF)	sub_41c950
+Processor.exe (NOLF)	sub_41c9cc
 Processor.exe (NOLF)	sub_41c9f0
 Processor.exe (NOLF)	sub_41ca20
 Processor.exe (NOLF)	sub_41cb50
@@ -11338,6 +11514,7 @@ Processor.exe (NOLF)	sub_42b940
 Processor.exe (NOLF)	sub_42ba20
 Processor.exe (NOLF)	sub_42bb40
 Processor.exe (NOLF)	sub_42bb60
+Processor.exe (NOLF)	sub_42bbcc
 Processor.exe (NOLF)	sub_42bef0
 Processor.exe (NOLF)	sub_42bf20
 Processor.exe (NOLF)	sub_42bfc0
@@ -11369,12 +11546,14 @@ Processor.exe (NOLF)	sub_42e4c0
 Processor.exe (NOLF)	sub_42e660
 Processor.exe (NOLF)	sub_42e830
 Processor.exe (NOLF)	sub_42e950
+Processor.exe (NOLF)	sub_42e9ac
 Processor.exe (NOLF)	sub_42ea00
 Processor.exe (NOLF)	sub_42ecf0
 Processor.exe (NOLF)	sub_42ed10
 Processor.exe (NOLF)	sub_42edf0
 Processor.exe (NOLF)	sub_42ee20
 Processor.exe (NOLF)	sub_42ee50
+Processor.exe (NOLF)	sub_42eeac
 Processor.exe (NOLF)	sub_42ef40
 Processor.exe (NOLF)	sub_42f100
 Processor.exe (NOLF)	sub_42f130
@@ -11420,6 +11599,7 @@ Processor.exe (NOLF)	sub_431c90
 Processor.exe (NOLF)	sub_431dc0
 Processor.exe (NOLF)	sub_431ec0
 Processor.exe (NOLF)	sub_432100
+Processor.exe (NOLF)	sub_4321bc
 Processor.exe (NOLF)	sub_4321d0
 Processor.exe (NOLF)	sub_4325e0
 Processor.exe (NOLF)	sub_432720
@@ -11528,20 +11708,27 @@ Processor.exe (NOLF)	sub_441300
 Processor.exe (NOLF)	sub_441320
 Processor.exe (NOLF)	sub_441340
 Processor.exe (NOLF)	sub_441350
+Processor.exe (NOLF)	sub_4413bc
 Processor.exe (NOLF)	sub_4413d0
 Processor.exe (NOLF)	sub_441440
 Processor.exe (NOLF)	sub_441470
+Processor.exe (NOLF)	sub_441544
 Processor.exe (NOLF)	sub_441550
+Processor.exe (NOLF)	sub_44164c
 Processor.exe (NOLF)	sub_441980
+Processor.exe (NOLF)	sub_441a1c
 Processor.exe (NOLF)	sub_441c70
+Processor.exe (NOLF)	sub_441ce4
 Processor.exe (NOLF)	sub_441cf0
 Processor.exe (NOLF)	sub_441d10
 Processor.exe (NOLF)	sub_441d20
 Processor.exe (NOLF)	sub_441d60
 Processor.exe (NOLF)	sub_441dd0
+Processor.exe (NOLF)	sub_442100
 Processor.exe (NOLF)	sub_442110
 Processor.exe (NOLF)	sub_442130
 Processor.exe (NOLF)	sub_442170
+Processor.exe (NOLF)	sub_4421d4
 Processor.exe (NOLF)	sub_442200
 Processor.exe (NOLF)	sub_442220
 Processor.exe (NOLF)	sub_442240
@@ -11564,10 +11751,13 @@ Processor.exe (NOLF)	sub_4424b0
 Processor.exe (NOLF)	sub_4426c0
 Processor.exe (NOLF)	sub_442770
 Processor.exe (NOLF)	sub_442880
+Processor.exe (NOLF)	sub_44290c
 Processor.exe (NOLF)	sub_4429a0
 Processor.exe (NOLF)	sub_4429b0
+Processor.exe (NOLF)	sub_442a10
 Processor.exe (NOLF)	sub_442a20
 Processor.exe (NOLF)	sub_442a40
+Processor.exe (NOLF)	sub_442aa4
 Processor.exe (NOLF)	sub_442ab0
 Processor.exe (NOLF)	sub_442ac0
 Processor.exe (NOLF)	sub_442b50
@@ -11747,6 +11937,7 @@ Processor.exe (NOLF)	sub_449a6f
 Processor.exe (NOLF)	sub_449af8
 Processor.exe (NOLF)	sub_449b86
 Processor.exe (NOLF)	sub_449bbb
+Processor.exe (NOLF)	sub_449bca
 Processor.exe (NOLF)	sub_449bd7
 Processor.exe (NOLF)	sub_449c60
 Processor.exe (NOLF)	sub_449df5
@@ -11887,6 +12078,7 @@ Processor.exe (NOLF)	sub_451cc0
 Processor.exe (NOLF)	sub_451cf0
 Processor.exe (NOLF)	sub_451d60
 Processor.exe (NOLF)	sub_451d90
+Processor.exe (NOLF)	sub_451de8
 Processor.exe (NOLF)	sub_4520f0
 Processor.exe (NOLF)	sub_452160
 Processor.exe (NOLF)	sub_4521f0
@@ -11901,6 +12093,7 @@ Processor.exe (NOLF)	sub_453010
 Processor.exe (NOLF)	sub_453260
 Processor.exe (NOLF)	sub_453520
 Processor.exe (NOLF)	sub_453c30
+Processor.exe (NOLF)	sub_453c90
 Processor.exe (NOLF)	sub_453ca0
 Processor.exe (NOLF)	sub_453cb0
 Processor.exe (NOLF)	sub_453d00
@@ -11946,12 +12139,19 @@ Processor.exe (NOLF)	sub_454ac0
 Processor.exe (NOLF)	sub_454af0
 Processor.exe (NOLF)	sub_454b10
 Processor.exe (NOLF)	sub_454b80
+Processor.exe (NOLF)	sub_454c1c
 Processor.exe (NOLF)	sub_454c30
+Processor.exe (NOLF)	sub_454ccc
 Processor.exe (NOLF)	sub_454ce0
+Processor.exe (NOLF)	sub_454d7c
 Processor.exe (NOLF)	sub_454d90
+Processor.exe (NOLF)	sub_454e2c
 Processor.exe (NOLF)	sub_454e40
+Processor.exe (NOLF)	sub_454edc
 Processor.exe (NOLF)	sub_454ef0
+Processor.exe (NOLF)	sub_454f8c
 Processor.exe (NOLF)	sub_454fa0
+Processor.exe (NOLF)	sub_45503c
 Processor.exe (NOLF)	sub_4552b0
 Processor.exe (NOLF)	sub_455490
 Processor.exe (NOLF)	sub_45549e
@@ -11960,11 +12160,17 @@ Processor.exe (NOLF)	sub_4555b0
 Processor.exe (NOLF)	sub_455940
 Processor.exe (NOLF)	sub_4559e0
 Processor.exe (NOLF)	sub_455a00
+Processor.exe (NOLF)	sub_455ab8
 Processor.exe (NOLF)	sub_455ad0
+Processor.exe (NOLF)	sub_455b64
 Processor.exe (NOLF)	sub_455b70
+Processor.exe (NOLF)	sub_455d0c
 Processor.exe (NOLF)	sub_455d20
+Processor.exe (NOLF)	sub_455db4
 Processor.exe (NOLF)	sub_455dc0
+Processor.exe (NOLF)	sub_455e60
 Processor.exe (NOLF)	sub_455e70
+Processor.exe (NOLF)	sub_455f4d
 Processor.exe (NOLF)	sub_455f60
 Processor.exe (NOLF)	sub_455fa0
 Processor.exe (NOLF)	sub_455ff0
@@ -11972,24 +12178,30 @@ Processor.exe (NOLF)	sub_456040
 Processor.exe (NOLF)	sub_456060
 Processor.exe (NOLF)	sub_4560d0
 Processor.exe (NOLF)	sub_456150
+Processor.exe (NOLF)	sub_4561c8
 Processor.exe (NOLF)	sub_4561e0
 Processor.exe (NOLF)	sub_456200
 Processor.exe (NOLF)	sub_456220
 Processor.exe (NOLF)	sub_456260
 Processor.exe (NOLF)	sub_456460
+Processor.exe (NOLF)	sub_456504
 Processor.exe (NOLF)	sub_456510
 Processor.exe (NOLF)	sub_456590
 Processor.exe (NOLF)	sub_4565d0
 Processor.exe (NOLF)	sub_456610
 Processor.exe (NOLF)	sub_456670
 Processor.exe (NOLF)	sub_4566e0
+Processor.exe (NOLF)	sub_456750
 Processor.exe (NOLF)	sub_456760
 Processor.exe (NOLF)	sub_456780
 Processor.exe (NOLF)	sub_4567a0
 Processor.exe (NOLF)	sub_4568b0
+Processor.exe (NOLF)	sub_456934
 Processor.exe (NOLF)	sub_456940
+Processor.exe (NOLF)	sub_4569b8
 Processor.exe (NOLF)	sub_4569d0
 Processor.exe (NOLF)	sub_456a40
+Processor.exe (NOLF)	sub_456aa4
 Processor.exe (NOLF)	sub_456ab0
 Processor.exe (NOLF)	sub_456ac0
 Processor.exe (NOLF)	sub_456ad0
@@ -11998,8 +12210,11 @@ Processor.exe (NOLF)	sub_456b30
 Processor.exe (NOLF)	sub_456b60
 Processor.exe (NOLF)	sub_456b90
 Processor.exe (NOLF)	sub_456bc0
+Processor.exe (NOLF)	sub_456c30
 Processor.exe (NOLF)	sub_456c40
+Processor.exe (NOLF)	sub_456cbc
 Processor.exe (NOLF)	sub_456cd0
+Processor.exe (NOLF)	sub_456d44
 Processor.exe (NOLF)	sub_456d50
 Processor.exe (NOLF)	sub_4574f0
 Processor.exe (NOLF)	sub_458060
@@ -12108,6 +12323,7 @@ Processor.exe (NOLF)	sub_460d00
 Processor.exe (NOLF)	sub_460dd0
 Processor.exe (NOLF)	sub_460df0
 Processor.exe (NOLF)	sub_460e30
+Processor.exe (NOLF)	sub_460ec4
 Processor.exe (NOLF)	sub_460ed0
 Processor.exe (NOLF)	sub_460f00
 Processor.exe (NOLF)	sub_460f10
