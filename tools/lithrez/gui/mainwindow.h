@@ -9,8 +9,11 @@
 
 #include <lithtech/rez.hpp>
 
+#include <atomic>
+#include <functional>
 #include <map>
 #include <memory>
+#include <mutex>
 #include <vector>
 
 class QAction;
@@ -118,9 +121,29 @@ private:
     void updateRecent();
 
     lithtech::rez::CreateOptions createOptions() const;
-    // Archive::open on a thread of its own, behind a progress dialog that can
-    // cancel it; throws what Archive::open throws (rez::Cancelled if cancelled).
-    std::unique_ptr<lithtech::rez::Archive> openArchive(const QString& path);
+    // A long job's progress, filled in from its thread.
+    struct Busy {
+        std::mutex m;
+        uint64_t done = 0, total = 0;   // total 0: a busy bar
+        QString detail;
+        std::atomic<bool> cancel{false};
+        void set(uint64_t d, uint64_t t, const QString& text = QString()) {
+            std::lock_guard<std::mutex> lock(m);
+            done = d;
+            total = t;
+            if (!text.isNull()) detail = text;
+        }
+    };
+    // Runs job on a thread of its own behind a progress dialog, which always
+    // shows, if only for a moment; then finish, if given, on this thread with
+    // the dialog still up (its text finishText). Rethrows what job throws.
+    void runBusy(const QString& title, bool canCancel, const std::function<void(Busy&)>& job,
+                 const std::function<void()>& finish = {}, const QString& finishText = QString());
+    // Archive::open through runBusy (finish then runs before the dialog
+    // closes); throws what Archive::open throws (rez::Cancelled if cancelled).
+    std::unique_ptr<lithtech::rez::Archive> openArchive(const QString& path,
+                                                        const std::function<void(std::unique_ptr<lithtech::rez::Archive>&)>& finish = {});
+    bool busy_ = false;   // a runBusy job is running: thumbnails wait
     void importArchive(lithtech::rez::Archive& from, lithtech::rez::Directory& src,
                        lithtech::rez::Directory& dst, int& count);
     int insertPaths(const QStringList& paths, lithtech::rez::Directory* into);

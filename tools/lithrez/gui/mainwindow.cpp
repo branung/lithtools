@@ -598,97 +598,132 @@ void MainWindow::newRez() {
     updateTitle();
 }
 
-std::unique_ptr<Archive> MainWindow::openArchive(const QString& path) {
-    // A large archive, or a PS2 disc image on slow storage, takes a while to
-    // read: the window keeps painting, and a progress bar (directory bytes or
-    // PS2 entries, a busy bar while the total isn't known) comes up once the
-    // open has taken more than half a second.
-    std::mutex m;
-    rez::OpenProgress latest;
-    std::atomic<bool> cancel{false}, finished{false};
-    std::unique_ptr<Archive> a;
+void MainWindow::runBusy(const QString& title, bool canCancel, const std::function<void(Busy&)>& job,
+                         const std::function<void()>& finish, const QString& finishText) {
+    // The job runs on a thread of its own so the window keeps painting; the
+    // dialog shows straight away, every time, even if a fast machine only
+    // flashes it, so a slow one is never left looking hung.
+    Busy busy;
+    std::atomic<bool> finished{false};
     std::exception_ptr error;
-    rez::OpenOptions opts;
-    opts.progress = [&](const rez::OpenProgress& p) {
-        std::lock_guard<std::mutex> lock(m);
-        latest = p;
-        return !cancel.load();
-    };
     std::thread worker([&] {
         try {
-            a = Archive::open(ss(path), opts);
+            job(busy);
         } catch (...) {
             error = std::current_exception();
         }
         finished = true;
     });
 
-    QProgressDialog prog(tr("Opening %1...").arg(QFileInfo(path).fileName()), tr("Cancel"), 0, 0, this);
+    QProgressDialog prog(title, canCancel ? tr("Cancel") : QString(), 0, 0, this);
+    prog.setWindowTitle(QApplication::applicationName());
     prog.setWindowModality(Qt::WindowModal);
-    prog.setMinimumDuration(500);
+    prog.setMinimumDuration(0);
     prog.setAutoReset(false);
     prog.setAutoClose(false);
-    connect(&prog, &QProgressDialog::canceled, this, [&] { cancel = true; });
+    if (canCancel) connect(&prog, &QProgressDialog::canceled, this, [&] { busy.cancel = true; });
+    auto update = [&] {
+        uint64_t done, total;
+        QString detail;
+        {
+            std::lock_guard<std::mutex> lock(busy.m);
+            done = busy.done;
+            total = busy.total;
+            detail = busy.detail;
+        }
+        if (total) {
+            // QProgressDialog's range is an int: work in thousandths
+            prog.setMaximum(1000);
+            prog.setValue(int(std::min(done, total) * 1000 / total));
+        } else {
+            prog.setMaximum(0);
+            prog.setValue(0);
+        }
+        prog.setLabelText(detail.isEmpty() ? title : title + "\n" + detail);
+    };
+    busy_ = true;
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    prog.show();
+    update();
+    QApplication::processEvents();
     QEventLoop loop;
     QTimer poll;
     connect(&poll, &QTimer::timeout, this, [&] {
+        if (canCancel && prog.wasCanceled()) busy.cancel = true;
         if (finished) {
             loop.quit();
             return;
         }
-        if (prog.wasCanceled()) cancel = true;
-        rez::OpenProgress p;
-        {
-            std::lock_guard<std::mutex> lock(m);
-            p = latest;
-        }
-        if (p.total) {
-            // QProgressDialog's range is an int: work in thousandths
-            prog.setMaximum(1000);
-            prog.setValue(int(p.done * 1000 / p.total));
-        } else {
-            prog.setMaximum(0);
-            prog.setValue(0);   // a busy bar; setValue also shows the dialog once its delay has passed
-        }
-        prog.setLabelText(tr("Opening %1...\n%2 files in %3 folders")
-                              .arg(QFileInfo(path).fileName(), QLocale().toString(qulonglong(p.resources)),
-                                   QLocale().toString(qulonglong(p.dirs))));
+        update();
     });
-    QApplication::setOverrideCursor(Qt::WaitCursor);
     poll.start(50);
-    loop.exec();
+    if (!finished) loop.exec();
     poll.stop();
-    QApplication::restoreOverrideCursor();
     worker.join();
+    if (!error) {   // the bar full before it goes, however quick the job was
+        prog.setMaximum(1);
+        prog.setValue(1);
+        QApplication::processEvents();
+    }
+    if (!error && finish) {
+        prog.setCancelButton(nullptr);
+        prog.setMaximum(0);
+        prog.setValue(0);
+        prog.setLabelText(finishText.isEmpty() ? title : title + "\n" + finishText);
+        QApplication::processEvents();
+        finish();
+    }
+    QApplication::restoreOverrideCursor();
+    busy_ = false;
     prog.close();
     if (error) std::rethrow_exception(error);
+}
+
+std::unique_ptr<Archive> MainWindow::openArchive(const QString& path,
+                                                 const std::function<void(std::unique_ptr<Archive>&)>& finish) {
+    // Progress: directory bytes or PS2 entries (a busy bar while the total
+    // isn't known), and the folders and files read so far.
+    std::unique_ptr<Archive> a;
+    rez::OpenOptions opts;
+    runBusy(tr("Opening %1...").arg(QFileInfo(path).fileName()), true,
+            [&](Busy& busy) {
+                opts.progress = [&](const rez::OpenProgress& p) {
+                    busy.set(p.done, p.total,
+                             tr("%1 files in %2 folders")
+                                 .arg(QLocale().toString(qulonglong(p.resources)), QLocale().toString(qulonglong(p.dirs))));
+                    return !busy.cancel.load();
+                };
+                a = Archive::open(ss(path), opts);
+            },
+            finish ? std::function<void()>([&] { finish(a); }) : std::function<void()>(),
+            tr("Building the folder tree..."));
     return a;
 }
 
 bool MainWindow::openRez(const QString& path) {
-    std::unique_ptr<Archive> a;
     try {
-        a = openArchive(path);
+        openArchive(path, [&](std::unique_ptr<Archive>& a) {
+            QSignalBlocker b1(details_), b2(icons_);
+            clearPreview();
+            butesFrom_ = nullptr;
+            butes_.clear();
+            archive_ = std::move(a);
+            path_ = path;
+            modified_ = false;
+            ps2Note_->setVisible(archive_->is_ps2());
+            back_.clear();
+            forward_.clear();
+            clipboard_ = {};
+            current_ = &archive_->root();
+            rebuildTree();
+            updateTitle();
+        });
     } catch (const rez::Cancelled&) {
         return false;
     } catch (const std::exception& e) {
         QMessageBox::warning(this, tr("Open"), tr("Can't open %1:\n%2").arg(path, qs(e.what())));
         return false;
     }
-    QSignalBlocker b1(details_), b2(icons_);
-    clearPreview();
-    butesFrom_ = nullptr;
-    butes_.clear();
-    archive_ = std::move(a);
-    path_ = path;
-    modified_ = false;
-    ps2Note_->setVisible(archive_->is_ps2());
-    back_.clear();
-    forward_.clear();
-    clipboard_ = {};
-    current_ = &archive_->root();
-    rebuildTree();
-    updateTitle();
     addRecent(path);
     return true;
 }
@@ -835,6 +870,10 @@ void MainWindow::startThumbnails() {
     auto step = std::make_shared<std::function<void()>>();
     *step = [this, size, dir, step] {
         if (dir != current_ || (mode_ != ViewMode::LargeIcons && mode_ != ViewMode::SmallIcons)) return;
+        if (busy_) {   // a save may be reading the archive on its own thread: wait for it
+            QTimer::singleShot(100, this, *step);
+            return;
+        }
         int done = 0;
         while (thumbRow_ < icons_->count() && done < 8) {
             QListWidgetItem* li = icons_->item(thumbRow_++);
@@ -1236,12 +1275,20 @@ bool MainWindow::saveTo(const QString& path) {
         if (r != QMessageBox::Save) return false;
     }
     try {
-        QApplication::setOverrideCursor(Qt::WaitCursor);
+        // Progress: the bytes of resource data written; the directory (or a
+        // PS2 archive's patching) comes last, as a busy bar, and can't stop.
         rez::SaveOptions so;
-        archive_->save(ss(path), so);
-        QApplication::restoreOverrideCursor();
+        runBusy(tr("Saving %1...").arg(QFileInfo(path).fileName()), true, [&](Busy& busy) {
+            so.progress = [&](uint64_t done, uint64_t total) {
+                busy.set(done, total, total ? tr("%1 of %2").arg(util::humanSize(done), util::humanSize(total))
+                                            : tr("Writing the directory..."));
+                return !busy.cancel.load();
+            };
+            archive_->save(ss(path), so);
+        });
+    } catch (const rez::Cancelled&) {
+        return false;
     } catch (const std::exception& e) {
-        QApplication::restoreOverrideCursor();
         QMessageBox::warning(this, tr("Save"), tr("Can't save %1:\n%2").arg(path, qs(e.what())));
         return false;
     }
