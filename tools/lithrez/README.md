@@ -9,13 +9,13 @@ they build with clang, gcc or MSVC on Linux, macOS and Windows.
   scripts.
 - **LithRez Studio** (`lithrez-studio`, Qt 6): a successor to WinRez LT Studio. It
   has an Explorer-style rez editor, a DTX texture viewer with thumbnails
-  (PCX, TGA and BMP images preview and thumbnail too), a
+  (PCX, TGA and BMP images preview and thumbnail too), animated sprites, a
   model preview for `.abc` (NOLF, AvP2) and `.ltb` (NOLF2, Contract
   J.A.C.K., Tron 2.0, and NOLF on the PS2) models, a sound player, and a string table editor for
   `CRes.dll`.
 - **`core/`**: the shared library (`lithtech::rez`, `lithtech::dtx`,
   `lithtech::pcx`, `lithtech::tga`, `lithtech::bmp`, `lithtech::abc`, `lithtech::ltb`, `lithtech::ps2ltb`, `lithtech::sound`,
-  `lithtech::pe`).
+  `lithtech::pe`, `lithtech::spr`).
 
 `docs/REZ.md` describes the format and how these tools were checked against
 the originals. Both tools also read the PS2 port's archive (`LITH_PS2.REZ`,
@@ -55,6 +55,10 @@ These read the game archives (never committed), so they aren't part of
 - `tests/ps2_verify.py <lithrez> <work dir> <reference> <disc images>...`:
   the PS2 discs extract byte-identical to a reference extraction, rebuild
   byte-identical from their tables, and take edits (docs/PS2REZ.md).
+- `spr_verify <rez>...`: every sprite of a game's archives, its frames
+  looked up among their textures (docs/SPR.md has the results; the only
+  failures are five empty files). `spr_test` (in ctest) checks sprites made
+  in the test.
 - `dtx_decode_all`, `abc_verify`, `ltb_verify`, `ps2ltb_verify`: textures
   and models (`ps2ltb_verify --dump` against plugins/blender's
   `tests/ps2ltb_dump.py` compares the C++ and Python PS2 readers).
@@ -171,7 +175,8 @@ lithrez roundtrip "NOLF (USA).iso" LITH_PS2.REZ   the archive alone, rebuilt fro
 ## LithRez Studio
 
 - **Browse:** folder tree, location bar with history, Back/Forward/Up, and
-  large icon, small icon, list and details views. Textures get thumbnails.
+  large icon, small icon, list and details views. Textures get thumbnails,
+  and sprites their first frame's.
 - **Edit:** insert files or folders (also by dragging them in), insert empty
   folders, rename, delete, and cut/copy/paste. Paste moves, as in WinRez: a
   rez file never holds the same data twice.
@@ -183,7 +188,10 @@ lithrez roundtrip "NOLF (USA).iso" LITH_PS2.REZ   the archive alone, rebuilt fro
 - **Preview pane:** textures and images (`.dtx`, `.pcx`, `.tga`, `.bmp`,
   every layout of each format, including the 8-bit `.dtx` of Blood 2
   (version -2) and KISS Psycho Circus (-3) with their 4-bit alpha masks; "Magenta transparent" shows the colour key
-  the games' interface art uses), models (`.abc`, `.ltb` and the PS2's `.ltb`)
+  the games' interface art uses), sprites (`.spr`, `docs/SPR.md`: the
+  frames animated at the sprite's rate as the engine picks them, with
+  play/pause, frame stepping, the header and the frame list; a frame the
+  archive doesn't hold shows as missing), models (`.abc`, `.ltb` and the PS2's `.ltb`)
   with their skins and animations, sounds, text (PS2 `.but` attribute files
   decoded), and hex for everything else. For NOLF2, Contract
   J.A.C.K. and Tron 2.0, skins come from the archive's own
