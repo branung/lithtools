@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 
+#include "lipsyncview.h"
 #include "modelview.h"
 #include "soundview.h"
 #include "spriteview.h"
@@ -500,6 +501,7 @@ void MainWindow::buildViews() {
     soundPreview_ = new SoundView(previewStack_);
     bankPreview_ = new BankView(previewStack_);
     spritePreview_ = new SpriteView(previewStack_);
+    lipPreview_ = new LipSyncView(previewStack_);
     connect(spritePreview_, &SpriteView::frameActivated, this, &MainWindow::showResource);
     textPreview_ = new QPlainTextEdit(previewStack_);
     textPreview_->setReadOnly(true);
@@ -511,6 +513,7 @@ void MainWindow::buildViews() {
     previewStack_->addWidget(soundPreview_);
     previewStack_->addWidget(bankPreview_);
     previewStack_->addWidget(spritePreview_);
+    previewStack_->addWidget(lipPreview_);
     previewStack_->addWidget(textPreview_);
     previewDock_->setWidget(previewStack_);
     addDockWidget(Qt::RightDockWidgetArea, previewDock_);
@@ -523,9 +526,10 @@ void MainWindow::buildViews() {
         if (previewStack_->currentWidget() != soundPreview_) soundPreview_->stop();
         if (previewStack_->currentWidget() != bankPreview_) bankPreview_->stop();
         if (previewStack_->currentWidget() != spritePreview_) spritePreview_->pause();
+        if (previewStack_->currentWidget() != lipPreview_) lipPreview_->stop();
     });
     connect(previewDock_, &QDockWidget::visibilityChanged, this, [this](bool on) {
-        if (!on) soundPreview_->stop(), bankPreview_->stop(), spritePreview_->pause();
+        if (!on) soundPreview_->stop(), bankPreview_->stop(), spritePreview_->pause(), lipPreview_->stop();
     });
     resize(1280, 800);
 }
@@ -995,6 +999,16 @@ QByteArray MainWindow::findFrame(const QString& path, QString& found) const {
     return readData(r);
 }
 
+QByteArray MainWindow::findVoice(const Resource* lip, QString& path) const {
+    // HandleNodeControlLipSync opens the sound's name with ".lip" for its
+    // extension: VOICE/<n>.WAV and VOICE/<n>.LIP
+    if (!lip->parent()) return {};
+    Resource* r = lip->parent()->find(lip->name, rez::type_from_string("WAV"));
+    if (!r) return {};
+    path = qs(r->path());
+    return readData(r);
+}
+
 QByteArray MainWindow::findSkin(const Resource* model, int index, int count, QString& path) const {
     // The game's own list first, where the archive carries it.
     QStringList listed = butesSkins(model);
@@ -1094,6 +1108,7 @@ void MainWindow::clearPreview() {
     soundPreview_->clear();
     bankPreview_->clear();
     spritePreview_->clear();
+    lipPreview_->clear();
     textPreview_->clear();
 }
 
@@ -1124,6 +1139,10 @@ void MainWindow::preview(Resource* r) {
             previewStack_->setCurrentWidget(spritePreview_);
             return;
         }
+    } else if (t == "LIP") {
+        previewStack_->setCurrentWidget(lipPreview_);   // first, so the last sound stops
+        if (lipPreview_->loadLip(readData(r), qs(r->file_name()), [this, r](QString& p) { return findVoice(r, p); }, &err))
+            return;
     } else if (t == "WAV") {
         previewStack_->setCurrentWidget(soundPreview_);   // first, so the last sound stops
         if (soundPreview_->loadWav(readData(r), qs(r->file_name()), &err)) return;
@@ -1254,6 +1273,20 @@ void MainWindow::openResource(Resource* r) {
             return;
         }
         v->resize(700, 700);
+        v->show();
+        return;
+    }
+    if (t == "LIP") {
+        auto* v = new LipSyncView;
+        v->setAttribute(Qt::WA_DeleteOnClose);
+        v->setWindowTitle(qs(r->file_name()) + " - LithRez Studio");
+        QString err;
+        if (!v->loadLip(readData(r), qs(r->file_name()), [this, r](QString& p) { return findVoice(r, p); }, &err)) {
+            QMessageBox::warning(this, tr("Lip-sync"), err);
+            delete v;
+            return;
+        }
+        v->resize(900, 700);
         v->show();
         return;
     }

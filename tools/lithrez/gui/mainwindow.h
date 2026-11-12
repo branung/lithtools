@@ -1,7 +1,8 @@
 #pragma once
 // LithRez Studio's main window: an Explorer-like view of a .rez file (WinRez
 // LT's layout: folder tree on the left, contents on the right, location bar
-// with history), with a preview pane for textures, sprites, models, sounds and text.
+// with history), with a preview pane for textures, sprites, models, sounds,
+// lip-sync and text.
 
 #include <QMainWindow>
 #include <QPointer>
@@ -31,6 +32,7 @@ class ModelView;
 class SoundView;
 class BankView;
 class SpriteView;
+class LipSyncView;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -93,6 +95,8 @@ private:
     // A sprite frame's .dtx by its path in the archive, and where it was
     // found; empty if it isn't there.
     QByteArray findFrame(const QString& path, QString& found) const;
+    // A lip-sync file's voice line: the .wav of the same name beside it.
+    QByteArray findVoice(const lithtech::rez::Resource* lip, QString& path) const;
     QString tempExtract(const lithtech::rez::Resource* r) const;
 
     // actions
@@ -180,6 +184,7 @@ private:
     SoundView* soundPreview_ = nullptr;
     BankView* bankPreview_ = nullptr;
     SpriteView* spritePreview_ = nullptr;
+    LipSyncView* lipPreview_ = nullptr;
     QPlainTextEdit* textPreview_ = nullptr;
     QLabel* infoPreview_ = nullptr;
     QToolBar* toolbar_ = nullptr;
