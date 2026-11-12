@@ -90,3 +90,10 @@ target_link_libraries(lip_test PRIVATE lithtech)
 add_test(NAME lip_test COMMAND lip_test)
 add_executable(lip_verify lip_verify.cpp)
 target_link_libraries(lip_verify PRIVATE lithtech)
+# Texture effects: scripts and groups made here; texfx_verify reads every
+# one of a game's archives.
+add_executable(texscript_test texscript_test.cpp)
+target_link_libraries(texscript_test PRIVATE lithtech)
+add_test(NAME texscript_test COMMAND texscript_test)
+add_executable(texfx_verify texfx_verify.cpp)
+target_link_libraries(texfx_verify PRIVATE lithtech)
