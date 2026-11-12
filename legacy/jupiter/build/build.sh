@@ -34,7 +34,7 @@ for f in "$VC71/bin/cl.exe" "$DXSDK/Include/d3dx9.h" \
 done
 case "$DXSDK" in "$REPO"/*) ;; *) echo "error: DXSDK must be inside the repository" >&2; exit 1;; esac
 
-sdk="$REPO/jupiter/src/Engine/tools/Plugins/SDKFiles"
+sdk="$REPO/legacy/jupiter/src/Engine/tools/Plugins/SDKFiles"
 if [ ! -e "$sdk/.copied" ]; then
     echo "== copying the plug-in SDKs from Build 69"
     rm -rf "$sdk"
