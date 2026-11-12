@@ -6,6 +6,7 @@
 #include "spriteview.h"
 #include "bankview.h"
 #include "stringtable.h"
+#include "texfxview.h"
 #include "textureview.h"
 #include "util.h"
 #include "wizard.h"
@@ -113,7 +114,7 @@ QString typeLabel(const QString& ext) {
         {"PCX", "Image"}, {"TGA", "Image"}, {"BMP", "Image"}, {"MP3", "Sound"}, {"FXF", "Effects"},
         {"FCF", "Effects"}, {"LTA", "LithTech text"}, {"BUT", "Attributes"}, {"CFG", "Config"},
         {"SGT", "Music segment"}, {"STY", "Music style"}, {"DLS", "Instruments"}, {"LIP", "Lip sync"},
-        {"LPS", "Sound bank"}};
+        {"LPS", "Sound bank"}, {"TFS", "Texture script"}, {"TFG", "Texture effect group"}};
     auto it = names.find(ext.toUpper());
     return it != names.end() ? it->second + " (" + ext.toUpper() + ")" : (ext.isEmpty() ? "File" : ext.toUpper() + " file");
 }
@@ -502,6 +503,8 @@ void MainWindow::buildViews() {
     bankPreview_ = new BankView(previewStack_);
     spritePreview_ = new SpriteView(previewStack_);
     lipPreview_ = new LipSyncView(previewStack_);
+    texFxPreview_ = new TexFxView(previewStack_);
+    connect(texFxPreview_, &TexFxView::scriptActivated, this, &MainWindow::showResource);
     connect(spritePreview_, &SpriteView::frameActivated, this, &MainWindow::showResource);
     textPreview_ = new QPlainTextEdit(previewStack_);
     textPreview_->setReadOnly(true);
@@ -514,6 +517,7 @@ void MainWindow::buildViews() {
     previewStack_->addWidget(bankPreview_);
     previewStack_->addWidget(spritePreview_);
     previewStack_->addWidget(lipPreview_);
+    previewStack_->addWidget(texFxPreview_);
     previewStack_->addWidget(textPreview_);
     previewDock_->setWidget(previewStack_);
     addDockWidget(Qt::RightDockWidgetArea, previewDock_);
@@ -527,9 +531,10 @@ void MainWindow::buildViews() {
         if (previewStack_->currentWidget() != bankPreview_) bankPreview_->stop();
         if (previewStack_->currentWidget() != spritePreview_) spritePreview_->pause();
         if (previewStack_->currentWidget() != lipPreview_) lipPreview_->stop();
+        if (previewStack_->currentWidget() != texFxPreview_) texFxPreview_->pause();
     });
     connect(previewDock_, &QDockWidget::visibilityChanged, this, [this](bool on) {
-        if (!on) soundPreview_->stop(), bankPreview_->stop(), spritePreview_->pause(), lipPreview_->stop();
+        if (!on) soundPreview_->stop(), bankPreview_->stop(), spritePreview_->pause(), lipPreview_->stop(), texFxPreview_->pause();
     });
     resize(1280, 800);
 }
@@ -900,7 +905,7 @@ void MainWindow::startThumbnails() {
                 try {
                     auto s = spr::read(reinterpret_cast<const uint8_t*>(b.constData()), size_t(b.size()));
                     QString found;
-                    if (!s.frames.empty()) img = dtxThumbnail(findFrame(QString::fromLatin1(s.frames[0].c_str()), found), size);
+                    if (!s.frames.empty()) img = dtxThumbnail(findByPath(QString::fromLatin1(s.frames[0].c_str()), found), size);
                 } catch (const std::exception&) {
                 }
             }
@@ -991,7 +996,7 @@ QStringList MainWindow::butesSkins(const Resource* model) const {
     return it == butes_.end() ? QStringList() : it->second;
 }
 
-QByteArray MainWindow::findFrame(const QString& path, QString& found) const {
+QByteArray MainWindow::findByPath(const QString& path, QString& found) const {
     if (!archive_) return {};
     Resource* r = archive_->root().find_path(ss(path));
     if (!r) return {};
@@ -1109,6 +1114,7 @@ void MainWindow::clearPreview() {
     bankPreview_->clear();
     spritePreview_->clear();
     lipPreview_->clear();
+    texFxPreview_->clear();
     textPreview_->clear();
 }
 
@@ -1135,7 +1141,7 @@ void MainWindow::preview(Resource* r) {
         }
     } else if (t == "SPR") {
         if (spritePreview_->loadSprite(readData(r), qs(r->file_name()),
-                                       [this](const QString& p, QString& found) { return findFrame(p, found); }, &err)) {
+                                       [this](const QString& p, QString& found) { return findByPath(p, found); }, &err)) {
             previewStack_->setCurrentWidget(spritePreview_);
             return;
         }
@@ -1143,6 +1149,18 @@ void MainWindow::preview(Resource* r) {
         previewStack_->setCurrentWidget(lipPreview_);   // first, so the last sound stops
         if (lipPreview_->loadLip(readData(r), qs(r->file_name()), [this, r](QString& p) { return findVoice(r, p); }, &err))
             return;
+    } else if (t == "TFS") {
+        if (texFxPreview_->loadScript(readData(r), qs(r->file_name()), &err)) {
+            previewStack_->setCurrentWidget(texFxPreview_);
+            return;
+        }
+    } else if (t == "TFG") {
+        // the engine finds a group's scripts from the resource root
+        if (texFxPreview_->loadGroup(readData(r), qs(r->file_name()),
+                                     [this](const QString& p, QString& found) { return findByPath(p, found); }, &err)) {
+            previewStack_->setCurrentWidget(texFxPreview_);
+            return;
+        }
     } else if (t == "WAV") {
         previewStack_->setCurrentWidget(soundPreview_);   // first, so the last sound stops
         if (soundPreview_->loadWav(readData(r), qs(r->file_name()), &err)) return;
@@ -1266,7 +1284,7 @@ void MainWindow::openResource(Resource* r) {
         connect(v, &SpriteView::frameActivated, this, &MainWindow::showResource);
         v->setWindowTitle(qs(r->file_name()) + " - LithRez Studio");
         QString err;
-        if (!v->loadSprite(readData(r), qs(r->file_name()), [this](const QString& p, QString& found) { return findFrame(p, found); },
+        if (!v->loadSprite(readData(r), qs(r->file_name()), [this](const QString& p, QString& found) { return findByPath(p, found); },
                            &err)) {
             QMessageBox::warning(this, tr("Sprite"), err);
             delete v;
@@ -1287,6 +1305,24 @@ void MainWindow::openResource(Resource* r) {
             return;
         }
         v->resize(900, 700);
+        v->show();
+        return;
+    }
+    if (t == "TFS" || t == "TFG") {
+        auto* v = new TexFxView;
+        v->setAttribute(Qt::WA_DeleteOnClose);
+        connect(v, &TexFxView::scriptActivated, this, &MainWindow::showResource);
+        v->setWindowTitle(qs(r->file_name()) + " - LithRez Studio");
+        QString err;
+        bool ok = t == "TFS" ? v->loadScript(readData(r), qs(r->file_name()), &err)
+                             : v->loadGroup(readData(r), qs(r->file_name()),
+                                            [this](const QString& p, QString& found) { return findByPath(p, found); }, &err);
+        if (!ok) {
+            QMessageBox::warning(this, tr("Texture effect"), err);
+            delete v;
+            return;
+        }
+        v->resize(760, 760);
         v->show();
         return;
     }
