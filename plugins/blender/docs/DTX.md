@@ -5,7 +5,7 @@ to Tron 2.0 (2003), is version -5 and uses this one layout: 21,955 distinct
 files across NOLF (all languages and GOTY), AvP2 Primal Hunt, NOLF2,
 Contract J.A.C.K., Tron 2.0, the Tron 2.0 tools and the Jupiter Build 51/69
 game trees. All of them read and write back byte for byte with
-`lithtech/dtx.py` (one 0-byte Tron file is not a texture; see
+`lithtech/dtx.py` (three 0-byte Tron files are not textures; see
 [Odd files](#odd-files)).
 
 The older engines wrote 8-bit palettized textures, versions -2 (LithTech
@@ -368,7 +368,14 @@ alpha for FULLBRITE textures was not traced.)
   128×128 size at offset 0x12, an older texture format the game evidently
   doesn't load. Neither reader takes them.
 
-- `tron2-usa Game2.rez:TEX/PROTOTYPE/M09/DAN/PANGLOWEDIT.dtx` is 0 bytes.
+- `tron2-usa Game2.rez:TEX/PROTOTYPE/M09/DAN/PANGLOWEDIT.dtx`,
+  `PANGLOWEDIT2.dtx` and `TEX/PROTOTYPE/REALWORLD/EVILLAB/BASE/ELEVATOR04.dtx`
+  are 0 bytes (in 1.0 and 1.030 alike), and no world, sprite, effect group
+  or attribute file names them. The engine couldn't load them: its rez
+  streams zero what they can't read, so `dtx_Create` (Build 69's
+  `runtime/shared/src/dtxmgr.cpp`) would see version 0 and return
+  `LT_INVALIDVERSION`. The C++ reader says "empty file (0 bytes)", and
+  LithRez Studio's viewer shows that.
 - `tron2-usa Game2.rez:TEX/PROTOTYPE/M06/DAN/FLOORANGLEUV.dtx` (64×1024,
   DXT5, 6 mips) and `GLASSARROWRUNNER.dtx` (32×512, DXT5, 5 mips) are
   missing their last level: 64 bytes for a 2×32 mip. Whatever wrote them

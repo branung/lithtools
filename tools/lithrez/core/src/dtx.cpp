@@ -159,6 +159,7 @@ Texture read_old(const std::vector<uint8_t>& d, Texture t, bool lenient) {
 }  // namespace
 
 Texture read(const std::vector<uint8_t>& d, bool lenient) {
+    if (d.empty()) throw Error("empty file (0 bytes), not a texture");
     if (d.size() < 8) throw Error("too short for a DTX header");
     Texture t;
     t.res_type = rd32(&d[0]);

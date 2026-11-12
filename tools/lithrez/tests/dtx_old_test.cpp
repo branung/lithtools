@@ -227,6 +227,14 @@ int main() {
         CHECK(throws(f));
     }
 
+    // An empty file (Tron 2.0 ships three) says so.
+    try {
+        dtx::read(V{});
+        CHECK(false);
+    } catch (const dtx::Error& e) {
+        CHECK(std::string(e.what()).find("empty file") == 0);
+    }
+
     std::printf(failures ? "%d failures\n" : "dtx_old_test: all passed\n", failures);
     return failures ? 1 : 0;
 }
