@@ -2,6 +2,7 @@
 
 #include "modelview.h"
 #include "soundview.h"
+#include "spriteview.h"
 #include "bankview.h"
 #include "stringtable.h"
 #include "textureview.h"
@@ -9,6 +10,7 @@
 #include "wizard.h"
 #include <lithtech/butes.hpp>
 #include <lithtech/ps2rez.hpp>
+#include <lithtech/spr.hpp>
 
 #include <QAction>
 #include <QActionGroup>
@@ -497,6 +499,8 @@ void MainWindow::buildViews() {
     connect(modelPreview_, &ModelView::skinActivated, this, &MainWindow::showResource);
     soundPreview_ = new SoundView(previewStack_);
     bankPreview_ = new BankView(previewStack_);
+    spritePreview_ = new SpriteView(previewStack_);
+    connect(spritePreview_, &SpriteView::frameActivated, this, &MainWindow::showResource);
     textPreview_ = new QPlainTextEdit(previewStack_);
     textPreview_->setReadOnly(true);
     textPreview_->setLineWrapMode(QPlainTextEdit::NoWrap);
@@ -506,6 +510,7 @@ void MainWindow::buildViews() {
     previewStack_->addWidget(modelPreview_);
     previewStack_->addWidget(soundPreview_);
     previewStack_->addWidget(bankPreview_);
+    previewStack_->addWidget(spritePreview_);
     previewStack_->addWidget(textPreview_);
     previewDock_->setWidget(previewStack_);
     addDockWidget(Qt::RightDockWidgetArea, previewDock_);
@@ -517,9 +522,10 @@ void MainWindow::buildViews() {
     connect(previewStack_, &QStackedWidget::currentChanged, this, [this] {
         if (previewStack_->currentWidget() != soundPreview_) soundPreview_->stop();
         if (previewStack_->currentWidget() != bankPreview_) bankPreview_->stop();
+        if (previewStack_->currentWidget() != spritePreview_) spritePreview_->pause();
     });
     connect(previewDock_, &QDockWidget::visibilityChanged, this, [this](bool on) {
-        if (!on) soundPreview_->stop(), bankPreview_->stop();
+        if (!on) soundPreview_->stop(), bankPreview_->stop(), spritePreview_->pause();
     });
     resize(1280, 800);
 }
@@ -884,6 +890,16 @@ void MainWindow::startThumbnails() {
                 img = dtxThumbnail(readData(r), size, archive_->is_ps2());   // PS2 palettes: alpha as the PS2 draws it
             else if (r->type_string() == "PCX" || r->type_string() == "TGA" || r->type_string() == "BMP")
                 img = imageThumbnail(readData(r), qs(r->type_string()), size);
+            else if (r->type_string() == "SPR") {
+                // its first frame
+                QByteArray b = readData(r);
+                try {
+                    auto s = spr::read(reinterpret_cast<const uint8_t*>(b.constData()), size_t(b.size()));
+                    QString found;
+                    if (!s.frames.empty()) img = dtxThumbnail(findFrame(QString::fromLatin1(s.frames[0].c_str()), found), size);
+                } catch (const std::exception&) {
+                }
+            }
             else
                 continue;
             if (!img.isNull()) li->setIcon(QIcon(QPixmap::fromImage(img)));
@@ -969,6 +985,14 @@ QStringList MainWindow::butesSkins(const Resource* model) const {
     }
     auto it = butes_.find(qs(model->path('\\')).toLower());
     return it == butes_.end() ? QStringList() : it->second;
+}
+
+QByteArray MainWindow::findFrame(const QString& path, QString& found) const {
+    if (!archive_) return {};
+    Resource* r = archive_->root().find_path(ss(path));
+    if (!r) return {};
+    found = qs(r->path());
+    return readData(r);
 }
 
 QByteArray MainWindow::findSkin(const Resource* model, int index, int count, QString& path) const {
@@ -1069,6 +1093,7 @@ void MainWindow::clearPreview() {
     modelPreview_->clear();
     soundPreview_->clear();
     bankPreview_->clear();
+    spritePreview_->clear();
     textPreview_->clear();
 }
 
@@ -1091,6 +1116,12 @@ void MainWindow::preview(Resource* r) {
         if (modelPreview_->loadAbc(readData(r), qs(r->file_name()),
                                    [this, r](int i, int n, QString& path) { return findSkin(r, i, n, path); }, &err)) {
             previewStack_->setCurrentWidget(modelPreview_);
+            return;
+        }
+    } else if (t == "SPR") {
+        if (spritePreview_->loadSprite(readData(r), qs(r->file_name()),
+                                       [this](const QString& p, QString& found) { return findFrame(p, found); }, &err)) {
+            previewStack_->setCurrentWidget(spritePreview_);
             return;
         }
     } else if (t == "WAV") {
@@ -1207,6 +1238,22 @@ void MainWindow::openResource(Resource* r) {
             return;
         }
         v->resize(900, 700);
+        v->show();
+        return;
+    }
+    if (t == "SPR") {
+        auto* v = new SpriteView;
+        v->setAttribute(Qt::WA_DeleteOnClose);
+        connect(v, &SpriteView::frameActivated, this, &MainWindow::showResource);
+        v->setWindowTitle(qs(r->file_name()) + " - LithRez Studio");
+        QString err;
+        if (!v->loadSprite(readData(r), qs(r->file_name()), [this](const QString& p, QString& found) { return findFrame(p, found); },
+                           &err)) {
+            QMessageBox::warning(this, tr("Sprite"), err);
+            delete v;
+            return;
+        }
+        v->resize(700, 700);
         v->show();
         return;
     }

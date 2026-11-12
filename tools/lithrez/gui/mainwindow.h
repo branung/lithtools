@@ -1,7 +1,7 @@
 #pragma once
 // LithRez Studio's main window: an Explorer-like view of a .rez file (WinRez
 // LT's layout: folder tree on the left, contents on the right, location bar
-// with history), with a preview pane for textures, models, sounds and text.
+// with history), with a preview pane for textures, sprites, models, sounds and text.
 
 #include <QMainWindow>
 #include <QPointer>
@@ -30,6 +30,7 @@ class TextureView;
 class ModelView;
 class SoundView;
 class BankView;
+class SpriteView;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -89,6 +90,9 @@ private:
     // The skins ATTRIBUTES/MODELBUTES.TXT gives a model (NOLF2, Contract
     // J.A.C.K., Tron 2.0), by slot; empty if it doesn't list it.
     QStringList butesSkins(const lithtech::rez::Resource* model) const;
+    // A sprite frame's .dtx by its path in the archive, and where it was
+    // found; empty if it isn't there.
+    QByteArray findFrame(const QString& path, QString& found) const;
     QString tempExtract(const lithtech::rez::Resource* r) const;
 
     // actions
@@ -175,6 +179,7 @@ private:
     ModelView* modelPreview_ = nullptr;
     SoundView* soundPreview_ = nullptr;
     BankView* bankPreview_ = nullptr;
+    SpriteView* spritePreview_ = nullptr;
     QPlainTextEdit* textPreview_ = nullptr;
     QLabel* infoPreview_ = nullptr;
     QToolBar* toolbar_ = nullptr;
