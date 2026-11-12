@@ -10,13 +10,14 @@ they build with clang, gcc or MSVC on Linux, macOS and Windows.
 - **LithRez Studio** (`lithrez-studio`, Qt 6): a successor to WinRez LT Studio. It
   has an Explorer-style rez editor, a DTX texture viewer with thumbnails
   (PCX, TGA and BMP images preview and thumbnail too), animated sprites,
-  lip-sync curves played with their voice lines, a
+  lip-sync curves played with their voice lines, texture effects run as
+  the engine runs them, a
   model preview for `.abc` (NOLF, AvP2) and `.ltb` (NOLF2, Contract
   J.A.C.K., Tron 2.0, and NOLF on the PS2) models, a sound player, and a string table editor for
   `CRes.dll`.
 - **`core/`**: the shared library (`lithtech::rez`, `lithtech::dtx`,
   `lithtech::pcx`, `lithtech::tga`, `lithtech::bmp`, `lithtech::abc`, `lithtech::ltb`, `lithtech::ps2ltb`, `lithtech::sound`,
-  `lithtech::pe`, `lithtech::spr`, `lithtech::lip`).
+  `lithtech::pe`, `lithtech::spr`, `lithtech::lip`, `lithtech::texscript`).
 
 `docs/REZ.md` describes the format and how these tools were checked against
 the originals. Both tools also read the PS2 port's archive (`LITH_PS2.REZ`,
@@ -64,6 +65,11 @@ These read the game archives (never committed), so they aren't part of
   (docs/LIP.md; all 3,671 of NOLF2, Contract J.A.C.K. and Tron 2.0 read).
   `lip_test` (in ctest) checks files made in the test and the rotation
   maths against LipCompiler's.
+- `texfx_verify [--dump] <rez>...`: every texture script and effect
+  group of a game's archives, the scripts checked (and with `--dump`
+  decompiled), the groups' scripts looked up (docs/TEXFX.md; all of
+  NOLF2's, Contract J.A.C.K.'s and Tron 2.0's read). `texscript_test`
+  (in ctest) checks scripts and groups made in the test.
 - `dtx_decode_all`, `abc_verify`, `ltb_verify`, `ps2ltb_verify`: textures
   and models (`ps2ltb_verify --dump` against plugins/blender's
   `tests/ps2ltb_dump.py` compares the C++ and Python PS2 readers).
@@ -198,7 +204,9 @@ lithrez roundtrip "NOLF (USA).iso" LITH_PS2.REZ   the archive alone, rebuilt fro
   play/pause, frame stepping, the header and the frame list; a frame the
   archive doesn't hold shows as missing), lip-sync (`.lip`, `docs/LIP.md`:
   the face nodes' curves over time, played with the voice line of the same
-  name), models (`.abc`, `.ltb` and the PS2's `.ltb`)
+  name), texture effects (`.tfs` scripts decompiled, disassembled and
+  run, showing the texture matrix they make; `.tfg` groups' stages with
+  their scripts linked and their values; `docs/TEXFX.md`), models (`.abc`, `.ltb` and the PS2's `.ltb`)
   with their skins and animations, sounds, text (PS2 `.but` attribute files
   decoded), and hex for everything else. For NOLF2, Contract
   J.A.C.K. and Tron 2.0, skins come from the archive's own
