@@ -55,6 +55,7 @@ int main(int argc, char** argv) {
         w->addPaths(args.mid(i + 1));
         return app.exec();
     }
+    QStringList rezFiles;
     for (const QString& a : args) {
         QString ext = QFileInfo(a).suffix().toLower();
         if (ext == "dtx") {
@@ -73,19 +74,24 @@ int main(int argc, char** argv) {
             delete w;
             return app.exec();
         }
-        if (lithtech::rez::Archive::probe(a.toUtf8().toStdString())) w->openRez(a);
+        if (lithtech::rez::Archive::probe(a.toUtf8().toStdString())) rezFiles << a;
     }
+    // The window first, then the file, so its progress bar shows over the
+    // window rather than before there is one.
     w->show();
-    // For tests and documentation: LITHREZSTUDIO_SHOT=<png> [LITHREZSTUDIO_GOTO=<path>]
-    // [LITHREZSTUDIO_VIEW=large|small|list|details] grabs the window and quits.
-    if (qEnvironmentVariableIsSet("LITHREZSTUDIO_SHOT")) {
-        QTimer::singleShot(400, w, [w] {
-            w->testNavigate(qEnvironmentVariable("LITHREZSTUDIO_GOTO"), qEnvironmentVariable("LITHREZSTUDIO_VIEW"));
-        });
-        QTimer::singleShot(2500, w, [w] {
-            w->grab().save(qEnvironmentVariable("LITHREZSTUDIO_SHOT"));
-            QApplication::quit();
-        });
-    }
+    QTimer::singleShot(0, w, [w, rezFiles] {
+        for (const QString& a : rezFiles) w->openRez(a);
+        // For tests and documentation: LITHREZSTUDIO_SHOT=<png> [LITHREZSTUDIO_GOTO=<path>]
+        // [LITHREZSTUDIO_VIEW=large|small|list|details] grabs the window and quits.
+        if (qEnvironmentVariableIsSet("LITHREZSTUDIO_SHOT")) {
+            QTimer::singleShot(400, w, [w] {
+                w->testNavigate(qEnvironmentVariable("LITHREZSTUDIO_GOTO"), qEnvironmentVariable("LITHREZSTUDIO_VIEW"));
+            });
+            QTimer::singleShot(2500, w, [w] {
+                w->grab().save(qEnvironmentVariable("LITHREZSTUDIO_SHOT"));
+                QApplication::quit();
+            });
+        }
+    });
     return app.exec();
 }
