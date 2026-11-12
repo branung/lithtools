@@ -407,9 +407,16 @@ int ps2_header(const ps2rez::Archive& p, bool json) {
     return 0;
 }
 
+// header and dump read what they can of a damaged file
+static rez::OpenOptions lenient() {
+    rez::OpenOptions o;
+    o.lenient = true;
+    return o;
+}
+
 int cmd_header(const Args& a) {
     if (a.pos.empty()) return 2;
-    auto ar = Archive::open(a.pos[0], {true});
+    auto ar = Archive::open(a.pos[0], lenient());
     if (ar->is_ps2()) return ps2_header(*ar->ps2, a.flags.count("json") > 0);
     auto& h = ar->header;
     if (a.flags.count("json")) {
@@ -454,7 +461,7 @@ void dump_dir(const Directory& d, int depth) {
 
 int cmd_dump(const Args& a) {
     if (a.pos.empty()) return 2;
-    auto ar = Archive::open(a.pos[0], {true});
+    auto ar = Archive::open(a.pos[0], lenient());
     cmd_header(a);
     std::printf("\n");
     dump_dir(ar->root(), 0);
