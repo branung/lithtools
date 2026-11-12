@@ -13,6 +13,7 @@ qt_add_executable(lithrez-studio WIN32 MACOSX_BUNDLE
   spriteview.h spriteview.cpp
   lipsyncview.h lipsyncview.cpp
   texfxview.h texfxview.cpp
+  renderstyleview.h renderstyleview.cpp
   util.h util.cpp
   resources.qrc
 )

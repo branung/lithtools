@@ -2,6 +2,7 @@
 
 #include "lipsyncview.h"
 #include "modelview.h"
+#include "renderstyleview.h"
 #include "soundview.h"
 #include "spriteview.h"
 #include "bankview.h"
@@ -12,6 +13,7 @@
 #include "wizard.h"
 #include <lithtech/butes.hpp>
 #include <lithtech/ps2rez.hpp>
+#include <lithtech/renderstyle.hpp>
 #include <lithtech/spr.hpp>
 
 #include <QAction>
@@ -504,6 +506,7 @@ void MainWindow::buildViews() {
     spritePreview_ = new SpriteView(previewStack_);
     lipPreview_ = new LipSyncView(previewStack_);
     texFxPreview_ = new TexFxView(previewStack_);
+    rsPreview_ = new RenderStyleView(previewStack_);
     connect(texFxPreview_, &TexFxView::scriptActivated, this, &MainWindow::showResource);
     connect(spritePreview_, &SpriteView::frameActivated, this, &MainWindow::showResource);
     textPreview_ = new QPlainTextEdit(previewStack_);
@@ -518,6 +521,7 @@ void MainWindow::buildViews() {
     previewStack_->addWidget(spritePreview_);
     previewStack_->addWidget(lipPreview_);
     previewStack_->addWidget(texFxPreview_);
+    previewStack_->addWidget(rsPreview_);
     previewStack_->addWidget(textPreview_);
     previewDock_->setWidget(previewStack_);
     addDockWidget(Qt::RightDockWidgetArea, previewDock_);
@@ -1115,6 +1119,7 @@ void MainWindow::clearPreview() {
     spritePreview_->clear();
     lipPreview_->clear();
     texFxPreview_->clear();
+    rsPreview_->clear();
     textPreview_->clear();
 }
 
@@ -1131,6 +1136,15 @@ void MainWindow::preview(Resource* r) {
     } else if (t == "PCX" || t == "TGA" || t == "BMP") {
         if (texPreview_->loadImage(readData(r), qs(r->file_name()), &err)) {
             previewStack_->setCurrentWidget(texPreview_);
+            return;
+        }
+    } else if (t == "LTB" && [&] {
+                   // by its LTB file type: 5 is a render style
+                   QByteArray b = readData(r);
+                   return renderstyle::looks_like(reinterpret_cast<const uint8_t*>(b.constData()), size_t(b.size()));
+               }()) {
+        if (rsPreview_->loadRenderStyle(readData(r), qs(r->file_name()), &err)) {
+            previewStack_->setCurrentWidget(rsPreview_);
             return;
         }
     } else if (t == "ABC" || t == "LTB") {
@@ -1262,6 +1276,23 @@ void MainWindow::openResource(Resource* r) {
         w->openData(readData(r), qs(r->file_name()));
         w->show();
         return;
+    }
+    if (t == "LTB") {
+        QByteArray b = readData(r);
+        if (renderstyle::looks_like(reinterpret_cast<const uint8_t*>(b.constData()), size_t(b.size()))) {
+            auto* v = new RenderStyleView;
+            v->setAttribute(Qt::WA_DeleteOnClose);
+            v->setWindowTitle(qs(r->file_name()) + " - LithRez Studio");
+            QString err;
+            if (!v->loadRenderStyle(b, qs(r->file_name()), &err)) {
+                QMessageBox::warning(this, tr("Render style"), err);
+                delete v;
+                return;
+            }
+            v->resize(640, 760);
+            v->show();
+            return;
+        }
     }
     if (t == "ABC" || t == "LTB") {
         auto* v = new ModelView;
