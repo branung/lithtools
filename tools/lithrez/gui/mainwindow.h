@@ -2,7 +2,7 @@
 // LithRez Studio's main window: an Explorer-like view of a .rez file (WinRez
 // LT's layout: folder tree on the left, contents on the right, location bar
 // with history), with a preview pane for textures, sprites, models, sounds,
-// lip-sync, texture effects, render styles and text.
+// lip-sync, texture effects, render styles, fonts, shaders and text.
 
 #include <QMainWindow>
 #include <QPointer>
@@ -35,6 +35,7 @@ class SpriteView;
 class LipSyncView;
 class TexFxView;
 class RenderStyleView;
+class FontView;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -190,6 +191,7 @@ private:
     LipSyncView* lipPreview_ = nullptr;
     TexFxView* texFxPreview_ = nullptr;
     RenderStyleView* rsPreview_ = nullptr;
+    FontView* fontPreview_ = nullptr;
     QPlainTextEdit* textPreview_ = nullptr;
     QLabel* infoPreview_ = nullptr;
     QToolBar* toolbar_ = nullptr;

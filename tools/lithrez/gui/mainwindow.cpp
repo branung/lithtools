@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 
+#include "fontview.h"
 #include "lipsyncview.h"
 #include "modelview.h"
 #include "renderstyleview.h"
@@ -14,6 +15,7 @@
 #include <lithtech/butes.hpp>
 #include <lithtech/ps2rez.hpp>
 #include <lithtech/renderstyle.hpp>
+#include <lithtech/shader.hpp>
 #include <lithtech/spr.hpp>
 
 #include <QAction>
@@ -116,14 +118,44 @@ QString typeLabel(const QString& ext) {
         {"PCX", "Image"}, {"TGA", "Image"}, {"BMP", "Image"}, {"MP3", "Sound"}, {"FXF", "Effects"},
         {"FCF", "Effects"}, {"LTA", "LithTech text"}, {"BUT", "Attributes"}, {"CFG", "Config"},
         {"SGT", "Music segment"}, {"STY", "Music style"}, {"DLS", "Instruments"}, {"LIP", "Lip sync"},
-        {"LPS", "Sound bank"}, {"TFS", "Texture script"}, {"TFG", "Texture effect group"}};
+        {"LPS", "Sound bank"}, {"TFS", "Texture script"}, {"TFG", "Texture effect group"},
+        {"TTF", "Font"}, {"VSH", "Vertex shader"}, {"PSH", "Pixel shader"}, {"PS", "Pixel shader"}, {"ASH", "Vertex shader"}};
     auto it = names.find(ext.toUpper());
     return it != names.end() ? it->second + " (" + ext.toUpper() + ")" : (ext.isEmpty() ? "File" : ext.toUpper() + " file");
 }
 
+// Always shown as text. (.fxf and .fcf effects files are text in NOLF2 and
+// Contract J.A.C.K. but binary in Tron 2.0: they show as text when they
+// are, by isMaybeText.)
 bool isTextType(const QString& t) {
-    static const QStringList text = {"TXT", "CFG", "BUT", "INI", "LTA", "FXF", "FCF", "SCC", "DEP", "CSV", "H", "LOG"};
+    static const QStringList text = {"TXT", "CFG", "BUT", "INI", "LTA", "SCC", "DEP", "CSV", "H", "LOG", "VSH", "PSH"};
     return text.contains(t.toUpper());
+}
+
+// Shown as text if they look like it, as hex otherwise, whatever their size.
+bool isMaybeText(const QString& t) {
+    static const QStringList text = {"FXF", "FCF"};
+    return text.contains(t.toUpper());
+}
+
+QString hexDump(const QByteArray& b, int limit = 4096) {
+    QString hex;
+    for (int i = 0; i < std::min<int>(b.size(), limit); i += 16) {
+        QString line = QStringLiteral("%1  ").arg(i, 8, 16, QChar('0'));
+        QString asc;
+        for (int j = 0; j < 16; ++j) {
+            if (i + j < b.size()) {
+                uchar c = uchar(b[i + j]);
+                line += QStringLiteral("%1 ").arg(c, 2, 16, QChar('0'));
+                asc += (c >= 32 && c < 127) ? QChar(c) : QChar('.');
+            } else {
+                line += "   ";
+            }
+        }
+        hex += line + " " + asc + "\n";
+    }
+    if (b.size() > limit) hex += QStringLiteral("... (%1 bytes in all)\n").arg(b.size());
+    return hex;
 }
 
 }  // namespace
@@ -507,6 +539,7 @@ void MainWindow::buildViews() {
     lipPreview_ = new LipSyncView(previewStack_);
     texFxPreview_ = new TexFxView(previewStack_);
     rsPreview_ = new RenderStyleView(previewStack_);
+    fontPreview_ = new FontView(previewStack_);
     connect(texFxPreview_, &TexFxView::scriptActivated, this, &MainWindow::showResource);
     connect(spritePreview_, &SpriteView::frameActivated, this, &MainWindow::showResource);
     textPreview_ = new QPlainTextEdit(previewStack_);
@@ -522,6 +555,7 @@ void MainWindow::buildViews() {
     previewStack_->addWidget(lipPreview_);
     previewStack_->addWidget(texFxPreview_);
     previewStack_->addWidget(rsPreview_);
+    previewStack_->addWidget(fontPreview_);
     previewStack_->addWidget(textPreview_);
     previewDock_->setWidget(previewStack_);
     addDockWidget(Qt::RightDockWidgetArea, previewDock_);
@@ -1120,6 +1154,7 @@ void MainWindow::clearPreview() {
     lipPreview_->clear();
     texFxPreview_->clear();
     rsPreview_->clear();
+    fontPreview_->clear();
     textPreview_->clear();
 }
 
@@ -1194,7 +1229,37 @@ void MainWindow::preview(Resource* r) {
                    return true;
                }()) {
         return;
-    } else if (isTextType(t) || r->size < 64 * 1024) {
+    } else if (t == "TTF") {
+        if (fontPreview_->loadFont(readData(r), qs(r->file_name()), &err)) {
+            previewStack_->setCurrentWidget(fontPreview_);
+            return;
+        }
+    } else if ((t == "PS" || t == "ASH") && [&] {
+                   // compiled shaders: what they are, then their bytes
+                   QByteArray b = readData(r);
+                   const auto* p = reinterpret_cast<const uint8_t*>(b.constData());
+                   QString head;
+                   try {
+                       if (t == "PS") {
+                           auto s = shader::read_pixel_shader(p, size_t(b.size()));
+                           head = tr("LTPS pixel shader, version %1: %2\n").arg(s.version).arg(qs(shader::describe(s.code)));
+                       } else {
+                           auto s = shader::read_assembled_vertex_shader(p, size_t(b.size()));
+                           head = tr("Assembled vertex shader (RenderStylesEditor), version %1%2\n")
+                                      .arg(s.version)
+                                      .arg(s.expand_for_skinning ? tr(", expanded for skinning") : QString());
+                           for (std::size_t i = 0; i < s.code.size(); ++i)
+                               head += tr("  shader %1: %2\n").arg(i).arg(qs(shader::describe(s.code[i])));
+                       }
+                   } catch (const std::exception& e) {
+                       head = tr("Can't read it as a shader: %1\n").arg(QString::fromUtf8(e.what()));
+                   }
+                   textPreview_->setPlainText(head + QLatin1Char('\n') + hexDump(b));
+                   previewStack_->setCurrentWidget(textPreview_);
+                   return true;
+               }()) {
+        return;
+    } else if (isTextType(t) || isMaybeText(t) || r->size < 64 * 1024) {
         QByteArray b = readData(r).left(256 * 1024);
         bool text = !b.isEmpty() && std::count_if(b.begin(), b.end(), [](char c) {
                         unsigned char u = uchar(c);
@@ -1205,23 +1270,8 @@ void MainWindow::preview(Resource* r) {
             previewStack_->setCurrentWidget(textPreview_);
             return;
         }
-        // hex
-        QString hex;
-        for (int i = 0; i < std::min<int>(b.size(), 4096); i += 16) {
-            QString line = QStringLiteral("%1  ").arg(i, 8, 16, QChar('0'));
-            QString asc;
-            for (int j = 0; j < 16; ++j) {
-                if (i + j < b.size()) {
-                    uchar c = uchar(b[i + j]);
-                    line += QStringLiteral("%1 ").arg(c, 2, 16, QChar('0'));
-                    asc += (c >= 32 && c < 127) ? QChar(c) : QChar('.');
-                } else {
-                    line += "   ";
-                }
-            }
-            hex += line + " " + asc + "\n";
-        }
-        textPreview_->setPlainText(hex);
+        textPreview_->setPlainText((isMaybeText(t) ? tr("A binary %1 file (not text): its first bytes.\n\n").arg(t) : QString()) +
+                                   hexDump(b));
         previewStack_->setCurrentWidget(textPreview_);
         return;
     }
