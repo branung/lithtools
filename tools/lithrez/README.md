@@ -79,7 +79,8 @@ These read the game archives (never committed), so they aren't part of
   in the test.
 - `abc6_verify <dir> [--dump <file>]`: every `.abc` v6 under a folder (the
   Shogo and Blood 2 demos' `SHOGODEM.REZ` and `B2Demo.rez`: 401 models, all
-  read) through `lithtech::abc6`, checking that each vertex skins back to
+  read; the games, Blood 2 with The Nightmare Levels and KISS Psycho
+  Circus: 1,645, all read) through `lithtech::abc6`, checking that each vertex skins back to
   its stored position and the first key is the bind pose; `--dump` writes
   every vertex posed at every keyframe and halfway between, which matched an
   independent LithTech 1 reference on all 20,677 poses (worst 0.00012).

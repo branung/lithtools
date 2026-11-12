@@ -243,7 +243,10 @@ is the `.abc` one. What v6 adds:
 **Export.** Each value the import kept is written back while what Blender
 holds still matches it, so an unchanged model exports byte for byte:
 `tests/blender_abc6.py` checks every v6 model of Shogo's and Blood 2's
-demos and the LithTech 2.42 SDK's samples, 414. An edit changes what it
+demos and the LithTech 2.42 SDK's samples, 414. Outside Blender,
+`tests/roundtrip_abc6.py` reads and writes back the shipped games' v6
+models: all 1,645 of Blood 2's (with The Nightmare Levels) and KISS's come
+back byte-identical. An edit changes what it
 touches: `tests/blender_abc6_edit.py` moves an animated vertex in one frame
 (three bytes change), a bone at one key (that key changes, written unit
 length), a vertex, a face, and makes vertex animation on a model that had

@@ -26,7 +26,8 @@ meant to grow to every LithTech-era game.
   `roundtrip_dtx.py` read and write back every shipped model and texture
   (`extract_abc.py` and `extract_ltb.py` fill the asset cache first; the PS2
   files come from the discs' `LITH_PS2.REZ`, out/assets/ps2), and
-  `roundtrip_ps2_dtx.py` every PS2 texture. `blender_roundtrip.py`,
+  `roundtrip_ps2_dtx.py` every PS2 texture. `roundtrip_abc6.py` does the
+  same for the LithTech 1 `.abc` (v6) under the folders it's given. `blender_roundtrip.py`,
   `blender_roundtrip_ltb.py`, `blender_roundtrip_ps2ltb.py` and
   `blender_roundtrip_ps2_dtx.py` (run inside Blender) import and export them
   through the extension, and `blender_rebuild_ps2ltb.py` checks the PS2
