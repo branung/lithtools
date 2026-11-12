@@ -25,10 +25,10 @@ repository: [`tools/lithrez/`](../tools/lithrez/README.md) and
   tools are re-implemented.
 
 The period toolchains (Visual C++ 5.0 and 6.0, Intel C/C++ 4.0, the SDKs of
-the time) come from a separate repository, `talon/toolchains`, and run in
+the time) come from a separate repository, the submodule `ext/toolchains`, and run in
 Docker under Wine. The shipped tools that the reconstruction is compared
 against are extracted at build time from the original game discs, fetched
-from archive.org (`talon/rez`). No shipped binary is in this repository.
+from archive.org (`ext/rez`). No shipped binary is in this repository.
 
 ## Terms
 

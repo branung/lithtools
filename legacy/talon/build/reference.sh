@@ -27,7 +27,8 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 TALON="$PWD"
-ISOS="$TALON/rez/isos"
+export TOOLS_PROJECT="$TALON"
+ISOS="$TALON/../../ext/rez/isos"
 PH_NAME="Aliens Versus Predator 2 - Primal Hunt (Europe)"
 DISC2_NAME="Operative, The - No One Lives Forever (USA, Europe) (Disc 2) (Game of the Year Edition)"
 if [ -z "${AVP2_PH_ISO:-}${AVP2_PH_BIN:-}" ]; then
@@ -45,7 +46,7 @@ declare -A TOOLS_SHA256=(
     [avp2tools_update]=7c3fd1f389ed9833331ca6b2200f40f409ff64200c20ccf800c04a17707775ab
     [avp2tools_update2]=485a8ea0b8f5055ccbd40c1bdb2d2a100d54d0476d2c692955407b3398ba5662
 )
-REZ="$TALON/rez/tools"
+REZ="$TALON/../../ext/rez/tools"
 OUT="$TALON/out/reference"
 TMP="$TALON/out/reference.tmp"
 
@@ -126,7 +127,7 @@ for t in targets.TARGETS:
     if t.get('kind') != 'image':
         continue
     csv = os.path.join(targets.REFERENCE, t['stem'] + '-functions.csv')
-    subprocess.run([sys.executable, '-I', 'tools/enumfuncs.py', t['shipped'], '--csv', csv],
+    subprocess.run([sys.executable, '-I', '../../ext/tools/enumfuncs.py', t['shipped'], '--csv', csv],
                    check=True, stdout=subprocess.DEVNULL)
     print('wrote', csv)
 PY

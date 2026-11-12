@@ -10,22 +10,27 @@
 #   make shell      a shell in the build container
 #   make help       everything else
 #
-# Needs docker and the three submodules (`git submodule update --init`):
-# toolchains/ (the compilers: toolchains/README.md; this project uses
-# msvc-6.00-8966 and msvc-6.00-9044, and for NOLF's processor
-# msvc-6.00-8447 and icl-4.0), rez/ (its disc-image readers) and
-# tools/ (the reconstruction tools). Every step runs in a throwaway
-# container of the cjacksrc build image (Ubuntu 24.04 with 32-bit Wine),
-# with this directory mounted at /repo, as you.
+# Needs docker and the three submodules in the repository's ext/ (`git
+# submodule update --init`): ext/toolchains/ (the compilers:
+# ext/toolchains/README.md; this project uses msvc-6.00-8966 and
+# msvc-6.00-9044, and for NOLF's processor msvc-6.00-8447 and icl-4.0),
+# ext/rez/ (its disc-image readers) and ext/tools/ (the reconstruction
+# tools). Every step runs in a throwaway container of the cjacksrc build
+# image (Ubuntu 24.04 with 32-bit Wine), as you, with this directory mounted
+# at /repo and ext/ at /ext, so that ../../ext is the same place in the
+# container as out of it. TOOLS_PROJECT tells the tools that this directory,
+# not the one above ext/, is their project (ext/tools/layout.py).
 
 IMAGE ?= cjacksrc-build
 JOBS  ?= $(shell nproc)
 
-DOCKER_RUN = docker run --rm --init -u $(shell id -u):$(shell id -g) \
-	-e HOME=/tmp/home -v $(CURDIR):/repo -w /repo $(IMAGE)
+EXT := $(abspath $(CURDIR)/../../ext)
+DOCKER_ARGS = --rm --init -u $(shell id -u):$(shell id -g) -e HOME=/tmp/home \
+	-e TOOLS_PROJECT=/repo -v $(CURDIR):/repo -v $(EXT):/ext -w /repo
+DOCKER_RUN = docker run $(DOCKER_ARGS) $(IMAGE)
 
-TOOLCHAIN_FILES = toolchains/msvc-6.00-8966/BIN/cl.exe toolchains/msvc-6.00-9044/BIN/cl.exe \
-	toolchains/msvc-6.00-8447/BIN/cl.exe toolchains/icl-4.0/BIN/icl.exe
+TOOLCHAIN_FILES = $(addprefix $(EXT)/toolchains/,msvc-6.00-8966/BIN/cl.exe msvc-6.00-9044/BIN/cl.exe \
+	msvc-6.00-8447/BIN/cl.exe icl-4.0/BIN/icl.exe)
 
 .PHONY: all reference progress progress-update test shell clean help check-toolchain
 
@@ -43,8 +48,8 @@ help:
 
 check-toolchain:
 	@for f in $(TOOLCHAIN_FILES); do [ -f $$f ] || { \
-	  echo "missing $$f: build the compilers first (toolchains/README.md:"; \
-	  echo "  bash toolchains/fetch.sh msvc-6.00-8966 msvc-6.00-9044 msvc-6.00-8447 icl-4.0, in the build container)"; exit 1; }; done
+	  echo "missing $$f: build the compilers first (ext/toolchains/README.md:"; \
+	  echo "  bash ext/toolchains/fetch.sh msvc-6.00-8966 msvc-6.00-9044 msvc-6.00-8447 icl-4.0, in the build container)"; exit 1; }; done
 
 reference:
 	$(DOCKER_RUN) bash build/reference.sh
@@ -53,7 +58,7 @@ reference:
 # directory of lithtools, whose .git is not mounted)
 EVIDENCE_ENV = EVIDENCE_REVISION=$(shell git rev-parse HEAD 2>/dev/null) \
 	EVIDENCE_MODIFIED=$(shell git status --porcelain --untracked-files=no . 2>/dev/null | wc -l) \
-	EVIDENCE_SUBMODULES="$(shell git submodule status 2>/dev/null | sed 's/^ *//' | tr '\n' ';')"
+	EVIDENCE_SUBMODULES="$(shell git -C ../.. submodule status 2>/dev/null | sed 's/^ *//' | tr '\n' ';')"
 
 progress:
 	$(DOCKER_RUN) env COMPLETE=$(COMPLETE) COVERED=$(COVERED) $(EVIDENCE_ENV) bash build/progress.sh check
@@ -65,8 +70,7 @@ test:
 	$(DOCKER_RUN) bash tests/run.sh $(TESTS)
 
 shell:
-	docker run --rm --init -it -u $(shell id -u):$(shell id -g) \
-	  -e HOME=/tmp/home -v $(CURDIR):/repo -w /repo $(IMAGE) bash
+	docker run -it $(DOCKER_ARGS) $(IMAGE) bash
 
 clean:
 	rm -rf out .build .wine

@@ -11,7 +11,7 @@
 # Settings (environment):
 #   IMAGE      build image (default: cjacksrc-build)
 #   VC71       host path of the msvc-7.10-3077 tree
-#              (default: ../cjacksrc/toolchains/msvc-7.10-3077)
+#              (default: the repository's ext/toolchains/msvc-7.10-3077)
 #   B69        Build 69 unpacked by file group (default: extracted/jupiter-b69/x)
 #   DXSDK      DirectX SDK, February 2006: Include/ and Lib/x86/
 #              (default: extracted/dxsdk-feb2006)
@@ -24,7 +24,7 @@
 set -euo pipefail
 REPO="$(cd "$(dirname "$0")/../../.." && pwd)"
 IMAGE="${IMAGE:-cjacksrc-build}"
-VC71="$(realpath "${VC71:-$REPO/../cjacksrc/toolchains/msvc-7.10-3077}")"
+VC71="$(realpath "${VC71:-$REPO/ext/toolchains/msvc-7.10-3077}")"
 B69="$(realpath "${B69:-$REPO/extracted/jupiter-b69/x}")"
 DXSDK="$(realpath "${DXSDK:-$REPO/extracted/dxsdk-feb2006}")"
 

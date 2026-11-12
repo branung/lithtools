@@ -23,8 +23,11 @@ research.
 | [`INVENTORY.md`](INVENTORY.md) | every public LithTech tools release for these games, and what built each binary (`inventory.tsv` has one row per binary) |
 | [`FORMATS.md`](FORMATS.md) | which format versions each game ships and each tool build reads and writes |
 
-`downloads/`, `extracted/` and `out/` are local working directories and are
-not in the repository.
+`ext/` holds the submodules the legacy tools' build uses: `tools/` (the
+reconstruction and scoring tools shared with the game projects),
+`toolchains/` (the period compilers) and `rez/` (the game discs' readers and
+installers). `downloads/`, `extracted/` and `out/` are local working
+directories and are not in the repository.
 
 ## Building
 

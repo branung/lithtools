@@ -8,9 +8,9 @@
 #   make test       behaviour: the shipped tools and ours run on the same
 #                   inputs must write the same files (legacy/talon/tests/README.md)
 #
-# The disc images come from archive.org through legacy/talon/rez/fetch-isos.sh
+# The disc images come from archive.org through ext/rez/fetch-isos.sh
 # (the releases avp2-ph-eu and nolf-eu-goty: about 1.1 GB, checked against
-# legacy/talon/rez/isos/SHA256SUMS). The job "prepare" fetches them once, into a
+# ext/rez/isos/SHA256SUMS). The job "prepare" fetches them once, into a
 # cache keyed on that file, and builds the docker image -- cjacksrc's, the
 # one the Makefile runs every step in, from nolffan/cjacksrc at the commit
 # pinned below -- into a layer cache; "check" restores both.
@@ -20,7 +20,7 @@ on:
   push:
     branches: [master]
   pull_request:
-    paths: ['legacy/talon/**', '.github/workflows/talon.yml']
+    paths: ['legacy/talon/**', 'ext/**', '.gitmodules', '.github/workflows/talon.yml']
   workflow_dispatch:
 
 concurrency:
@@ -45,36 +45,36 @@ jobs:
       - uses: actions/checkout@v4
 
       # .gitmodules names the submodules by SSH; all of them are public, so
-      # fetch them over HTTPS instead. Only rez/ (the disc list and
+      # fetch them over HTTPS instead. Only ext/rez/ (the disc list and
       # fetch-isos.sh) is needed here.
       - name: Submodules
         run: |
           git config --global url."https://github.com/".insteadOf "git@github.com:"
           git submodule sync
-          git submodule update --init --depth 1 legacy/talon/rez
+          git submodule update --init --depth 1 ext/rez
 
       - name: Cache key
         id: key
-        run: echo "key=redump-talon-$(echo "$RELEASES" | tr ' ' -)-$(sha256sum legacy/talon/rez/isos/SHA256SUMS | cut -c1-64)" >> "$GITHUB_OUTPUT"
+        run: echo "key=redump-talon-$(echo "$RELEASES" | tr ' ' -)-$(sha256sum ext/rez/isos/SHA256SUMS | cut -c1-64)" >> "$GITHUB_OUTPUT"
 
       - name: Look for the disc images
         id: discs
         uses: actions/cache/restore@v4
         with:
-          path: legacy/talon/rez/isos/*.zip
+          path: ext/rez/isos/*.zip
           key: ${{ steps.key.outputs.key }}
           lookup-only: true
 
       # Checked against SHA256SUMS before it is saved.
       - name: Fetch the disc images
         if: steps.discs.outputs.cache-hit != 'true'
-        run: legacy/talon/rez/fetch-isos.sh $RELEASES
+        run: ext/rez/fetch-isos.sh $RELEASES
 
       - name: Save the disc images
         if: steps.discs.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
-          path: legacy/talon/rez/isos/*.zip
+          path: ext/rez/isos/*.zip
           key: ${{ steps.key.outputs.key }}
 
       - uses: actions/checkout@v4
@@ -108,24 +108,24 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      # toolchains/ (the compilers), rez/ (the disc readers), tools/ (the
+      # ext/: toolchains/ (the compilers), rez/ (the disc readers), tools/ (the
       # reconstruction tools and the scorer).
       - name: Submodules
         run: |
           git config --global url."https://github.com/".insteadOf "git@github.com:"
           git submodule sync
-          git submodule update --init --depth 1 --jobs 3 legacy/talon/toolchains legacy/talon/rez legacy/talon/tools
+          git submodule update --init --depth 1 --jobs 3 ext/toolchains ext/rez ext/tools
 
       - name: Restore the disc images
         uses: actions/cache/restore@v4
         with:
-          path: legacy/talon/rez/isos/*.zip
+          path: ext/rez/isos/*.zip
           key: ${{ needs.prepare.outputs.discs-key }}
           fail-on-cache-miss: true
 
       # Downloads nothing (the zips are there): checks them and makes the .isos.
       - name: Verify and convert the disc images
-        run: legacy/talon/rez/fetch-isos.sh $RELEASES
+        run: ext/rez/fetch-isos.sh $RELEASES
 
       - uses: actions/checkout@v4
         with:

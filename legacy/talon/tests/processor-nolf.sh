@@ -19,7 +19,7 @@ suite_processor_nolf() {
     local dir="$WORK/processor-nolf" w name side opts case
     rm -rf "$dir"
     mkdir -p "$dir/worlds"
-    python3 -I "$TALON/tools/rezextract.py" x "$REZ" "$dir/worlds" WORLDS/ >/dev/null
+    python3 -I "$TALON/../../ext/tools/rezextract.py" x "$REZ" "$dir/worlds" WORLDS/ >/dev/null
     for side in ship ours; do
         mkdir -p "$dir/$side/bin"
     done

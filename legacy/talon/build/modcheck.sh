@@ -12,14 +12,16 @@
 # object's functions that match nothing (templates and initializers left out).
 set -u
 cd "$(dirname "$0")/.."
+export TOOLS_PROJECT="$PWD"
 tgt=$1 obj=$2 lo=$3 hi=$4
 img=$(python3 -I -c "import sys; sys.path.insert(0,'progress'); import targets; print(next(t['shipped'] for t in targets.TARGETS if t['stem']=='$tgt'))")
 dir=$(python3 -I -c "import sys,os; sys.path.insert(0,'progress'); import targets; print(os.path.dirname(next(t['built'] for t in targets.TARGETS if t['stem']=='$tgt')))")
 O=$dir/$obj.obj
-docker run --rm --init -u "$(id -u):$(id -g)" -e HOME=/tmp/home -v "$PWD:/repo" -w /repo cjacksrc-build \
+docker run --rm --init -u "$(id -u):$(id -g)" -e HOME=/tmp/home -e TOOLS_PROJECT=/repo \
+    -v "$PWD:/repo" -v "$(cd ../../ext && pwd):/ext" -w /repo cjacksrc-build \
     make -s -f build/build.mk ${PFX:+PFX=$PFX} "$O" 2>&1 | grep -E "error" | head -20
 [ -f "$O" ] || exit 1
-out=$(python3 -I tools/exematch.py "$img" "$O" 2>&1)
+out=$(python3 -I ../../ext/tools/exematch.py "$img" "$O" 2>&1)
 echo "$out" | tail -1
 matched=$(echo "$out" | grep -oE "MATCH 0x[0-9a-f]+" | awk '{print $2}' | sort -u)
 echo "-- shipped rows in range not matched:"

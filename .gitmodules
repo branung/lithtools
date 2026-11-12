@@ -1,9 +1,9 @@
-[submodule "talon/tools"]
-	path = legacy/talon/tools
+[submodule "tools"]
+	path = ext/tools
 	url = git@github.com:nolffan/tools.git
-[submodule "talon/toolchains"]
-	path = legacy/talon/toolchains
+[submodule "toolchains"]
+	path = ext/toolchains
 	url = git@github.com:nolffan/toolchains.git
-[submodule "talon/rez"]
-	path = legacy/talon/rez
+[submodule "rez"]
+	path = ext/rez
 	url = git@github.com:nolffan/rez.git

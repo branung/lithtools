@@ -24,6 +24,9 @@
 # altered cache would be scored as if it were the release.
 set -e
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
+# the tools are the repository's (ext/tools/layout.py: this is their project)
+TOOLS=../../ext/tools
+export TOOLS_PROJECT="$PWD"
 
 mode="${1:-check}"
 case "$mode" in
@@ -36,27 +39,27 @@ if ! (cd out/reference 2>/dev/null && sha256sum --quiet -c ../../progress/refere
     bash build/reference.sh
 fi
 
-python3 tools/progress.py
+python3 $TOOLS/progress.py
 echo
 rc=0
 if [ "$mode" = check ]; then
-    python3 tools/ratchet.py check ${COMPLETE:+--complete} ${COVERED:+--covered} || rc=$?
+    python3 $TOOLS/ratchet.py check ${COMPLETE:+--complete} ${COVERED:+--covered} || rc=$?
 else
-    python3 tools/ratchet.py update ${ACCEPT_LOSSES:+--accept-losses} || rc=$?
+    python3 $TOOLS/ratchet.py update ${ACCEPT_LOSSES:+--accept-losses} || rc=$?
 fi
 echo
-python3 tools/datacheck.py "$mode" || rc=1
+python3 $TOOLS/datacheck.py "$mode" || rc=1
 echo
-echo "float constants (tools/fpconst.py):"
-python3 tools/fpconst.py --targets || rc=1
+echo "float constants (fpconst.py):"
+python3 $TOOLS/fpconst.py --targets || rc=1
 # ... and every vtable slot and every call and global our identically placed
 # functions reach, against the shipped ones (progress/vtab-known.txt)
 echo
-echo "vtables and wiring (tools/vtabcheck.py):"
-python3 tools/vtabcheck.py --targets || rc=1
+echo "vtables and wiring (vtabcheck.py):"
+python3 $TOOLS/vtabcheck.py --targets || rc=1
 # ... and what all of it rested on (the toolchains' digests checked), kept
 # with the baseline when one is recorded
 echo
-python3 tools/evidence.py || rc=1
+python3 $TOOLS/evidence.py || rc=1
 [ "$mode" = update ] && cp out/progress/evidence.json progress/evidence.json
 exit $rc

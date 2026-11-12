@@ -45,8 +45,8 @@ legacy/jupiter/build/build.sh --shell         # then: legacy/jupiter/build/smoke
 ```
 
 Needs: the `cjacksrc-build` Docker image (Ubuntu 24.04 with 32-bit Wine),
-VC .NET 2003 (`msvc-7.10-3077`; by default cjacksrc's checkout of the
-toolchains, `../cjacksrc/toolchains/msvc-7.10-3077`, override with `VC71`),
+VC .NET 2003 (`msvc-7.10-3077`; by default the repository's toolchains
+submodule, `ext/toolchains/msvc-7.10-3077`, override with `VC71`),
 the Build 69 package unpacked by file group (`extracted/jupiter-b69/x`,
 `B69`) and its DirectX SDK unpacked to `extracted/dxsdk-feb2006`
 (`Include/`, `Lib/x86/`; `DXSDK`). `../../INVENTORY.md` says where each comes

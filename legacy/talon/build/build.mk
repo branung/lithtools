@@ -21,7 +21,7 @@
 # Targets: all (the default: every workspace's wanted projects, below); a
 # project by its workspace name; any single output.
 #
-# The compilers see src/ as drive S: and toolchains/ as T:.
+# The compilers see src/ as drive S: and ext/toolchains/ as T:.
 #
 # From the environment (empty for the scored build):
 #   TALON_CFLAGS   appended to every compile (/Z7 ...)
@@ -29,6 +29,10 @@
 #   TALON_RCFLAGS  put first on every resource compile
 
 ROOT := $(CURDIR)
+# the submodules (../../ext: /ext in the container, the Makefile); RTOOLS
+# the reconstruction tools (TOOLS is the tools this builds)
+EXT := $(abspath $(ROOT)/../../ext)
+RTOOLS := $(EXT)/tools
 SHELL := /bin/bash
 .SUFFIXES:
 .DELETE_ON_ERROR:
@@ -91,7 +95,7 @@ PFX := $(ROOT)/.wine/drives
 # ModelEdit 12.00.9044 (SP5 with the Processor Pack: CL_<project>); all link
 # with link 6.00. msvc-6.00-8966 is SP5, with its CRT and MFC 4.2 (whose
 # static library nafxcw.lib is the build 8569 the images' MFC objects show).
-TC      := $(ROOT)/toolchains
+TC      := $(EXT)/toolchains
 VC6     := $(TC)/msvc-6.00-8966
 VC6PP   := $(TC)/msvc-6.00-9044
 CL      := $(VC6)/BIN/cl.exe
@@ -101,7 +105,7 @@ LIBEXE  := $(VC6)/BIN/lib.exe
 # RCDLL.DLL): the processor-pack toolchains have none, so SP6's
 RC      := $(TC)/msvc-6.00-9782/Common/MSDev98/Bin/RC.EXE
 
-# Windows paths: src/ is S:, toolchains/ T:, the rest Z:
+# Windows paths: src/ is S:, ext/toolchains/ T:, the rest Z:
 wz = z:$(subst /,\,$(1))
 ws = $(if $(filter $(ROOT)/src $(ROOT)/src/%,$(1)),s:$(subst /,\,$(patsubst $(ROOT)/src%,%,$(1))),$(if $(filter $(TC) $(TC)/%,$(1)),t:$(subst /,\,$(patsubst $(TC)%,%,$(1))),$(call wz,$(1))))
 
@@ -243,7 +247,7 @@ PROJECTS :=
 WANTED :=
 define workspace
 ifneq ($(wildcard $(ROOT)/$(1)),)
-DSP_OK := $$(shell python3 tools/dsp2mk.py --have "$$(PROJECTS)" $(1) Release $(DEPDIR)/$(basename $(notdir $(1))).mk $(subst $(comma), ,$(2)) 2>$(DEPDIR)/dsp2mk-$(basename $(notdir $(1))).log && echo ok)
+DSP_OK := $$(shell python3 $(RTOOLS)/dsp2mk.py --have "$$(PROJECTS)" $(1) Release $(DEPDIR)/$(basename $(notdir $(1))).mk $(subst $(comma), ,$(2)) 2>$(DEPDIR)/dsp2mk-$(basename $(notdir $(1))).log && echo ok)
 ifneq ($$(DSP_OK),ok)
 $$(error tools/dsp2mk.py failed on $(1): $$(file <$(DEPDIR)/dsp2mk-$(basename $(notdir $(1))).log))
 endif
@@ -292,7 +296,7 @@ FORCE:
 
 # Header dependencies (tools/mkdeps.py), brought up to date on every run
 $(file >$(DEPDIR)/deps.spec,$(subst |, ,$(subst $(space),$(nl),$(DEPSPEC))))
-DEPS_OK := $(shell python3 tools/mkdeps.py $(DEPDIR)/deps.spec $(DEPDIR)/deps.mk && echo ok)
+DEPS_OK := $(shell python3 $(RTOOLS)/mkdeps.py $(DEPDIR)/deps.spec $(DEPDIR)/deps.mk && echo ok)
 ifneq ($(DEPS_OK),ok)
 $(error tools/mkdeps.py failed)
 endif

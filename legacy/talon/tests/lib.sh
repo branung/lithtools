@@ -7,6 +7,7 @@
 # host's Wine behaving like another's.
 
 TALON=${TALON:-$PWD}
+export TOOLS_PROJECT="$TALON"
 REFERENCE="$TALON/out/reference"
 WORK="$TALON/out/tests"
 # outside out/tests: its dosdevices/z: is the whole filesystem, which must

@@ -16,7 +16,7 @@ by function, with the compilers that built them:
 The same project's other half, `../jupiter/`, builds the next engine
 generation's tools (NOLF2, Contract J.A.C.K., Tron 2.0) from Build 69's
 source. The reconstruction method and tools are nolfsrc's, nolf2src's and
-cjacksrc's (`tools/`, `tools/guides/`); `docs/PLAN.md` says what is done
+cjacksrc's (the repository's `ext/tools/`, `ext/tools/guides/`); `docs/PLAN.md` says what is done
 in what order, `../../INVENTORY.md` where every shipped binary comes from, and
 `RETAIL_BUGS.md` lists the bugs found in the retail tools, for fixing when
 they are re-implemented.
@@ -85,7 +85,7 @@ the baseline (2026-11-02), and why.
 ## Building
 
 ```sh
-git submodule update --init      # tools/, toolchains/, rez/
+git submodule update --init      # ../../ext/: tools/, toolchains/, rez/
 make reference                   # the shipped binaries -> out/reference/ (build/reference.sh)
 make                             # build everything reconstructed so far
 make progress                    # score it and check it (COMPLETE=1, COVERED=1); fails on a regression
@@ -94,10 +94,10 @@ make test                        # behaviour: shipped tools vs ours on the same 
 ```
 
 Needs docker, the `cjacksrc-build` image, and the compilers
-`toolchains/msvc-6.00-8966` and `msvc-6.00-9044` (`toolchains/README.md`).
+`ext/toolchains/msvc-6.00-8966` and `msvc-6.00-9044` (`ext/toolchains/README.md`).
 `make reference` needs the *AvP2: Primal Hunt* (Europe) disc image
 (redump.org 35760) and the NOLF Game of the Year disc 2:
-`rez/fetch-isos.sh avp2-ph-eu nolf-eu-goty` fetches both from archive.org,
+`../../ext/rez/fetch-isos.sh avp2-ph-eu nolf-eu-goty` fetches both from archive.org,
 and `build/reference.sh` says where else it looks and checks them. CI
 (`../../.github/workflows/talon.yml`) runs all of the above.
 
