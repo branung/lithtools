@@ -104,3 +104,7 @@ target_link_libraries(renderstyle_test PRIVATE lithtech)
 add_test(NAME renderstyle_test COMMAND renderstyle_test)
 add_executable(renderstyle_verify renderstyle_verify.cpp)
 target_link_libraries(renderstyle_verify PRIVATE lithtech)
+# Compiled shaders (.ps, .ash): files made here.
+add_executable(shader_test shader_test.cpp)
+target_link_libraries(shader_test PRIVATE lithtech)
+add_test(NAME shader_test COMMAND shader_test)

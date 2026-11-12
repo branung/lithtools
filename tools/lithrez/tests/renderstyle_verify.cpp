@@ -1,10 +1,12 @@
 // Reads every render style (an .LTB of file type 5) in the given .rez
 // files and counts what they hold: styles per file, passes per style,
 // passes with Direct3D options and vertex shaders, trailing bytes; and
-// the other .LTB files by type. --dump prints each style.
+// the other .LTB files by type. Also reads the compiled shaders render
+// styles and effects use (.PS, .ASH). --dump prints each style.
 //   renderstyle_verify [--dump] <file.rez>...
 #include <lithtech/renderstyle.hpp>
 #include <lithtech/rez.hpp>
+#include <lithtech/shader.hpp>
 
 #include <cstdio>
 #include <cstring>
@@ -30,6 +32,22 @@ int main(int argc, char** argv) {
         }
         std::function<void(const rez::Directory&)> walk = [&](const rez::Directory& d) {
             for (auto& r : d.resources()) {
+                if (r->type_string() == "PS" || r->type_string() == "ASH") {
+                    auto data = r->read();
+                    try {
+                        std::string what;
+                        if (r->type_string() == "PS") what = shader::describe(shader::read_pixel_shader(data.data(), data.size()).code);
+                        else
+                            for (auto& c : shader::read_assembled_vertex_shader(data.data(), data.size()).code)
+                                what += (what.empty() ? "" : "; ") + shader::describe(c);
+                        counts["shader ." + r->type_string() + " read"]++;
+                        std::printf("SHADER %s %s: %s\n", argv[i], r->path('/').c_str(), what.c_str());
+                    } catch (const std::exception& e) {
+                        ++bad;
+                        std::printf("FAIL %s %s: %s\n", argv[i], r->path('/').c_str(), e.what());
+                    }
+                    continue;
+                }
                 if (r->type_string() != "LTB") continue;
                 auto data = r->read();
                 ltb_types[data.empty() ? "empty" : "type " + std::to_string(data[0])]++;
