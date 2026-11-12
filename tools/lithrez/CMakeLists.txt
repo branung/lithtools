@@ -42,6 +42,7 @@ add_library(lithtech STATIC
   core/src/spr.cpp
   core/src/lip.cpp
   core/src/texscript.cpp
+  core/src/renderstyle.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/ps2_names.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/ps2_bute_names.cpp
 )

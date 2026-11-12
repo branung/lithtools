@@ -410,6 +410,7 @@ Model read(const std::vector<uint8_t>& data) {
     Reader r{&data, 0};
     uint8_t type = data[0];
     uint16_t lv = uint16_t(data[2] | data[3] << 8);
+    if (type == 5) throw Error("LTB file type 5 is a render style, not a model (lithtech::renderstyle reads it)");
     if (type != kD3DModelFile) throw Error("LTB file type " + std::to_string(type) + " is not a D3D model");
     if (lv != kD3DVersion) throw Error("LTB version " + std::to_string(lv) + " (only 9 is known)");
     r.pos = kHeaderSize;

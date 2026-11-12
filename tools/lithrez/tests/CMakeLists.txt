@@ -97,3 +97,10 @@ target_link_libraries(texscript_test PRIVATE lithtech)
 add_test(NAME texscript_test COMMAND texscript_test)
 add_executable(texfx_verify texfx_verify.cpp)
 target_link_libraries(texfx_verify PRIVATE lithtech)
+# Render styles: files made here; renderstyle_verify reads every one of a
+# game's archives.
+add_executable(renderstyle_test renderstyle_test.cpp)
+target_link_libraries(renderstyle_test PRIVATE lithtech)
+add_test(NAME renderstyle_test COMMAND renderstyle_test)
+add_executable(renderstyle_verify renderstyle_verify.cpp)
+target_link_libraries(renderstyle_verify PRIVATE lithtech)
