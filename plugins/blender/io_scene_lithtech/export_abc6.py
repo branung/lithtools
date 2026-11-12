@@ -564,10 +564,15 @@ def save(context, filepath, *, armature=None, scale=1.0, use_selection=False,
     has_dims = all(int(act.get("lt_v6_has_dims", 1)) for act in actions if act is not None)
     raw.anim_dims = [tuple(_f32(c) for c in a.dims) for a in anims] if has_dims else None
     chunks = json.loads(arm_obj.get("lt_v6_chunks_json", "null")) or list(abc6.CHUNKS)
+    # The chunks v6 doesn't define (KISS's TransformInfo), written back as
+    # imported.
+    raw.extra_chunks = {k: bytes.fromhex(v) for k, v in
+                        json.loads(arm_obj.get("lt_v6_extra_chunks_json", "{}")).items()}
+    chunks = [c for c in chunks if c in abc6.CHUNKS or c in raw.extra_chunks]
     if not has_dims:
         chunks = [c for c in chunks if c != "AnimDims"]
     elif "AnimDims" not in chunks:
-        chunks.append("AnimDims")
+        chunks.insert(chunks.index("Animation") + 1 if "Animation" in chunks else len(chunks), "AnimDims")
     raw.chunks = chunks
 
     # Bounds that weren't kept, by the rule (see the module notes).

@@ -9,7 +9,11 @@ read, written back byte for byte, and converted to the shared ABC model.
 Standard library only. The file is a chunk list like the later versions',
 but its chunks are different: Header (the token "MonolithExport Model File
 v6" and the command string), Geometry, Nodes, Animation and AnimDims. Shogo
-and Blood 2 ship exactly those five, in that order.
+and Blood 2 ship exactly those five, in that order. KISS Psycho Circus adds
+a sixth after them in every model, TransformInfo: 8 bytes, two uint32s,
+(0, 0) in 445 of its 447 models and (1, 0) in the other two. Nothing here
+needs it; a chunk that isn't one of the five is kept as stored
+(Model.extra_chunks) and written back in its place.
 
 What v6 stores, and how to_abc turns it into what abc.read gives:
 
@@ -50,7 +54,7 @@ pose check that holds its engine to the same rule.
 """
 
 from dataclasses import dataclass, field
-from typing import List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from . import abc
 from .binio import Reader, Writer
@@ -141,6 +145,9 @@ class Model:
     animations: List[Animation] = field(default_factory=list)
     anim_dims: Optional[List[Vec3]] = None                         # None: no AnimDims chunk
     chunks: List[str] = field(default_factory=lambda: list(CHUNKS))
+    # The chunks that aren't v6's own five (KISS's TransformInfo), by name,
+    # their bytes as stored.
+    extra_chunks: Dict[str, bytes] = field(default_factory=dict)
 
     def node_parents(self) -> List[int]:
         parents = [-1] * len(self.nodes)
@@ -197,9 +204,9 @@ def read(data) -> Model:
         raise ABC6Error("truncated .abc chunk list")
     where = {c[0]: c for c in chunks}
     m = Model(chunks=[c[0] for c in chunks])
-    for name in m.chunks:
+    for name, start, end in chunks:
         if name not in CHUNKS:
-            raise ABC6Error("chunk %r is not one of v6's" % name)
+            m.extra_chunks[name] = bytes(data[start:end])
     for need in ("Header", "Geometry", "Nodes", "Animation"):
         if need not in where:
             raise ABC6Error("no %s chunk; not a v6 .abc?" % need)
@@ -335,6 +342,10 @@ def _payload(m: Model, name: str) -> bytes:
             raise ABC6Error("%d AnimDims for %d animations" % (len(dims), len(m.animations)))
         for d in dims:
             w.vec3(d)
+    elif name in m.extra_chunks:
+        return m.extra_chunks[name]
+    else:
+        raise ABC6Error("no bytes for chunk %r" % name)
     return w.getvalue()
 
 

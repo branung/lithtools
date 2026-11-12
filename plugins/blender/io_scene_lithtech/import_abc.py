@@ -98,6 +98,8 @@ def _keep_v6(arm_obj, bone_names, obj, raw, lod_count):
     back while the part of the model they belong to is unchanged."""
     arm_obj["lt_v6_bounds"] = list(raw.bounds_min) + list(raw.bounds_max)
     arm_obj["lt_v6_chunks_json"] = json.dumps(raw.chunks)
+    if raw.extra_chunks:
+        arm_obj["lt_v6_extra_chunks_json"] = json.dumps({k: v.hex() for k, v in raw.extra_chunks.items()})
     arm_obj["lt_v6_node_names_json"] = json.dumps([n.name for n in raw.nodes])
     bones = arm_obj.data.bones
     for i, n in enumerate(raw.nodes):

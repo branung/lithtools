@@ -238,6 +238,7 @@ is the `.abc` one. What v6 adds:
 | vertex animation: a deformation node's vertices keyed per keyframe as three bytes each | shape keys `<animation>\|<key>` (as for `.ltb`), at the bind pose, keyed in the action's KEY slot so they play with the bones |
 | quaternions as stored, some not unit length | the action's `lt_v6_keys` |
 | bounds, the reduced-detail vertices, the vertex bytes, the raw vertex and face values | `lt_v6_*` properties and attributes |
+| chunks v6 doesn't define (KISS's `TransformInfo`, in every one of its models) | `lt_v6_extra_chunks_json`, written back as stored |
 
 **Export.** Each value the import kept is written back while what Blender
 holds still matches it, so an unchanged model exports byte for byte:
