@@ -28,10 +28,10 @@ they are re-implemented.
 
 | Binary | | Byte-identical functions | Byte-identical code | | Unwritten | Unplaced |
 |---|---|--:|--:|---|--:|--:|
-| `DEdit.exe` | world editor (Talon, Update 1/2) | 3,840 / 4,305 | 455,637 / 570,071 bytes | `███████████████░░░░░` 79.9% | 60 | 62 |
-| `ModelEdit.exe` | model editor (Talon, Update 1/2) | 1,641 / 1,836 | 187,638 / 220,652 bytes | `█████████████████░░░` 85.0% | 8 | 93 |
+| `DEdit.exe` | world editor (Talon, Update 1/2) | 3,849 / 4,305 | 455,798 / 570,071 bytes | `███████████████░░░░░` 79.9% | 59 | 62 |
+| `ModelEdit.exe` | model editor (Talon, Update 1/2) | 1,647 / 1,836 | 187,752 / 220,652 bytes | `█████████████████░░░` 85.0% | 8 | 94 |
 | `Processor.exe (AvP2)` | world processor, AvP2 (v1.0) | 1,399 / 1,503 | 267,366 / 339,484 bytes | `███████████████░░░░░` 78.7% | 3 | 2 |
-| `Processor.exe (NOLF)` | world processor, NOLF (Tools 001) | 1,343 / 2,587 | 176,761 / 414,841 bytes | `████████░░░░░░░░░░░░` 42.6% | 491 | 58 |
+| `Processor.exe (NOLF)` | world processor, NOLF (Tools 001) | 1,344 / 2,587 | 176,780 / 414,841 bytes | `████████░░░░░░░░░░░░` 42.6% | 490 | 58 |
 | `lithrez.exe` | resource (.rez) packer, LithRez 1.00 | 121 / 122 | 21,652 / 22,326 bytes | `███████████████████░` 96.9% | 0 | 0 |
 | `TProcessor.exe` | DirectEngine world processor (1998, NOLF Tools 001) | 0 / 1,314 | 0 / 236,418 bytes | `░░░░░░░░░░░░░░░░░░░░` 0.0% | 1,314 | 0 |
 | `LithExport.dll (AvP2)` | Softimage\|3D model exporter (AvP2 v1.0) | 0 / 1,408 | 0 / 156,440 bytes | `░░░░░░░░░░░░░░░░░░░░` 0.0% | 1,408 | 0 |
@@ -66,7 +66,7 @@ they are re-implemented.
 | `MaxWorldExport40.dle:rsrc` | 3ds Max world exporter for 3ds Max 4 (Update 2): resources, not in the total | 4 / 4 resources | 3,062 / 3,062 bytes | `████████████████████` 100.0% | 0 | -- |
 | `MaxWorldImport30.dli:rsrc` | 3ds Max world importer for 3ds Max 3 (Update 2): resources, not in the total | 4 / 4 resources | 2,266 / 2,266 bytes | `████████████████████` 100.0% | 0 | -- |
 | `MaxWorldImport40.dli:rsrc` | 3ds Max world importer for 3ds Max 4 (Update 2): resources, not in the total | 4 / 4 resources | 2,266 / 2,266 bytes | `████████████████████` 100.0% | 0 | -- |
-| **All** | | **12,230 / 23,800** | **1,772,853 / 3,109,188 bytes** | `███████████░░░░░░░░░` **57.0%** | **8,213** | **231** |
+| **All** | | **12,246 / 23,800** | **1,773,147 / 3,109,188 bytes** | `███████████░░░░░░░░░` **57.0%** | **8,211** | **232** |
 <!-- progress:end -->
 
 A function is *identical* when our object's code is the shipped code byte
