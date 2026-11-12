@@ -11,13 +11,14 @@ they build with clang, gcc or MSVC on Linux, macOS and Windows.
   has an Explorer-style rez editor, a DTX texture viewer with thumbnails
   (PCX, TGA and BMP images preview and thumbnail too), animated sprites,
   lip-sync curves played with their voice lines, texture effects run as
-  the engine runs them, a
+  the engine runs them, render styles, fonts, a
   model preview for `.abc` (NOLF, AvP2) and `.ltb` (NOLF2, Contract
   J.A.C.K., Tron 2.0, and NOLF on the PS2) models, a sound player, and a string table editor for
   `CRes.dll`.
 - **`core/`**: the shared library (`lithtech::rez`, `lithtech::dtx`,
   `lithtech::pcx`, `lithtech::tga`, `lithtech::bmp`, `lithtech::abc`, `lithtech::ltb`, `lithtech::ps2ltb`, `lithtech::sound`,
-  `lithtech::pe`, `lithtech::spr`, `lithtech::lip`, `lithtech::texscript`).
+  `lithtech::pe`, `lithtech::spr`, `lithtech::lip`, `lithtech::texscript`,
+  `lithtech::renderstyle`, `lithtech::shader`).
 
 `docs/REZ.md` describes the format and how these tools were checked against
 the originals. Both tools also read the PS2 port's archive (`LITH_PS2.REZ`,
@@ -70,6 +71,11 @@ These read the game archives (never committed), so they aren't part of
   decompiled), the groups' scripts looked up (docs/TEXFX.md; all of
   NOLF2's, Contract J.A.C.K.'s and Tron 2.0's read). `texscript_test`
   (in ctest) checks scripts and groups made in the test.
+- `renderstyle_verify [--dump] <rez>...`: every render style (`.ltb` of
+  file type 5) and compiled shader (`.ps`, `.ash`) of a game's archives
+  (docs/RENDERSTYLE.md; all read but the version 2 files the games refuse
+  too). `renderstyle_test` and `shader_test` (in ctest) check files made
+  in the test.
 - `dtx_decode_all`, `abc_verify`, `ltb_verify`, `ps2ltb_verify`: textures
   and models (`ps2ltb_verify --dump` against plugins/blender's
   `tests/ps2ltb_dump.py` compares the C++ and Python PS2 readers).
@@ -208,7 +214,8 @@ lithrez roundtrip "NOLF (USA).iso" LITH_PS2.REZ   the archive alone, rebuilt fro
   run, showing the texture matrix they make; `.tfg` groups' stages with
   their scripts linked and their values; `docs/TEXFX.md`), models (`.abc`, `.ltb` and the PS2's `.ltb`)
   with their skins and animations, sounds, text (PS2 `.but` attribute files
-  decoded), and hex for everything else. For NOLF2, Contract
+  decoded; effects files, `.fxf` and `.fcf`, as text where they are, as
+  Tron 2.0's binary ones are not), and hex for everything else. For NOLF2, Contract
   J.A.C.K. and Tron 2.0, skins come from the archive's own
   `ATTRIBUTES/MODELBUTES.TXT` when it has one. Double-click opens the texture viewer, the
   model viewer, the sound player, or (for a DLL) the string table editor;
