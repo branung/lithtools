@@ -83,3 +83,10 @@ target_link_libraries(spr_test PRIVATE lithtech)
 add_test(NAME spr_test COMMAND spr_test)
 add_executable(spr_verify spr_verify.cpp)
 target_link_libraries(spr_verify PRIVATE lithtech)
+# Lip-sync: files made here; lip_verify reads every one of a game's
+# archives against its voice line.
+add_executable(lip_test lip_test.cpp)
+target_link_libraries(lip_test PRIVATE lithtech)
+add_test(NAME lip_test COMMAND lip_test)
+add_executable(lip_verify lip_verify.cpp)
+target_link_libraries(lip_verify PRIVATE lithtech)
