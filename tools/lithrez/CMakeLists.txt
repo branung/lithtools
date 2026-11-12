@@ -39,6 +39,7 @@ add_library(lithtech STATIC
   core/src/sound.cpp
   core/src/ps2rez.cpp
   core/src/butes.cpp
+  core/src/spr.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/ps2_names.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/ps2_bute_names.cpp
 )

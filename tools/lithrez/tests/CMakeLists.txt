@@ -76,3 +76,10 @@ endif()
 add_executable(ps2rez_test ps2rez_test.cpp)
 target_link_libraries(ps2rez_test PRIVATE lithtech)
 add_test(NAME ps2rez_test COMMAND ps2rez_test ${CMAKE_CURRENT_BINARY_DIR}/ps2rez-work)
+# Sprites: files made here; spr_verify reads every one of a game's archives
+# and looks their frames up.
+add_executable(spr_test spr_test.cpp)
+target_link_libraries(spr_test PRIVATE lithtech)
+add_test(NAME spr_test COMMAND spr_test)
+add_executable(spr_verify spr_verify.cpp)
+target_link_libraries(spr_verify PRIVATE lithtech)
