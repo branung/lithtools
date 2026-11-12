@@ -503,7 +503,7 @@ std::unique_ptr<Archive> Archive::open(const std::string& path, OpenOptions opts
 }
 
 void Archive::save(const std::string& path, const SaveOptions& opts) {
-    if (ps2) return save_ps2(path);
+    if (ps2) return save_ps2(path, opts);
     // Gather every resource; data goes out in data_order.
     std::vector<Resource*> all;
     std::function<void(Directory&)> gather = [&](Directory& d) {
@@ -520,11 +520,25 @@ void Archive::save(const std::string& path, const SaveOptions& opts) {
     std::ofstream f(tmp, std::ios::binary | std::ios::trunc);
     if (!f) throw Error("can't write " + tmp.u8string());
 
+    // Progress: resource bytes written, of their sizes as the tree has them (a
+    // file added from disk may since have changed size: the total follows).
+    uint64_t done = 0, total = 0;
+    for (Resource* r : all) total += r->size;
+    auto report = [&]() {
+        if (opts.progress && !opts.progress(done, std::max(done, total))) {
+            f.close();
+            std::error_code ec;
+            fs::remove(tmp, ec);
+            throw Cancelled();
+        }
+    };
+
     std::vector<uint8_t> zero(kHeaderSize, 0);
     f.write(reinterpret_cast<char*>(zero.data()), zero.size());
     uint64_t pos = kHeaderSize;
     std::map<Resource*, uint32_t> new_pos;
     for (Resource* r : all) {
+        report();
         std::vector<uint8_t> data;
         if (r->source.kind != DataSource::Kind::None) data = r->read();
         if ((r->source.kind == DataSource::Kind::File && !r->source.slice) ||
@@ -539,7 +553,10 @@ void Archive::save(const std::string& path, const SaveOptions& opts) {
         f.write(reinterpret_cast<char*>(data.data()), data.size());
         new_pos[r] = uint32_t(pos);
         pos += data.size();
+        done += data.size();
     }
+    report();
+    if (opts.progress) opts.progress(done, 0);   // the directory: no stopping now
     uint32_t next_write = uint32_t(pos);
 
     // Directory blocks, each after its subdirectories (CRezDir::WriteAllDirs).
@@ -1190,7 +1207,7 @@ void Archive::open_ps2(const std::string& path, const OpenOptions& opts) {
     attach(*root_);
 }
 
-void Archive::save_ps2(const std::string& path) {
+void Archive::save_ps2(const std::string& path, const SaveOptions& opts) {
     std::map<uint64_t, const ps2rez::Entry*> by_offset;
     std::map<uint32_t, const ps2rez::Entry*> by_hash;
     for (auto& e : ps2->tables[0]) {
@@ -1259,7 +1276,10 @@ void Archive::save_ps2(const std::string& path) {
     };
     std::map<uint32_t, ps2rez::Archive::Change> changes;
     std::map<uint32_t, Resource*> seen;
+    // Progress: resources gone through, of all; the patching itself can't stop.
+    uint64_t done = 0;
     for (Resource* r : all) {
+        if (opts.progress && !opts.progress(done++, all.size())) throw Cancelled();
         uint32_t h = hash_of(*r);
         if (!seen.emplace(h, r).second)
             throw Error(r->path() + " and " + seen[h]->path() + " have the same PS2 name hash");
@@ -1287,6 +1307,8 @@ void Archive::save_ps2(const std::string& path) {
             c.kind = ps2rez::Archive::Change::Kind::Remove;
             changes[h] = c;
         }
+    if (opts.progress && !opts.progress(done, all.size())) throw Cancelled();
+    if (opts.progress) opts.progress(done, 0);   // patching: no stopping now
     // Same file: release our handle while it is patched.
     file_.reset();
     ps2->save(path, changes);

@@ -1,7 +1,8 @@
 // Archive::open's progress callback: it never goes back or past its total,
 // it ends at the total for a file with RezMgr's directory gaps (the shipped
 // layout), it counts every folder and file, and returning false cancels the
-// open with rez::Cancelled.
+// open with rez::Cancelled. Archive::save's likewise, and a cancelled save
+// leaves the file as it was.
 
 #include <lithtech/rez.hpp>
 
@@ -86,6 +87,45 @@ int main(int argc, char** argv) {
     }
     CHECK(cancelled);
     CHECK(calls == 3);
+
+    // saving: bytes of data up to their total, then the directory (total 0)
+    {
+        auto b = rez::Archive::open((w / "gaps.rez").string());
+        rez::SaveOptions s2;
+        uint64_t last_done = 0, data_total = 0, calls2 = 0;
+        bool back = false, dir_step = false;
+        s2.progress = [&](uint64_t done, uint64_t total) {
+            if (done < last_done) back = true;
+            if (total) data_total = total;
+            else dir_step = true;
+            last_done = done;
+            ++calls2;
+            return true;
+        };
+        b->save((w / "saved.rez").string(), s2);
+        CHECK(calls2 > 2);
+        CHECK(!back);
+        CHECK(dir_step);
+        CHECK(data_total > 0 && last_done == data_total);
+    }
+    // cancelling a save leaves the file as it was, and no temporary file
+    {
+        auto before = std::filesystem::file_size(w / "saved.rez");
+        auto b = rez::Archive::open((w / "gaps.rez").string());
+        rez::SaveOptions s3;
+        int n = 0;
+        s3.progress = [&](uint64_t, uint64_t) { return ++n < 3; };
+        bool cancelled2 = false;
+        try {
+            b->save((w / "saved.rez").string(), s3);
+        } catch (const rez::Cancelled&) {
+            cancelled2 = true;
+        }
+        CHECK(cancelled2);
+        CHECK(std::filesystem::file_size(w / "saved.rez") == before);
+        CHECK(!std::filesystem::exists(w / "saved.rez.rezmgr~"));
+        CHECK(rez::Archive::open((w / "saved.rez").string())->root().count_resources() == files);
+    }
 
     std::printf(fails ? "rez_progress_test: %d failed\n" : "rez_progress_test: all passed\n", fails);
     return fails ? 1 : 0;

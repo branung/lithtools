@@ -175,6 +175,13 @@ struct SaveOptions {
     // Recompute the largest-name fields from the tree (RezMgr's way).
     // Off, the header's values are written as they are.
     bool recompute_largest = true;
+    // Called as the data is written (from the calling thread), with the bytes
+    // of resource data written so far and their total (0 while the last step,
+    // the directory or a PS2 archive's patching, is being written). Returning
+    // false stops the save, which then throws Cancelled and leaves the file
+    // as it was; in that last step it can no longer stop, and the return is
+    // ignored.
+    std::function<bool(uint64_t done, uint64_t total)> progress;
 };
 
 // How far Archive::open has got, for a progress bar: done of total, in
@@ -247,7 +254,7 @@ private:
     uint64_t data_counter_ = 0;
     void attach(Directory& d);
     void open_ps2(const std::string& path, const OpenOptions& opts);
-    void save_ps2(const std::string& path);
+    void save_ps2(const std::string& path, const SaveOptions& opts);
     friend class Directory;
 };
 
